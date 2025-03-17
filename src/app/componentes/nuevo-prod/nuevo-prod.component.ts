@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/Producto';
-import { ProductoService } from '../../producto.service';
+import { ProductoService } from '../../servicios/producto.service';
 
 @Component({
   selector: 'app-nuevo-prod',

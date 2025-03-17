@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProdCat } from '../../models/ProdCat';
 import { ProductoCategoria } from '../../models/ProductoCategoria';
-import { CatProdService } from '../../cat-prod.service';
+import { CatProdService } from '../../servicios/cat-prod.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,6 +16,10 @@ export class ConfCatProdComponent {
   temp: ProdCat = { IdProd: 0, IdCat: 0 }; //variable temporal para cuando tengamos que borrar
   auxNombres: ProductoCategoria = { producto: '', categoria: '' };
   constructor(private proCatService: CatProdService) {
+    this.muestraTodo();
+  }
+
+  muestraTodo() {
     this.recuperarTodos();
     this.recuperaNombres();
   }
@@ -32,7 +36,6 @@ export class ConfCatProdComponent {
     });
   }
 
-  //poner métodos para borrar
   tempBorr(pr: number, cat: number, pC: ProductoCategoria) {
     this.temp = new ProdCat(pr, cat);
     this.auxNombres = pC;
@@ -47,8 +50,7 @@ export class ConfCatProdComponent {
   baja(prCt: ProdCat) {
     this.proCatService.baja(prCt).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
-        this.recuperarTodos();
-        this.recuperaNombres();
+        this.muestraTodo();
       }
     });
   }

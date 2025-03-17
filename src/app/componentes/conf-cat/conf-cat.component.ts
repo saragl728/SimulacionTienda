@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Categoria } from '../../models/Categoria';
-import { CategoriaService } from '../../categoria.service';
+import { CategoriaService } from '../../servicios/categoria.service';
 
 @Component({
   selector: 'app-conf-cat',

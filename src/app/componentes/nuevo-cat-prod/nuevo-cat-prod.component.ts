@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ProdCat } from '../../models/ProdCat';
-import { CatProdService } from '../../cat-prod.service';
-import { CategoriaService } from '../../categoria.service';
-import { ProductoService } from '../../producto.service';
+import { CatProdService } from '../../servicios/cat-prod.service';
+import { CategoriaService } from '../../servicios/categoria.service';
+import { ProductoService } from '../../servicios/producto.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
