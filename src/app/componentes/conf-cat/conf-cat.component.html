@@ -1,0 +1,69 @@
+<div class="container mt-4">
+    <h1 class="text-center bg-light" i18n>Administración de categorías</h1>
+    @if (this.categorias != null) {
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th i18n>Id</th>
+                <th i18n>Nombre</th>
+                <th i18n>Borrar</th>
+                <th i18n>Seleccionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(cat of categorias; track cat.Id) {
+            <tr>
+                <td>{{cat.Id}}</td>
+                <td>{{cat.nombre}}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra"
+                        (click)="tempBorr(cat)" i18n>Borrar</button>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm" (click)="seleccionar(cat)" i18n>Seleccionar</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="card p-3 mt-4">
+        <h5 class="card-title" i18n>Renombramiento de categorías</h5>
+        <div class="mb-3">
+            <label class="form-label" i18n>Nombre:</label>
+            <input type="text" id="description" class="form-control" [(ngModel)]="cat.nombre" />
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-warning" i18n (click)="modificacion()">Renombrar</button>
+        </div>
+    </div>
+    }
+    @else {
+    <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
+        <h2 i18n><span class="material-symbols-outlined">
+                error
+            </span>No se han encontrado categorías</h2>
+    </div>
+
+    }
+
+</div>
+
+<div class="modal fade" id="modalBorra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" i18n>Confirmación</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-warning-subtle">
+                <img src="clipo.png">
+                <p i18n>¿Seguro que quieres eliminar la categoría {{ temp.nombre }}?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" i18n
+                    (click)="confirmaBorrar()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

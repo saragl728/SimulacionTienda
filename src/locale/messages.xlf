@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="es" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="7033562660197166339" datatype="html">
+        <source>Productos y sus categorías</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7072282989020813528" datatype="html">
+        <source>Producto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7159627112785313048" datatype="html">
+        <source>Categoría</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7099780434896458019" datatype="html">
+        <source>Borrar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7015990493381275859" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/> error <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>No hay relaciones entre productos y categorías</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">27,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3483317183365632335" datatype="html">
+        <source>Confirmación</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">62,63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4355194263413336566" datatype="html">
+        <source>¿Seguro que quieres eliminar la relación entre la categoría <x id="INTERPOLATION" equiv-text="{{auxNombres.categoria}}"/> y el producto <x id="INTERPOLATION_1" equiv-text="{{auxNombres.producto}}"/>?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">44,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6402951927316857780" datatype="html">
+        <source>Cancelar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6665903341931535342" datatype="html">
+        <source>Eliminar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">65,66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">72,73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5232085037623934386" datatype="html">
+        <source>Administración de categorías</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7286430803380181008" datatype="html">
+        <source>Id</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5357661269973482487" datatype="html">
+        <source>Nombre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2229594745304510307" datatype="html">
+        <source>Seleccionar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9055896849532205147" datatype="html">
+        <source>Renombramiento de categorías</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5988527754735881488" datatype="html">
+        <source>Nombre:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7883868744074242410" datatype="html">
+        <source>Renombrar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2738520845950460264" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/> error <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>No se han encontrado categorías</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">42,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5785940053847841334" datatype="html">
+        <source>¿Seguro que quieres eliminar la categoría <x id="INTERPOLATION" equiv-text="{{ temp.nombre }}"/>?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1381375828767996101" datatype="html">
+        <source>Administración de productos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2090485092107532642" datatype="html">
+        <source>Precio</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3842875166798936006" datatype="html">
+        <source>Gestión de Productos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2520628223219999682" datatype="html">
+        <source>Precio:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="902070586281448184" datatype="html">
+        <source>Modificar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4431450995680982405" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/> error <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>No se han encontrado productos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">49,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3891507854031395717" datatype="html">
+        <source>¿Seguro que quieres eliminar el producto <x id="INTERPOLATION" equiv-text="{{ temp.nombre }}"/>?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7602154116463588646" datatype="html">
+        <source> Productos </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="768047679236655527" datatype="html">
+        <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot; routerLink=&quot;/nuevo-prod&quot;&gt;"/>Añadir<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5656627746547036719" datatype="html">
+        <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot; routerLink=&quot;/conf-prod&quot;&gt;"/>Ver/modificar<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2201630084290175230" datatype="html">
+        <source> Categorías </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5740944405385374611" datatype="html">
+        <source><x id="START_LINK" ctype="x-a" equiv-text="&lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot; routerLink=&quot;conf-cat&quot;&gt;"/>Ver<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4589154795299311269" datatype="html">
+        <source> Categorías y productos </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="67890544561792238" datatype="html">
+        <source>Ayuda</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1763678127244379236" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/> info <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>Sobre esta página</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">48,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2775687410740132207" datatype="html">
+        <source>Vale</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6633696276697624803" datatype="html">
+        <source>Aquí puedes añadir nuevos productos. Tienen nombres únicos y obviamente su precio no puede ser igual o inferior a 0.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4439131894515767330" datatype="html">
+        <source>Aquí puedes añadir nuevas categorías de productos. Tienen nombres únicos.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3210955127611556927" datatype="html">
+        <source>Aquí puedes ver los productos actuales, modificarlos y eliminarlos.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4891830865854560966" datatype="html">
+        <source>Aquí puedes ver las categorías disponibles de productos y eliminarlas.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4276993867422411296" datatype="html">
+        <source>Aquí puedes conectar categorías con productos.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2467552776092258133" datatype="html">
+        <source>Aquí puedes ver las conexiones de categorías con productos y eliminarlas.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1738619142209106754" datatype="html">
+        <source>Esto está por defecto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2542313354271007101" datatype="html">
+        <source>Añadir nueva categoría</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3352319243624037017" datatype="html">
+        <source>Escribe la categoría</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1372173599787735409" datatype="html">
+        <source>Guardar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="559337250148591292" datatype="html">
+        <source>Selecciona un producto: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6726816586541925659" datatype="html">
+        <source>Selecciona una categoría: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3167291061863294335" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/> error <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>No se han encontrado productos y/o categorías</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.html</context>
+          <context context-type="linenumber">28,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9139745358953580581" datatype="html">
+        <source>Añadir nuevo producto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8041854266679790943" datatype="html">
+        <source>Nombre del producto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7533671672435468025" datatype="html">
+        <source>Escribe el nombre del producto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1992026201833864906" datatype="html">
+        <source>Escribe el precio</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4678235583542699769" datatype="html">
+        <source>© 2025 - <x id="INTERPOLATION" equiv-text="{{ anyo }}"/> Creado por saragl728</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/pie/pie.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+        <note priority="1" from="description">mensPie</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

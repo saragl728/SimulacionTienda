@@ -1,0 +1,33 @@
+<!--comprueba que ambas tablas tienen elementos-->
+@if (productos != null && categorias != null){
+<div class="container mt-4 bg-primary-subtle">
+    <form>
+        <div class="mb-3">
+            <label for="pr" i18n>Selecciona un producto: </label>
+            <select class="form-select" name="pr" id="prodc" [(ngModel)]="proCat.IdProd">
+                @for(prod of productos; track prod.Id) {
+                <option value="{{ prod.Id }}">{{ prod.nombre }}</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="ct" i18n>Selecciona una categoría: </label>
+            <select class="form-select" name="ct" id="ctgs" [(ngModel)]="proCat.IdCat">
+                @for(cats of categorias; track cats.Id) {
+                <option value="{{ cats.Id }}">{{ cats.nombre }}</option>
+                }
+            </select>
+
+        </div>
+        <button type="submit" class="btn btn-primary mb-3" (click)="alta()" i18n>Guardar</button>
+    </form>
+</div>
+}<!--dice si alguna tabla está vacía-->
+@else {
+<div class="container mt-4 text-danger-emphasis bg-danger-subtle">
+    <h2 i18n><span class="material-symbols-outlined">
+            error
+        </span>No se han encontrado productos y/o categorías</h2>
+</div>
+
+}
