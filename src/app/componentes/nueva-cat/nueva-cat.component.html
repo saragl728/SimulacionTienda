@@ -1,6 +1,12 @@
 <div class="container mt-4 bg-primary-subtle">
     <h2 i18n>Añadir nueva categoría</h2>
     <form>
+        @if (this.estringNombres()!= ""){
+            <div class="my-3 border border-info border-3 rounded bg-info-subtle shadow">
+                <h3 i18n>Ya tenemos las siguientes categorías, intentar añadirlas no servirá</h3>
+                <p> {{ estringNombres() }} </p>
+            </div>
+        }
         <div class="mb-3">
             <input type="text" name="descripcion" id="description" class="form-control" i18n-placeholder
                 placeholder="Escribe la categoría" [(ngModel)]="cat.nombre">
