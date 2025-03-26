@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Categoria } from './models/Categoria';
+import { Categoria } from '../models/Categoria';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +23,6 @@ export class CategoriaService {
     return this.http.get(`${this.url}seleccionar.php?Id=${categoria.Id}`);
   }
   modificacion(categoria: Categoria) {
-    return this.http.post(
-      `${this.url}modificacion.php`,
-      JSON.stringify(categoria)
-    );
+    return this.http.post(`${this.url}modificacion.php`, JSON.stringify(categoria));
   }
 }

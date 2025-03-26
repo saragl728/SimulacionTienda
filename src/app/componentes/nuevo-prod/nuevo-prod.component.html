@@ -1,16 +1,24 @@
 <div class="container mt-4 bg-primary-subtle">
     <h2 i18n>Añadir nuevo producto</h2>
     <form>
+        @if (this.estringNombres()!= ""){
+            <div class="my-3 border border-info border-3 rounded bg-info-subtle shadow">
+                <h3 i18n>Ya tenemos los siguientes productos, intentar añadirlos no servirá</h3>
+                <p> {{ estringNombres() }} </p>
+            </div>
+        }
+
         <div class="mb-3">
-            <label for="description" class="form-label" i18n>Nombre del producto</label>
+            <label for="description" class="form-label fw-bold" i18n>Nombre del producto</label>
             <input type="text" name="nombre" id="description" class="form-control" i18n-placeholder
                 placeholder="Escribe el nombre del producto" [(ngModel)]="prod.nombre">
         </div>
         <div class="mb-3">
-            <label for="price" class="form-label" i18n>Precio</label>
+            <label for="price" class="form-label fw-bold" i18n>Precio</label>
             <input type="number" name="precio" id="price" class="form-control" i18n-placeholder placeholder="Escribe el precio"
                 [(ngModel)]="prod.precio">
         </div>
         <button type="submit" class="btn btn-primary mb-3" i18n (click)="alta()">Guardar</button>
+
     </form>
 </div>
