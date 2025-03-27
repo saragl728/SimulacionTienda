@@ -17,12 +17,7 @@ export class NuevoCatProdComponent {
   categorias: any;
   valido: boolean = true;
   proCat: ProdCat = { IdProd: 0, IdCat: 0 };
-  
-  constructor(
-    private productoService: ProductoService,
-    private categoriaService: CategoriaService,
-    private catProdService: CatProdService
-  ) {
+  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService) {
     this.recuperaProds();
     this.recuperaCats();
   }
@@ -36,16 +31,13 @@ export class NuevoCatProdComponent {
     if (!this.proCat.IdProd) {
       pro.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      pro.classList.remove('is-invalid');
-    }
+    } else pro.classList.remove('is-invalid');
 
     if (!this.proCat.IdCat) {
       categ.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      categ.classList.remove('is-invalid');
-    }
+    } else categ.classList.remove('is-invalid');
+         
   }
 
   recuperaProds() {
@@ -71,7 +63,7 @@ export class NuevoCatProdComponent {
 
     if (this.valido) {
       this.catProdService.alta(this.proCat).subscribe((datos: any) => {
-        if (datos['resultado'] == 'OK') {
+        if (datos.resultado == 'OK') {
           console.log('Conexión añadida');
           pro.classList.add('is-valid');
           categ.classList.add('is-valid');

@@ -9,11 +9,13 @@ import { ProductoService } from '../../servicios/producto.service';
   templateUrl: './conf-prod.component.html',
   styleUrl: './conf-prod.component.css',
 })
+
 export class ConfProdComponent {
   productos: any;
   temp: Producto = { Id: 0, nombre: '', precio: 0 }; //variable temporal para cuando tengamos que borrar
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
   valido: boolean = true;
+  existe: number = -1; //se usará para la modificación
   constructor(private productoService: ProductoService) {
     this.recuperarTodos();
   }
@@ -26,20 +28,18 @@ export class ConfProdComponent {
     let nom = document.getElementById('description') as HTMLInputElement;
     let prc = document.getElementById('price') as HTMLInputElement;
 
-    //compruebo que el nombre no sea demasiado largo
+    //compruebo la longitud del nombre y si existe el nombre
     if (!this.prod.nombre || this.prod.nombre.length > longMax) {
       nom.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      nom.classList.remove('is-invalid');
-    }
+    } else nom.classList.remove('is-invalid');
+    
 
     if (!this.prod.precio || this.prod.precio <= 0) {
       prc.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      prc.classList.remove('is-invalid');
-    }
+    } else prc.classList.remove('is-invalid');
+          
   }
 
   recuperarTodos() {
@@ -61,33 +61,37 @@ export class ConfProdComponent {
 
   baja(producto: Producto) {
     this.productoService.baja(producto).subscribe((datos: any) => {
-      if (datos['resultado'] == 'OK') {
+      if (datos.resultado == 'OK') {
         this.recuperarTodos();
       }
     });
   }
-  modificacion() {
-    this.validar();
 
+  modificacion() {
     let nom = document.getElementById('description') as HTMLInputElement;
     let prc = document.getElementById('price') as HTMLInputElement;
 
     nom.classList.remove('is-valid');
     prc.classList.remove('is-valid');
 
+    this.validar();
+
     if (this.valido) {
       this.productoService.modificacion(this.prod).subscribe((datos: any) => {
-        if (datos['resultado'] == 'OK') {
+        if (datos.resultado == 'OK') {
           this.recuperarTodos();
           nom.classList.add('is-valid');
           prc.classList.add('is-valid');
         }
-      });
+        else {
+          nom.classList.add('is-invalid');
+          prc.classList.add('is-invalid');
+        }
+      }
+    );
     }
   }
   seleccionar(producto: Producto) {
-    this.productoService
-      .seleccionar(producto)
-      .subscribe((result: any) => (this.prod = result[0]));
+    this.productoService.seleccionar(producto).subscribe((result: any) => (this.prod = result[0]));
   }
 }

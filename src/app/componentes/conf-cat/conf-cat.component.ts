@@ -11,7 +11,6 @@ import { CategoriaService } from '../../servicios/categoria.service';
 })
 export class ConfCatComponent {
   categorias: any;
-  nom = document.getElementById('description');
   temp: Categoria = { Id: 0, nombre: '' };
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
