@@ -31,7 +31,7 @@ export class MenuComponent {
         info = $localize`Aquí puedes conectar categorías con productos.`;
         break;
       case '/conf-cat-prod':
-        info = $localize`Aquí puedes ver las conexiones de categorías con productos y eliminarlas.`;
+        info = $localize`Aquí puedes ver las conexiones de categorías con productos y eliminarlas. También puedes hacer búsquedas.`;
         break;
       default:
         info = $localize`Esto está por defecto`;

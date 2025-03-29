@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class ConfCatProdComponent {
   prodCats: any; //ids conectados
+  filtroElegido: string = ""; //se usará para la búsqueda
+  filtrio: string = "";  //lo que hay en la barra de búsqueda
   nombres: any; //resultado de la consulta con join
   temp: ProdCat = { IdProd: 0, IdCat: 0 }; //variable temporal para cuando tengamos que borrar
   auxNombres: ProductoCategoria = { producto: '', categoria: '' };
@@ -22,6 +24,55 @@ export class ConfCatProdComponent {
   muestraTodo() {
     this.recuperarTodos();
     this.recuperaNombres();
+  }
+
+  recuperarIdsPorCategoria(cat: string) {
+  	this.proCatService.recuperaIdsPorCategoria(cat).subscribe((respuesta: any) => {
+    this.prodCats = respuesta;
+  });
+}
+
+  recuperaNombresPorCategoria(cat: string) {
+  this.proCatService.recuperaNombresPorCategoria(cat).subscribe((respuesta: any) => {
+    this.nombres = respuesta;
+  });
+}
+
+
+  recuperarIdsPorProducto(pro: string) {
+  	this.proCatService.recuperarIdsPorProducto(pro).subscribe((respuesta: any) => {
+    this.prodCats = respuesta;
+  });
+}
+
+  recuperaNombresPorProducto(pro: string) {
+  this.proCatService.recuperaNombresPorProducto(pro).subscribe((respuesta: any) => {
+    this.nombres = respuesta;
+  });
+}
+
+  buscarPorProducto(filtro: string){
+    this.recuperarIdsPorProducto(filtro);
+    this.recuperaNombresPorProducto(filtro);
+  }
+
+  buscarPorCategoria(filtro: string){
+    this.recuperarIdsPorCategoria(filtro);
+    this.recuperaNombresPorCategoria(filtro);
+  }
+
+  busca(){
+    switch(this.filtroElegido){
+      case "produc":
+        this.buscarPorProducto(this.filtrio);
+        break;
+      case "categ":
+        this.buscarPorCategoria(this.filtrio);
+        break;
+      default:
+        break;
+    }
+
   }
 
   recuperarTodos() {
@@ -49,7 +100,7 @@ export class ConfCatProdComponent {
 
   baja(prCt: ProdCat) {
     this.proCatService.baja(prCt).subscribe((datos: any) => {
-      if (datos['resultado'] == 'OK') {
+      if (datos.resultado == 'OK') {
         this.muestraTodo();
       }
     });

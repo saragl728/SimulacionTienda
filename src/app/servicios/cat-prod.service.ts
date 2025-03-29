@@ -23,8 +23,22 @@ export class CatProdService {
     return this.http.post(`${this.url}alta.php`, JSON.stringify(prodCat));
   }
   baja(prodCat: ProdCat) {
-    return this.http.get(
-      `${this.url}baja.php?IdProd=${prodCat.IdProd}&IdCat=${prodCat.IdCat}`
-    );
+    return this.http.get(`${this.url}baja.php?IdProd=${prodCat.IdProd}&IdCat=${prodCat.IdCat}`);
+  }
+
+  recuperaNombresPorCategoria(categoria: string){
+    return this.http.get(`${this.url}buscaNombresPorCategoria.php?filtro=${categoria}`);
+  }
+
+  recuperaIdsPorCategoria(categoria: string){
+    return this.http.get(`${this.url}buscaIdsPorCategoria.php?filtro=${categoria}`);
+  }
+
+  recuperaNombresPorProducto(producto: string){
+    return this.http.get(`${this.url}buscaNombresPorProducto.php?filtro=${producto}`);
+  }
+
+  recuperarIdsPorProducto(producto: string){
+    return this.http.get(`${this.url}buscaIdsPorProducto.php?filtro=${producto}`);
   }
 }

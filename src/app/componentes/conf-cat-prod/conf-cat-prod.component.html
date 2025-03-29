@@ -2,6 +2,26 @@
     <h1 class="text-center bg-light" i18n>Productos y sus categorías</h1>
     <!--comprueba si el objeto de nombres no está vacío-->
     @if (this.nombres != null){
+        <div class="shadow my-2 p-2 border border-secondary border-3 rounded bg-light">
+            <div class="form-floating form-check-inline col-6">
+                <input type="text" class="form-control" id="Filtro" name="filtro" [(ngModel)]="filtrio" i18n-placeholder placeholder="Busca por producto o categoría">
+                <label for="Filtro" i18n>Busca por producto o categoría</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" [(ngModel)]="filtroElegido" type="radio" name="tipoFiltro" id="porProd" value="produc">
+                <label class="form-check-label" for="porProd" i18n>Por producto</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" [(ngModel)]="filtroElegido" type="radio" name="tipoFiltro" id="porCat" value="categ">
+                <label class="form-check-label" for="porCat" i18n>Por categoría</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <button class="btn btn-primary" (click)="busca()" i18n>Buscar</button>
+              </div>
+              <div class="form-check form-check-inline">
+                <button class="btn btn-primary" (click)="muestraTodo()" i18n>Mostrar todos</button>
+              </div>
+        </div>
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
@@ -44,8 +64,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="confirmaBorrar()"
-                    i18n>Eliminar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="confirmaBorrar()" i18n>Eliminar</button>
             </div>
         </div>
     </div>
