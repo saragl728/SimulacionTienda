@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/Producto';
+import { SesionAdmin } from '../../models/SesionAdmin';
 import { ProductoService } from '../../servicios/producto.service';
 
 @Component({
@@ -10,18 +11,14 @@ import { ProductoService } from '../../servicios/producto.service';
   styleUrl: './conf-prod.component.css',
 })
 
-export class ConfProdComponent {
+export class ConfProdComponent extends SesionAdmin {
   productos: any;
   temp: Producto = { Id: 0, nombre: '', precio: 0 }; //variable temporal para cuando tengamos que borrar
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
   valido: boolean = true;
-  usuario = "";
-  sesionIniciada = false;
 
-  inicioSesion(){
-    if (this.usuario.trim()!= "") this.sesionIniciada = true;
-  }
   constructor(private productoService: ProductoService) {
+    super();
     this.recuperarTodos();
   }
 

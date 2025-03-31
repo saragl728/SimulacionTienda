@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProdCat } from '../../models/ProdCat';
+import { SesionAdmin } from '../../models/SesionAdmin';
 import { CatProdService } from '../../servicios/cat-prod.service';
 import { CategoriaService } from '../../servicios/categoria.service';
 import { ProductoService } from '../../servicios/producto.service';
@@ -11,21 +12,15 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './nuevo-cat-prod.component.html',
   styleUrl: './nuevo-cat-prod.component.css',
 })
-export class NuevoCatProdComponent {
+export class NuevoCatProdComponent extends SesionAdmin {
   //variables que se usarán para ver si se cargan datos para insertar
   productos: any;
   categorias: any;
   valido: boolean = true;
   proCat: ProdCat = { IdProd: 0, IdCat: 0 };
 
-  usuario = "";
-  sesionIniciada = false;
-
-  inicioSesion(){
-    if (this.usuario.trim()!= "") this.sesionIniciada = true;
-  }
-
   constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService) {
+    super();
     this.recuperaProds();
     this.recuperaCats();
   }

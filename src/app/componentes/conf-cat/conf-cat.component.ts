@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Categoria } from '../../models/Categoria';
+import { SesionAdmin } from '../../models/SesionAdmin';
 import { CategoriaService } from '../../servicios/categoria.service';
 
 @Component({
@@ -9,18 +10,14 @@ import { CategoriaService } from '../../servicios/categoria.service';
   templateUrl: './conf-cat.component.html',
   styleUrl: './conf-cat.component.css',
 })
-export class ConfCatComponent {
+export class ConfCatComponent extends SesionAdmin {
   categorias: any;
   temp: Categoria = { Id: 0, nombre: '' };
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
-  usuario = "";
-  sesionIniciada = false;
 
-  inicioSesion(){
-    if (this.usuario.trim()!= "") this.sesionIniciada = true;
-  }
   constructor(private categoriaService: CategoriaService) {
+    super();
     this.recuperarTodos();
   }
 

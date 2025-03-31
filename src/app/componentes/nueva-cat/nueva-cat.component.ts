@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Categoria } from '../../models/Categoria';
+import { SesionAdmin } from '../../models/SesionAdmin';
 import { CategoriaService } from '../../servicios/categoria.service';
 
 @Component({
@@ -9,20 +10,15 @@ import { CategoriaService } from '../../servicios/categoria.service';
   templateUrl: './nueva-cat.component.html',
   styleUrl: './nueva-cat.component.css',
 })
-export class NuevaCatComponent {
+export class NuevaCatComponent extends SesionAdmin {
   constructor(private categoriaServicio: CategoriaService) {
+    super();
     this.obtenerNombres();
   }
 
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
   categorias: Array<any> = [];
-  usuario = "";
-  sesionIniciada = false;
-
-  inicioSesion(){
-    if (this.usuario.trim()!= "") this.sesionIniciada = true;
-  }
 
   estringNombres(): string {
     let aux = [];

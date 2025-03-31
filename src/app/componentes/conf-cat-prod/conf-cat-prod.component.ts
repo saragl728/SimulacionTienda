@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProdCat } from '../../models/ProdCat';
 import { ProductoCategoria } from '../../models/ProductoCategoria';
+import { SesionAdmin } from '../../models/SesionAdmin';
 import { CatProdService } from '../../servicios/cat-prod.service';
 import { FormsModule } from '@angular/forms';
 
@@ -10,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './conf-cat-prod.component.html',
   styleUrl: './conf-cat-prod.component.css',
 })
-export class ConfCatProdComponent {
+export class ConfCatProdComponent extends SesionAdmin {
   prodCats: any; //ids conectados
   filtroElegido: string = ""; //se usará para la búsqueda
   filtrio: string = "";  //lo que hay en la barra de búsqueda
@@ -18,14 +19,8 @@ export class ConfCatProdComponent {
   temp: ProdCat = { IdProd: 0, IdCat: 0 }; //variable temporal para cuando tengamos que borrar
   auxNombres: ProductoCategoria = { producto: '', categoria: '' };
 
-  usuario = "";
-  sesionIniciada = false;
-
-  inicioSesion(){
-    if (this.usuario.trim()!= "") this.sesionIniciada = true;
-  }
-
   constructor(private proCatService: CatProdService) {
+    super();
     this.muestraTodo();
   }
 
