@@ -15,7 +15,12 @@ export class ConfProdComponent {
   temp: Producto = { Id: 0, nombre: '', precio: 0 }; //variable temporal para cuando tengamos que borrar
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
   valido: boolean = true;
-  existe: number = -1; //se usará para la modificación
+  usuario = "";
+  sesionIniciada = false;
+
+  inicioSesion(){
+    if (this.usuario.trim()!= "") this.sesionIniciada = true;
+  }
   constructor(private productoService: ProductoService) {
     this.recuperarTodos();
   }

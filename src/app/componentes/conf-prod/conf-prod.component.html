@@ -1,5 +1,24 @@
 <div class="container mt-4">
-    <h1 class="text-center bg-light" i18n>Administración de productos</h1>
+    @if (!sesionIniciada){
+        <div class="bg-primary-subtle p-2 mb-3 border border-primary rounded border-2">
+            <h2 i18n>Inicia sesión como administrador para modificar o eliminar productos</h2>
+            <div class="mb-3">
+                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="usuario">
+          </div>
+            <div class="mb-3">
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
+        </div>
+        @if (this.productos != null){
+            <h1 class="text-center bg-light" i18n>Lista de productos</h1>
+        }
+    }
+    @else {
+        <h1 class="text-center bg-light" i18n>Administración de productos</h1>
+    }
+
+
     <!--comprueba si productos no es nulo-->
     @if (this.productos != null) {
     <table class="table table-bordered table-striped">
@@ -8,8 +27,10 @@
                 <th i18n>Id</th>
                 <th i18n>Nombre</th>
                 <th i18n>Precio</th>
-                <th i18n>Borrar</th>
-                <th i18n>Seleccionar</th>
+                @if (sesionIniciada){
+                    <th i18n>Borrar</th>
+                    <th i18n>Seleccionar</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -18,37 +39,41 @@
                 <td>{{prod.Id}}</td>
                 <td>{{prod.nombre}}</td>
                 <td>{{prod.precio}} €</td>
-                <td>
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra"
-                        (click)="tempBorr(prod)" i18n>Borrar</button>
-                </td>
-                <td>
-                    <button class="btn btn-primary btn-sm" (click)="seleccionar(prod)" i18n>Seleccionar</button>
-                </td>
+                @if (sesionIniciada){
+                    <td>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra"
+                            (click)="tempBorr(prod)" i18n>Borrar</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" (click)="seleccionar(prod)" i18n>Seleccionar</button>
+                    </td>
+                }
             </tr>
             }
         </tbody>
     </table>
-    <div class="card p-3 mt-4 sticky-bottom border border-dark border-2">
-        <h5 class="card-title" i18n>Gestión de Productos</h5>
-        <div class="mb-3">
-            <label class="form-label fw-bold" i18n>Nombre:</label>
-            <input type="text" id="description" class="form-control" [(ngModel)]="prod.nombre" />
-        </div>
-        <div class="mb-3">
-            <label class="form-label fw-bold" i18n>Precio:</label>
-            <input type="number" id="price" class="form-control" [(ngModel)]="prod.precio" />
-        </div>
-        <div class="d-flex gap-2">
-            <button class="btn btn-warning" i18n (click)="modificacion()">Modificar</button>
-        </div>
-    </div>
+        @if (sesionIniciada){
+            <div class="card p-3 mt-4 sticky-bottom border border-dark border-2">
+                <h5 class="card-title" i18n>Gestión de Productos</h5>
+                <div class="mb-3">
+                    <label class="form-label fw-bold" i18n>Nombre:</label>
+                    <input type="text" id="description" class="form-control" [(ngModel)]="prod.nombre" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold" i18n>Precio:</label>
+                    <input type="number" id="price" class="form-control" [(ngModel)]="prod.precio" />
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-warning" i18n (click)="modificacion()">Modificar</button>
+                </div>
+            </div>
+            }
+
     }
     @else {
-    <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
-        <h2 i18n><span class="material-symbols-outlined">error</span>No se han encontrado productos</h2>
-    </div>
-
+        <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
+            <h2 i18n><span class="material-symbols-outlined">error</span>No se han encontrado productos</h2>
+        </div>
     }
 
 </div>

@@ -17,6 +17,14 @@ export class ConfCatProdComponent {
   nombres: any; //resultado de la consulta con join
   temp: ProdCat = { IdProd: 0, IdCat: 0 }; //variable temporal para cuando tengamos que borrar
   auxNombres: ProductoCategoria = { producto: '', categoria: '' };
+
+  usuario = "";
+  sesionIniciada = false;
+
+  inicioSesion(){
+    if (this.usuario.trim()!= "") this.sesionIniciada = true;
+  }
+
   constructor(private proCatService: CatProdService) {
     this.muestraTodo();
   }

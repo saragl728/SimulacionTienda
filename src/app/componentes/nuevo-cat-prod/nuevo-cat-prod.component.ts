@@ -17,6 +17,14 @@ export class NuevoCatProdComponent {
   categorias: any;
   valido: boolean = true;
   proCat: ProdCat = { IdProd: 0, IdCat: 0 };
+
+  usuario = "";
+  sesionIniciada = false;
+
+  inicioSesion(){
+    if (this.usuario.trim()!= "") this.sesionIniciada = true;
+  }
+
   constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService) {
     this.recuperaProds();
     this.recuperaCats();

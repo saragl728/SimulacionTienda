@@ -17,6 +17,12 @@ export class NuevaCatComponent {
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
   categorias: Array<any> = [];
+  usuario = "";
+  sesionIniciada = false;
+
+  inicioSesion(){
+    if (this.usuario.trim()!= "") this.sesionIniciada = true;
+  }
 
   estringNombres(): string {
     let aux = [];

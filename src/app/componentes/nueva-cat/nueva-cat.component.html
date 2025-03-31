@@ -1,16 +1,31 @@
 <div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
-    <h2 i18n>Añadir nueva categoría</h2>
-    <form>
-        @if (this.estringNombres()!= ""){
-            <div class="my-3 border border-info border-3 rounded bg-info-subtle shadow">
-                <h3 i18n>Ya tenemos las siguientes categorías, intentar añadirlas no servirá</h3>
-                <p> {{ estringNombres() }} </p>
+    @if (!sesionIniciada){
+        <div>
+            <h2 i18n>Inicia sesión como administrador para añadir productos</h2>
+            <div class="mb-3">
+                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="usuario">
             </div>
-        }
-        <div class="mb-3">
-            <input type="text" name="descripcion" id="description" class="form-control" i18n-placeholder
-                placeholder="Escribe la categoría" [(ngModel)]="cat.nombre">
+            <div class="mb-3">
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
         </div>
-        <button type="submit" class="btn btn-primary mb-3" i18n (click)="alta()">Guardar</button>
-    </form>
+    }
+    @else {
+        <h2 i18n>Añadir nueva categoría</h2>
+        <form>
+            @if (this.estringNombres()!= ""){
+                <div class="my-3 border border-info border-3 rounded bg-info-subtle shadow">
+                    <h3 i18n>Ya tenemos las siguientes categorías, intentar añadirlas no servirá</h3>
+                    <p> {{ estringNombres() }} </p>
+                </div>
+            }
+            <div class="mb-3">
+                <input type="text" name="descripcion" id="description" class="form-control" i18n-placeholder
+                    placeholder="Escribe la categoría" [(ngModel)]="cat.nombre">
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" i18n (click)="alta()">Guardar</button>
+        </form>
+    }
+
 </div>

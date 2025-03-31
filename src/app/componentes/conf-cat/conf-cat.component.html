@@ -1,13 +1,36 @@
 <div class="container mt-4">
-    <h1 class="text-center bg-light" i18n>Administración de categorías</h1>
+
+    @if (!sesionIniciada){
+        <div class="bg-primary-subtle p-2 mb-3 border border-primary rounded border-2">
+            <h2 i18n>Inicia sesión como administrador para modificar o eliminar categorías</h2>
+            <div class="mb-3">
+                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="usuario">
+            </div>
+            <div class="mb-3">
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
+        </div>
+        @if (this.categorias != null) {
+            <h1 class="text-center bg-light" i18n>Lista de categorías</h1>
+        }
+    }
+    @else {
+        <h1 class="text-center bg-light" i18n>Administración de categorías</h1>
+    }
+
+
     @if (this.categorias != null) {
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
                 <th i18n>Id</th>
                 <th i18n>Nombre</th>
-                <th i18n>Borrar</th>
-                <th i18n>Seleccionar</th>
+                @if (sesionIniciada){
+                    <th i18n>Borrar</th>
+                    <th i18n>Seleccionar</th>
+                }
+
             </tr>
         </thead>
         <tbody>
@@ -15,27 +38,33 @@
             <tr>
                 <td>{{cat.Id}}</td>
                 <td>{{cat.nombre}}</td>
-                <td>
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra"
-                        (click)="tempBorr(cat)" i18n>Borrar</button>
-                </td>
-                <td>
-                    <button class="btn btn-primary btn-sm" (click)="seleccionar(cat)" i18n>Seleccionar</button>
-                </td>
+                @if (sesionIniciada){
+                    <td>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra"
+                            (click)="tempBorr(cat)" i18n>Borrar</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" (click)="seleccionar(cat)" i18n>Seleccionar</button>
+                    </td>
+                }
+
             </tr>
             }
         </tbody>
     </table>
-    <div class="card p-3 mt-4 sticky-bottom border border-dark border-2">
-        <h5 class="card-title" i18n>Renombramiento de categorías</h5>
-        <div class="mb-3">
-            <label class="form-label fw-bold" i18n>Nombre:</label>
-            <input type="text" id="description" class="form-control" [(ngModel)]="cat.nombre" />
+    @if (sesionIniciada){
+        <div class="card p-3 mt-4 sticky-bottom border border-dark border-2">
+            <h5 class="card-title" i18n>Renombramiento de categorías</h5>
+            <div class="mb-3">
+                <label class="form-label fw-bold" i18n>Nombre:</label>
+                <input type="text" id="description" class="form-control" [(ngModel)]="cat.nombre" />
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-warning" i18n (click)="modificacion()">Renombrar</button>
+            </div>
         </div>
-        <div class="d-flex gap-2">
-            <button class="btn btn-warning" i18n (click)="modificacion()">Renombrar</button>
-        </div>
-    </div>
+    }
+
     }
     @else {
     <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
@@ -43,7 +72,6 @@
     </div>
 
     }
-
 </div>
 
 <div class="modal fade" id="modalBorra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,26 +1,41 @@
 <!--comprueba que ambas tablas tienen elementos-->
 @if (productos != null && categorias != null){
 <div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
-    <form>
-        <div class="mb-3">
-            <label for="pr" class="form-label fw-bold" i18n>Selecciona un producto: </label>
-            <select class="form-select" name="pr" id="prodc" [(ngModel)]="proCat.IdProd">
-                @for(prod of productos; track prod.Id) {
-                <option value="{{ prod.Id }}">{{ prod.nombre }}</option>
-                }
-            </select>
+    @if (!sesionIniciada){
+        <div>
+            <h2 i18n>Inicia sesión como administrador para añadir conexiones entre productos y categorías</h2>
+            <div class="mb-3">
+                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="usuario">
+            </div>
+            <div class="mb-3">
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
         </div>
-        <div class="mb-3">
-            <label for="ct" class="form-label fw-bold" i18n>Selecciona una categoría: </label>
-            <select class="form-select" name="ct" id="ctgs" [(ngModel)]="proCat.IdCat">
-                @for(cats of categorias; track cats.Id) {
-                <option value="{{ cats.Id }}">{{ cats.nombre }}</option>
-                }
-            </select>
+    }
+    @else {
+        <form>
+            <div class="mb-3">
+                <label for="pr" class="form-label fw-bold" i18n>Selecciona un producto: </label>
+                <select class="form-select" name="pr" id="prodc" [(ngModel)]="proCat.IdProd">
+                    @for(prod of productos; track prod.Id) {
+                    <option value="{{ prod.Id }}">{{ prod.nombre }}</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="ct" class="form-label fw-bold" i18n>Selecciona una categoría: </label>
+                <select class="form-select" name="ct" id="ctgs" [(ngModel)]="proCat.IdCat">
+                    @for(cats of categorias; track cats.Id) {
+                    <option value="{{ cats.Id }}">{{ cats.nombre }}</option>
+                    }
+                </select>
+    
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" (click)="alta()" i18n>Guardar</button>
+        </form>
+    }
 
-        </div>
-        <button type="submit" class="btn btn-primary mb-3" (click)="alta()" i18n>Guardar</button>
-    </form>
 </div>
 }<!--dice si alguna tabla está vacía-->
 @else {

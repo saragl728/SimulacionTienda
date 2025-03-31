@@ -1,6 +1,20 @@
 <div class="container mt-4">
     <h1 class="text-center bg-light" i18n>Productos y sus categorías</h1>
     <!--comprueba si el objeto de nombres no está vacío-->
+
+    @if (!sesionIniciada){
+        <div class="bg-primary-subtle p-2 mb-3 border border-primary rounded border-2">
+            <h2 i18n>Inicia sesión como administrador para eliminar conexiones entre productos y categorías</h2>
+            <div class="mb-3">
+                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="usuario">
+            </div>
+            <div class="mb-3">
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
+        </div>
+    }
+
     @if (this.nombres != null){
         <div class="shadow my-2 p-2 border border-secondary border-3 rounded bg-light">
             <div class="form-floating form-check-inline col-6">
@@ -27,7 +41,9 @@
             <tr>
                 <th i18n>Producto</th>
                 <th i18n>Categoría</th>
-                <th i18n>Borrar</th>
+                @if (sesionIniciada){
+                    <th i18n>Borrar</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -35,8 +51,10 @@
             <tr>
                 <td>{{p.producto}}</td>
                 <td>{{p.categoria}}</td>
-                <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra" i18n
+                @if (sesionIniciada){
+                    <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra" i18n
                         (click)="tempBorr(prodCats[i].IdProd, prodCats[i].IdCat, p)">Borrar</button></td>
+                }
             </tr>
             }
         </tbody>

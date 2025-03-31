@@ -14,6 +14,16 @@ export class NuevoProdComponent {
     this.obtenerNombres();
   }
 
+  prod: Producto = { Id: 0, nombre: '', precio: 0 };
+  valido: boolean = true;
+  nombres: Array<any> = []; //array con los nombres de los productos, se usará para que el usuario tenga claro qué nombres no se pueden meter
+  usuario = "";
+  sesionIniciada = false;
+
+  inicioSesion(){
+    if (this.usuario.trim()!= "") this.sesionIniciada = true;
+  }
+
   obtenerNombres() {
     this.productoServicio.obtenerNombres().subscribe((result: any) => {
       this.nombres = result;
@@ -28,10 +38,6 @@ export class NuevoProdComponent {
     }
     return aux.join(', ')
   }
-
-  prod: Producto = { Id: 0, nombre: '', precio: 0 };
-  valido: boolean = true;
-  nombres: Array<any> = []; //array con los nombres de los productos, se usará para que el usuario tenga claro qué nombres no se pueden meter
 
   validar() {
     this.valido = true;

@@ -14,6 +14,12 @@ export class ConfCatComponent {
   temp: Categoria = { Id: 0, nombre: '' };
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
+  usuario = "";
+  sesionIniciada = false;
+
+  inicioSesion(){
+    if (this.usuario.trim()!= "") this.sesionIniciada = true;
+  }
   constructor(private categoriaService: CategoriaService) {
     this.recuperarTodos();
   }
