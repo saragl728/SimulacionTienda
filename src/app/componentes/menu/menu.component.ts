@@ -33,6 +33,12 @@ export class MenuComponent {
       case '/conf-cat-prod':
         info = $localize`Aquí puedes ver las conexiones de categorías con productos y eliminarlas. También puedes hacer búsquedas.`;
         break;
+      case '/nuevo-usuario':
+        info = $localize`Crea tu cuenta de usuario.`;
+        break;
+      case '/mi-cuenta':
+        info = $localize`Aquí puedes ver los detalles sobre tu cuenta. Puedes cambiar tu nombre de usuario y tu contraseña.`;
+        break;
       default:
         info = $localize`Esto está por defecto`;
         break;
