@@ -39,6 +39,9 @@ export class MenuComponent {
       case '/mi-cuenta':
         info = $localize`Aquí puedes ver los detalles sobre tu cuenta. Puedes cambiar tu nombre de usuario y tu contraseña.`;
         break;
+        case '/error':
+          info = $localize`Has escrito mal la ruta en el navegador, ¿no?`;
+          break;
       default:
         info = $localize`Esto está por defecto`;
         break;

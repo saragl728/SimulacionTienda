@@ -7,6 +7,7 @@ import { NuevoCatProdComponent } from './componentes/nuevo-cat-prod/nuevo-cat-pr
 import { ConfCatProdComponent } from './componentes/conf-cat-prod/conf-cat-prod.component';
 import { NuevoUsuarioComponent } from './componentes/nuevo-usuario/nuevo-usuario.component';
 import { MiCuentaComponent } from './componentes/mi-cuenta/mi-cuenta.component';
+import { ErrorComponent } from './componentes/error/error.component';
 
 export const routes: Routes = [
   { path: 'nuevo-prod', component: NuevoProdComponent },
@@ -16,7 +17,8 @@ export const routes: Routes = [
   { path: 'nuevo-cat-prod', component: NuevoCatProdComponent },
   { path: 'conf-cat-prod', component: ConfCatProdComponent },
   { path: 'nuevo-usuario', component: NuevoUsuarioComponent},
-  {path: 'mi-cuenta', component: MiCuentaComponent},
+  { path: 'mi-cuenta', component: MiCuentaComponent },
+  { path: 'error', component: ErrorComponent },
   { path: '', redirectTo: 'nuevo-prod', pathMatch: 'full' },
-  { path: '**', redirectTo: 'nuevo-prod', pathMatch: 'full' },
+  { path: '**', redirectTo: 'error', pathMatch: 'full' },
 ];
