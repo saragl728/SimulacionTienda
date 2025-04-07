@@ -1,5 +1,12 @@
-<div class="container mt-3 p-1 bg-danger-subtle border border-3 rounded border-dark">
-    <h1 i18n class="text-danger-emphasis">Error</h1>
+<div class="container mt-2 p-1 border border-3 rounded border-dark-subtle text-light fw-bold" id="er">
+    <h1 i18n>Error</h1>
+    <h2 i18n>¿He sido yo?</h2>
     <p i18n>La página que buscabas no se encuentra.</p>
     <p i18n>Prueba a usar la barra de navegación.</p>
+    <p i18n>A lo mejor te interesa ver alguna de estas páginas:</p>
+    <ul>
+        <li i18n><button class="btn btn-light"><a href="/conf-prod" routerLink="/conf-prod">Lista de productos</a></button></li>
+        <li i18n><button class="btn btn-light"><a href="/conf-cat" routerLink="/conf-cat">Lista de categorías</a></button></li>
+        <li i18n><button class="btn btn-light"><a href="/conf-cat-prod" routerLink="/conf-cat-prod">Productos y categorías</a></button></li>
+    </ul>
 </div>
