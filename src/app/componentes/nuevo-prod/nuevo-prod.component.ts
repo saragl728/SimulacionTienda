@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/Producto';
-import { Usuario } from '../../models/Usuario';
 import { SesionAdmin } from '../../models/SesionAdmin';
 import { ProductoService } from '../../servicios/producto.service';
 import { UsuarioService } from '../../servicios/usuario.service';
@@ -16,17 +15,13 @@ export class NuevoProdComponent extends SesionAdmin {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
-    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
   }
 
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
   valido: boolean = true;
   nombres: Array<any> = []; //array con los nombres de los productos, se usará para que el usuario tenga claro qué nombres no se pueden meter
-  aiuda: string = 'N';
-  persona: Usuario;
-
+  
   override inicioSesion(): void {
-    
     this.usuarioServicio.entraAdmin(this.persona).subscribe((result: any) => {      
         if (result != null && result.length > 0){
           this.aiuda = result[0].adminis;
@@ -35,8 +30,6 @@ export class NuevoProdComponent extends SesionAdmin {
           }
       }
     });    
-    
-
   }
 
   obtenerNombres() {

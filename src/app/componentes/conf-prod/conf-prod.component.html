@@ -12,11 +12,11 @@
                         <div class="accordion-body">
                             <div class="mb-3">
                                 <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
-                                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="usuario">
+                                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="persona.nombre">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold" i18n>Contraseña:</label>
-                                <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña"/>
+                                <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
                             </div>
                             <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
                         </div>
@@ -31,6 +31,7 @@
     }
     @else {
         <h1 class="text-center bg-light" i18n>Administración de productos</h1>
+        <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}</h3>
     }
 
     <!--comprueba si productos no es nulo-->

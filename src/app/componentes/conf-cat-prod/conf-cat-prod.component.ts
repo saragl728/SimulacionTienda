@@ -3,6 +3,7 @@ import { ProdCat } from '../../models/ProdCat';
 import { ProductoCategoria } from '../../models/ProductoCategoria';
 import { SesionAdmin } from '../../models/SesionAdmin';
 import { CatProdService } from '../../servicios/cat-prod.service';
+import { UsuarioService } from '../../servicios/usuario.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -19,9 +20,20 @@ export class ConfCatProdComponent extends SesionAdmin {
   temp: ProdCat = { IdProd: 0, IdCat: 0 }; //variable temporal para cuando tengamos que borrar
   auxNombres: ProductoCategoria = { producto: '', categoria: '' };
 
-  constructor(private proCatService: CatProdService) {
+  constructor(private proCatService: CatProdService, private usuarioServicio: UsuarioService) {
     super();
     this.muestraTodo();
+  }
+
+  override inicioSesion(): void {
+    this.usuarioServicio.entraAdmin(this.persona).subscribe((result: any) => {      
+        if (result != null && result.length > 0){
+          this.aiuda = result[0].adminis;
+          if (this.aiuda == 'S') {
+            this.sesionIniciada = true;
+          }
+      }
+    });    
   }
 
   muestraTodo() {

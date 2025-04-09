@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Categoria } from '../../models/Categoria';
 import { SesionAdmin } from '../../models/SesionAdmin';
+import { UsuarioService } from '../../servicios/usuario.service';
 import { CategoriaService } from '../../servicios/categoria.service';
 
 @Component({
@@ -16,9 +17,22 @@ export class ConfCatComponent extends SesionAdmin {
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
 
-  constructor(private categoriaService: CategoriaService) {
+  constructor(private categoriaService: CategoriaService, private usuarioServicio: UsuarioService) {
     super();
     this.recuperarTodos();
+  }
+
+  override inicioSesion(): void {
+      
+    this.usuarioServicio.entraAdmin(this.persona).subscribe((result: any) => {      
+        if (result != null && result.length > 0){
+          this.aiuda = result[0].adminis;
+          if (this.aiuda == 'S') {
+            this.sesionIniciada = true;
+          }
+      }
+    });    
+
   }
 
   validar() {

@@ -4,6 +4,7 @@ import { SesionAdmin } from '../../models/SesionAdmin';
 import { CatProdService } from '../../servicios/cat-prod.service';
 import { CategoriaService } from '../../servicios/categoria.service';
 import { ProductoService } from '../../servicios/producto.service';
+import { UsuarioService } from '../../servicios/usuario.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -19,10 +20,21 @@ export class NuevoCatProdComponent extends SesionAdmin {
   valido: boolean = true;
   proCat: ProdCat = { IdProd: 0, IdCat: 0 };
 
-  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService) {
+  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService, private usuarioServicio: UsuarioService) {
     super();
     this.recuperaProds();
     this.recuperaCats();
+  }
+
+  override inicioSesion(): void {
+    this.usuarioServicio.entraAdmin(this.persona).subscribe((result: any) => {      
+        if (result != null && result.length > 0){
+          this.aiuda = result[0].adminis;
+          if (this.aiuda == 'S') {
+            this.sesionIniciada = true;
+          }
+      }
+    });    
   }
 
   validar() {

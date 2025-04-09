@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/Producto';
 import { SesionAdmin } from '../../models/SesionAdmin';
+import { UsuarioService } from '../../servicios/usuario.service';
 import { ProductoService } from '../../servicios/producto.service';
 
 @Component({
@@ -17,10 +18,21 @@ export class ConfProdComponent extends SesionAdmin {
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
   valido: boolean = true;
 
-  constructor(private productoService: ProductoService) {
+  constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService) {
     super();
     this.recuperarTodos();
   }
+
+  override inicioSesion(): void {
+    this.usuarioServicio.entraAdmin(this.persona).subscribe((result: any) => {      
+        if (result != null && result.length > 0){
+          this.aiuda = result[0].adminis;
+          if (this.aiuda == 'S') {
+            this.sesionIniciada = true;
+          }
+      }
+    });    
+  }  
 
   validar() {
     this.valido = true;

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Categoria } from '../../models/Categoria';
 import { SesionAdmin } from '../../models/SesionAdmin';
 import { CategoriaService } from '../../servicios/categoria.service';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-nueva-cat',
@@ -11,14 +12,29 @@ import { CategoriaService } from '../../servicios/categoria.service';
   styleUrl: './nueva-cat.component.css',
 })
 export class NuevaCatComponent extends SesionAdmin {
-  constructor(private categoriaServicio: CategoriaService) {
+  constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
+    //this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
   }
 
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
   categorias: Array<any> = [];
+    //aiuda: string = 'N';
+    //persona: Usuario;
+  
+    override inicioSesion(): void {
+      this.usuarioServicio.entraAdmin(this.persona).subscribe((result: any) => {      
+          if (result != null && result.length > 0){
+            this.aiuda = result[0].adminis;
+            if (this.aiuda == 'S') {
+              this.sesionIniciada = true;
+            }
+        }
+      });    
+    }
+
 
   estringNombres(): string {
     let aux = [];
