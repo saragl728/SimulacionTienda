@@ -1,33 +1,35 @@
 <div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
     <form>
-        <h1>Crea tu cuenta</h1>
+        <div class="col-12 mt-2">
+            <h1 i18n>Crea tu cuenta<button class="btn btn-warning rounded-circle float-end" data-bs-toggle="modal" data-bs-target="#modalAviso">?</button></h1>
+        </div>
+
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Nombre:</label>
-            <input type="text" id="nombre" name="nombre" class="form-control"/>
+            <input type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="usuario.nombre"/>
         </div>
 
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Email(sólo admitimos gmail, yahoo y hotmail):</label>
-            <input type="text" id="correo" name="correo" class="form-control"/>
+            <input type="email" id="correo" name="correo" class="form-control" [(ngModel)]="usuario.correo"/>
         </div>
 
         <div class="mb-3">
-            <label class="form-label fw-bold" i18n>Fecha de nacimiento(debes tener al menos 13 años):</label>
-            <input type="date" id="fechaNac" name="fechaNac" class="form-control" />
+            <label class="form-label fw-bold" i18n>Fecha de nacimiento (AÑO-MES-DÍA) (debes tener al menos 13 años):</label>
+            <input type="text" id="fechaNac" name="fechaNac" class="form-control" [(ngModel)]="auxFecha" />
+            <p>  {{ usuario.fechaNac }} </p>
         </div>
 
-        <div class="mb-3">
-            <input class="form-check-input me-2" name="acepto" type="checkbox" id="acepto" [(ngModel)]="confirmado">
-            <label class="form-check-label" for="acepto">Acepto los términos y condiciones de uso</label>
-        </div>
-
-        @if (cont1 != cont2){
-            <h2 class="text-danger-emphasis bg-warning-subtle border border-dark border-2">Las contraseñas no coinciden</h2>
+        @if (usuario.contrasenya != cont2){
+            <h3 i18n class="text-danger-emphasis bg-warning-subtle p-2 border border-dark border-2 rounded"><span class="material-symbols-outlined"> error </span>Las contraseñas no coinciden</h3>
+        }
+        @else {
+            <h3 i18n class="bg-success-subtle border border-light p-2 border-2 rounded"><span class="material-symbols-outlined"> check_circle </span>Las contraseñas coinciden</h3>
         }
 
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Contraseña(usa una de la que te puedas acordar fácilmente):</label>
-            <input type="password" name="contrasenya" id="contrasenya" class="form-control" [(ngModel)]="cont1" />
+            <input type="password" name="contrasenya" id="contrasenya" class="form-control" [(ngModel)]="usuario.contrasenya" />
         </div>
 
         <div class="mb-3">
@@ -35,7 +37,30 @@
             <input type="password" name="cont2" id="contrasenya2" class="form-control" [(ngModel)]="cont2" />
         </div>
 
+        <div class="mb-3">
+            <input class="form-check-input me-2" name="acepto" type="checkbox" id="acepto" [(ngModel)]="confirmado">
+            <label i18n class="form-check-label" for="acepto">Acepto los términos y condiciones de uso y me hago responsable de mis acciones</label>
+        </div>
+
         <button type="submit" class="btn btn-primary mb-3" i18n (click)="crearCuenta()">Crear cuenta</button>
     </form>
 
 </div>
+
+<div class="modal fade" id="modalAviso" tabindex="-1" aria-labelledby="Modal aviso" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content border border-warning border-3 rounded text-warning-emphasis">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><span class="material-symbols-outlined"> warning </span>Aviso</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body fw-bold bg-light">
+          <p i18n>Si descubrimos que has mentido sobre tu edad a la hora de crear tu cuenta, la borraremos.</p>
+          <p i18n>Al decir que tienes 18 o más años, estás aceptando que te traten como a un adulto, incluso si no lo eres.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" i18n>Vale</button>
+        </div>
+      </div>
+    </div>
+  </div>

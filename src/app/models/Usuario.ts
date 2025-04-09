@@ -2,11 +2,11 @@ export class Usuario {
     Id: number;
     nombre: string;
     correo: string;
-    fechaNac: Date;
+    fechaNac: string;
     saldo: number;
     contrasenya: string;
     adminis: string;
-    constructor(Id: number, nombre: string, correo: string, fechaNac: Date, saldo: number, contrasenya: string, adminis: string) {
+    constructor(Id: number, nombre: string, correo: string, fechaNac: string, saldo: number, contrasenya: string, adminis: string) {
       this.Id = Id;
       this.nombre = nombre;
       this.correo = correo;
