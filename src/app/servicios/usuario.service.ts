@@ -22,4 +22,8 @@ export class UsuarioService {
     return this.http.get(`${this.url}logAdmin.php?nombre=${usuario.nombre}&contrasenya=${usuario.contrasenya}`);
   }
 
+  entraNormal(usuario: Usuario){
+    return this.http.get(`${this.url}selectPorNombre.php?nombre=${usuario.nombre}&contrasenya=${usuario.contrasenya}`);
+  }
+
 }
