@@ -19,6 +19,6 @@ export const routes: Routes = [
   { path: 'nuevo-usuario', component: NuevoUsuarioComponent},
   { path: 'mi-cuenta', component: MiCuentaComponent },
   { path: 'error', component: ErrorComponent },
-  { path: '', redirectTo: 'nuevo-prod', pathMatch: 'full' },
+  { path: '', redirectTo: 'mi-cuenta', pathMatch: 'full' },
   { path: '**', redirectTo: 'error', pathMatch: 'full' },
 ];
