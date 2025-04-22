@@ -24,6 +24,12 @@
                 <h6> {{ persona.fechaNac }}</h6>
                 <h5 class="card-title" i18n>Mi saldo</h5>
                 <h6> {{ persona.saldo }} €</h6>
+                @if (esAdulto()){
+                    <p>Eres un adulto</p>
+                }
+                @else {
+                    <p>Sigues siendo menor de edad</p>
+                }
                 @if (inventario.length > 0){
                     <h5 class="card-title" i18n>Mi inventario</h5>
                     <table class="table table-bordered table-striped">
@@ -44,11 +50,17 @@
 
             </div>
             <div class="shadow card p-3 my-2 border border-dark border-2">
-                <h5 class="card-title" i18n>Modificar mi cuenta</h5>
+                <h5 class="card-title" i18n>Cambiar mi nombre</h5>
                 <div class="mb-3">
-                    <label class="form-label fw-bold" i18n>Nombre:</label>
-                    <input type="text" id="nombre" class="form-control" [(ngModel)]="persona.nombre"/>
+                    <label class="form-label fw-bold" i18n>Nuevo nombre(max 50 caracteres):</label>
+                    <input type="text" id="nombre" class="form-control" [(ngModel)]="persona.nombre"/>                    
                 </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-warning" i18n (click)="cambiarNombre()">Modificar</button>
+                </div>
+            </div>
+            <div class="shadow card p-3 my-2 border border-dark border-2">
+                <h5 class="card-title" i18n>Cambiar mi contraseña</h5>
                 @if (persona.contrasenya != contr2){
                     <h3 i18n class="text-danger-emphasis bg-warning-subtle p-2 border border-dark border-2 rounded"><span class="material-symbols-outlined"> error </span>Las contraseñas no coinciden</h3>
                 }
@@ -57,14 +69,14 @@
                 }
                 <div class="mb-3">
                     <label class="form-label fw-bold" i18n>Nueva contraseña:</label>
-                    <input type="password" id="nombre" class="form-control" [(ngModel)]="persona.contrasenya"/>
+                    <input type="password" id="contrasenya" class="form-control" [(ngModel)]="persona.contrasenya"/>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold" i18n>Repite la contraseña:</label>
-                    <input type="password" id="nombre" class="form-control" [(ngModel)]="contr2"/>
+                    <input type="password" id="contrasenya2" class="form-control" [(ngModel)]="contr2"/>
                 </div>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-warning" i18n (click)="editarCuenta()">Modificar</button>
+                    <button class="btn btn-warning" i18n (click)="cambiarContrasenya()">Modificar</button>
                 </div>
             </div>
 

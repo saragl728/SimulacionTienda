@@ -22,6 +22,33 @@ export class MiCuentaComponent {
   contr2 = "";
   inventario: Array<ProdCant> = [];
 
+  esAdulto(): boolean{
+    //hacer algo parecido a la validación de 13 años
+    const ADULTO = 18;
+    let edadAdulto: boolean = true;
+    let fe = new Date(this.persona.fechaNac);
+    const aux: Date = new Date(); //fecha actual
+
+    let ed = aux.getFullYear() - fe.getFullYear();
+
+    if (ed < ADULTO) {
+      edadAdulto = false;
+    } else {
+      if (ed == ADULTO) {
+        //se comprueba si en este mes se ha cumplido la edad mínima
+        if (fe.getMonth() > aux.getMonth()) {
+          edadAdulto = false;
+        } else {
+          //si se cumple en este mes, se comprueba si ya se ha cumplido
+          if (aux.getMonth() == fe.getMonth() && fe.getDate() > aux.getDate())
+            edadAdulto = false;
+        }
+      }
+    }
+
+    return edadAdulto;
+  }
+
   inicioSesion() {
     this.usuarioServicio.entraNormal(this.persona).subscribe((result: any) => {      
       if (result != null && result.length > 0){
@@ -39,7 +66,54 @@ export class MiCuentaComponent {
   });    
   }
 
-  editarCuenta(){
+  cambiarContrasenya(){
+    let valido: boolean = true;
+
+    let con1 = document.getElementById('contrasenya') as HTMLInputElement;
+    let con2 = document.getElementById('contrasenya2') as HTMLInputElement;
+
+    
+    if (!this.persona.contrasenya || this.persona.contrasenya != this.contr2) {
+      con1.classList.add('is-invalid');
+      con2.classList.add('is-invalid');
+      valido = false;
+    } else {
+      con1.classList.remove('is-invalid');
+      con2.classList.remove('is-invalid');
+    }
+
+    if (valido){
+      this.usuarioServicio.cambiaNombre(this.persona).subscribe((datos: any) => {
+        if (datos['resultado'] == 'OK') {
+          con1.classList.add('is-valid');
+          con2.classList.add('is-valid');
+        }
+      });
+    }
+  }
+
+  cambiarNombre(){
+    let valido: boolean = true;
+    const LONG_NOM = 50;
+    let nom = document.getElementById('nombre') as HTMLInputElement;
+    nom.classList.remove('is-valid');
+
+    if (!this.persona.nombre || this.persona.nombre.length > LONG_NOM) {
+      nom.classList.add('is-invalid');
+      valido = false;
+    } else {
+      nom.classList.remove('is-invalid');
+    }
+
+    if (valido){
+      //si el nombre está bien, hace la actualización
+      this.usuarioServicio.cambiaNombre(this.persona).subscribe((datos: any) => {
+        if (datos['resultado'] == 'OK') {
+          nom.classList.add('is-valid');
+        }
+      });
+    }
 
   }
+
 }
