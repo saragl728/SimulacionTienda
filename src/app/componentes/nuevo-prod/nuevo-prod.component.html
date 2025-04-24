@@ -16,26 +16,7 @@
     @else {
         <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}</h3>
         <h2 i18n>Añadir nuevo producto</h2>
-        <form>
-            @if (this.estringNombres()!= ""){
-
-                <div class="accordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed bg-primary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="fw-bold" i18n>Ya tenemos los siguientes productos, intentar añadirlos no servirá</span>
-                            </button>
-                          </h2>
-                          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <p> {{ estringNombres() }} </p>
-                            </div>
-                          </div>
-                    </div>
-                </div>
-
-            }
-    
+        <form>   
             <div class="mb-3">
                 <label for="description" class="form-label fw-bold" i18n>Nombre del producto</label>
                 <input type="text" name="nombre" id="description" class="form-control" i18n-placeholder

@@ -15,14 +15,12 @@ export class NuevaCatComponent extends SesionAdmin {
   constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
-    //this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    console.log(this.categorias);
   }
 
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
   categorias: Array<any> = [];
-    //aiuda: string = 'N';
-    //persona: Usuario;
   
     override inicioSesion(): void {
       this.usuarioServicio.entraAdmin(this.persona).subscribe((result: any) => {      
@@ -35,20 +33,11 @@ export class NuevaCatComponent extends SesionAdmin {
       });    
     }
 
-
-  estringNombres(): string {
-    let aux = [];
-
-    for (var i = 0; i < this.categorias.length; i++) {
-      aux.push(this.categorias[i].nombre);
-    }
-    return aux.join(', ');
-  }
-
-  //TODO: tengo que crear la consulta
   obtenerNombres() {
     this.categoriaServicio.obtenerNombres().subscribe((result: any) => {
-      this.categorias = result;
+      for (let i = 0; i < result.length; i++){
+        this.categorias.push(result[i].nombre)
+      }
     });
   }
 
@@ -56,7 +45,7 @@ export class NuevaCatComponent extends SesionAdmin {
     const longMax: number = 20; //longitud máxima de la categoría
     let nom = document.getElementById('description') as HTMLInputElement;
 
-    if (!this.cat.nombre || this.cat.nombre.length > longMax) {
+    if (!this.cat.nombre || this.cat.nombre.length > longMax || this.categorias.includes(this.cat.nombre)) {
       nom.classList.add('is-invalid');
       this.valido = false;
     } else {

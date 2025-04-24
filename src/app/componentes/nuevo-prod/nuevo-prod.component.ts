@@ -15,6 +15,7 @@ export class NuevoProdComponent extends SesionAdmin {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
+    console.log(this.nombres)
   }
 
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
@@ -34,17 +35,10 @@ export class NuevoProdComponent extends SesionAdmin {
 
   obtenerNombres() {
     this.productoServicio.obtenerNombres().subscribe((result: any) => {
-      this.nombres = result;
+      for (let i = 0; i < result.length; i++){
+        this.nombres.push(result[i].nombre)
+      }
     });
-  }
-
-  //esto se usará para decirle al usuario los productos que hay
-  estringNombres(): string{
-    let aux = [];
-    for (var i = 0; i < this.nombres.length; i++) {
-      aux.push(this.nombres[i].nombre)
-    }
-    return aux.join(', ')
   }
 
   validar() {
@@ -56,7 +50,7 @@ export class NuevoProdComponent extends SesionAdmin {
     let prc = document.getElementById('price') as HTMLInputElement;
 
     //comprobación del nombre
-    if (!this.prod.nombre || this.prod.nombre.length > longMax) {
+    if (!this.prod.nombre || this.prod.nombre.length > longMax || this.nombres.includes(this.prod.nombre)) {
       nom.classList.add('is-invalid');
       this.valido = false;
     } else {
