@@ -1,0 +1,43 @@
+<div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
+    @if (!sesionIniciada){
+    <h2 i18n>Inicia sesión para comprar productos</h2>
+    <div class="mb-3">
+        <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+        <input type="text" name="usuario" id="usuario" class="form-control" [(ngModel)]="persona.nombre" i18n-placeholder placeholder="Usuario">
+    </div>
+    <div class="mb-3">
+        <label class="form-label fw-bold" i18n>Contraseña:</label>
+        <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder [(ngModel)]="persona.contrasenya" placeholder="Contraseña" />
+    </div>
+    <button type="submit" class="btn btn-primary mb-3" i18n (click)="iniciarSesion()">Iniciar sesión</button>
+    }
+    @else {
+        <!--mostrará una tabla con los productos que se pueden comprar y te dirá el nombre y tu sueldo si es posible comprar algo-->
+        @if (comprables.length > 0){
+            <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}, tu saldo ahora es {{ persona.saldo }} €</h3>
+
+            <h3 class="text-info-emphasis bg-info-subtle mt-1 p-1" i18n>Lista de productos disponibles</h3>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th i18n>Producto</th>
+                        <th i18n>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (compr of comprables;let i = $index; track i) {
+                        <tr>
+                            <td>{{ compr.nombre }}</td>
+                            <td> {{ compr.precio }} </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        @else {
+            <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
+                <h2 i18n><span class="material-symbols-outlined">error</span>La tienda está vacía</h2>
+            </div>
+        }
+    }
+</div>
