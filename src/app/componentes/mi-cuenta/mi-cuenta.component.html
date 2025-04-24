@@ -12,7 +12,6 @@
             </div>
             <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
         </div>
-
     }
     @else{
         <div>
@@ -41,8 +40,32 @@
                         </thead>
                         <tbody>
                             @for (inv of inventario;let i = $index; track i){
-                                <td> {{ inv.producto }} </td>
-                                <td> {{ inv.cantidad }} </td>
+                                <tr>
+                                    <td> {{ inv.producto }} </td>
+                                    <td> {{ inv.cantidad }} </td>              
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+                @if (misReses.length > 0){
+                    <h5 class="card-title" i18n>Mis opiniones</h5>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th i18n>Producto</th>
+                                <th i18n>Opinión</th>
+                                <th i18n>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (resen of misReses;let j = $index; track j){
+                                <tr>
+                                    <td> {{ resen.producto }} </td>
+                                    <td> {{ resen.opinion }} </td>
+                                    <td> {{ resen.fecha }} </td>
+                                </tr>
                             }
                         </tbody>
                     </table>

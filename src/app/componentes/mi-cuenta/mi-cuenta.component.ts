@@ -4,6 +4,7 @@ import { Usuario } from '../../models/Usuario';
 import { ProdCant } from '../../models/ProdCant';
 import { InventarioService } from '../../servicios/inventario.service';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { ResenyaService } from '../../servicios/resenya.service';
 
 @Component({
   selector: 'app-mi-cuenta',
@@ -12,7 +13,7 @@ import { UsuarioService } from '../../servicios/usuario.service';
   styleUrl: './mi-cuenta.component.css'
 })
 export class MiCuentaComponent {
-  constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService) {
+  constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private resenyaServicio: ResenyaService) {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
   }
   sesionIniciada = false;
@@ -21,6 +22,7 @@ export class MiCuentaComponent {
   persona: Usuario;
   contr2 = "";
   inventario: Array<ProdCant> = [];
+  misReses: Array<any> = [];
 
   esAdulto(): boolean{
     //hacer algo parecido a la validación de 13 años
@@ -59,8 +61,11 @@ export class MiCuentaComponent {
           //ahora busco el inventario
           this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => {
             this.inventario = resultado;
-            console.log(this.inventario)
-          })
+            console.log(this.inventario);
+          });
+          this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => {
+            this.misReses = resu;
+          });
         } 
     }
   });    
@@ -113,7 +118,5 @@ export class MiCuentaComponent {
         }
       });
     }
-
   }
-
 }

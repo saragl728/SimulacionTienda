@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Resenya } from '../models/Resenya';
+import { Usuario } from '../models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,9 @@ export class ResenyaService {
 
     mostrarTodas(){
       return this.http.get(`${this.url}mostrarTodo.php`);
+    }
+
+    resenyaPorPersona(persona: Usuario){
+      return this.http.get(`${this.url}resenyasDeUnaPersona.php?IdCliente=${persona.Id}`);
     }
 }
