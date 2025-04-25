@@ -34,10 +34,10 @@
                 </tbody>
             </table>
         }
-        @else {
-            <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
-                <h2 i18n><span class="material-symbols-outlined">error</span>La tienda está vacía</h2>
-            </div>
-        }
     }
 </div>
+@if (comprables == null) {
+    <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
+        <h2 i18n><span class="material-symbols-outlined">error</span>La tienda está vacía</h2>
+    </div>
+}

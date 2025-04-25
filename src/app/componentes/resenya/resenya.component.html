@@ -43,6 +43,11 @@
             <button type="submit" class="btn btn-primary mb-3" i18n (click)="anyadirResenya()">Añadir reseña</button>
         </div>
     }
+    @if (productos == null){
+        <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
+            <h2 i18n><span class="material-symbols-outlined">error</span>No se puede añadir reseñas porque no hay productos</h2>
+        </div>
+    }
     @if (this.resenyas != null) {
         <table class="table table-bordered table-striped">
             <thead class="table-dark">

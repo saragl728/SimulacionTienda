@@ -22,16 +22,16 @@ export class MenuComponent {
         info = $localize`Aquí puedes añadir nuevas categorías de productos. Tienen nombres únicos.`;
         break;
       case '/conf-prod':
-        info = $localize`Aquí puedes ver los productos actuales, modificarlos y eliminarlos.`;
+        info = $localize`Aquí puedes ver los productos actuales. Puedes modificarlos y eliminarlos si eres administrador.`;
         break;
       case '/conf-cat':
-        info = $localize`Aquí puedes ver las categorías disponibles de productos y eliminarlas.`;
+        info = $localize`Aquí puedes ver las categorías disponibles de productos y eliminarlas si eres administrador.`;
         break;
       case '/nuevo-cat-prod':
         info = $localize`Aquí puedes conectar categorías con productos.`;
         break;
       case '/conf-cat-prod':
-        info = $localize`Aquí puedes ver las conexiones de categorías con productos y eliminarlas. También puedes hacer búsquedas.`;
+        info = $localize`Aquí puedes ver las conexiones de categorías con productos y eliminarlas si eres administrador. También puedes hacer búsquedas.`;
         break;
       case '/nuevo-usuario':
         info = $localize`Crea tu cuenta de usuario.`;
@@ -39,9 +39,15 @@ export class MenuComponent {
       case '/mi-cuenta':
         info = $localize`Aquí puedes ver los detalles sobre tu cuenta. Puedes cambiar tu nombre de usuario y tu contraseña.`;
         break;
-        case '/error':
-          info = $localize`Has escrito mal la ruta en el navegador, ¿no?`;
-          break;
+      case '/resenya':
+        info = $localize`Aquí puedes ver las opiniones de los clientes de los productos y dar la tuya.`;
+        break;
+      case '/comprar':
+        info = $localize`Aquí puedes hacer tu compra.`;
+        break;
+      case '/error':
+        info = $localize`Has escrito mal la ruta en el navegador, ¿no?`;
+        break;
       default:
         info = $localize`Esto está por defecto`;
         break;
