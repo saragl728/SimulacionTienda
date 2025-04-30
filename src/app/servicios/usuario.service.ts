@@ -25,6 +25,10 @@ export class UsuarioService {
     return this.http.post(`${this.url}cambiaNombre.php`, JSON.stringify(usuario));
   }
 
+  actualizaSaldo(usuario: Usuario){
+    return this.http.post(`${this.url}cambiaSaldo.php`, JSON.stringify(usuario));
+  }
+
   //si da un valor nulo, es que la contraseña no coincide
   entraAdmin(usuario: Usuario){
     return this.http.get(`${this.url}logAdmin.php?nombre=${usuario.nombre}&contrasenya=${usuario.contrasenya}`);

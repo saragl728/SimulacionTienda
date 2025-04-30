@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Usuario } from '../../models/Usuario';
 import { ResenyaService } from '../../servicios/resenya.service';
 import { ProductoService } from '../../servicios/producto.service';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { Usuario } from '../../models/Usuario';
 import { Resenya } from '../../models/Resenya';
 
 @Component({
@@ -40,11 +40,11 @@ export class ResenyaComponent {
 
   iniciarSesion(){
         this.usuarioServicio.entraNormal(this.persona).subscribe((result: any) => {      
-      if (result != null && result.length > 0){
-        this.persona = result[0];
-        if (this.persona.adminis != ""){
-          this.sesionIniciada = true;
-        } 
+          if (result != null && result.length > 0){
+            this.persona = result[0];
+          if (this.persona.adminis != ""){
+            this.sesionIniciada = true;
+          } 
     }
   }); 
   }
@@ -70,7 +70,6 @@ export class ResenyaComponent {
     }
   }
 
-
   anyadirResenya(){
     let opi = document.getElementById('areaOp') as HTMLInputElement;
     let pro = document.getElementById('prodc') as HTMLInputElement;
@@ -86,7 +85,6 @@ export class ResenyaComponent {
       if (datos.resultado == 'OK') {
         console.log('Reseña añadida');
         this.sacarTodas();  //si funciona, hace que cargue las reseñas
-        //poner en verde los datos
         opi.classList.add('is-valid');
         pro.classList.add('is-valid');
       } else {

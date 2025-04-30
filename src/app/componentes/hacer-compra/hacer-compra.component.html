@@ -12,16 +12,47 @@
     <button type="submit" class="btn btn-primary mb-3" i18n (click)="iniciarSesion()">Iniciar sesión</button>
     }
     @else {
-        <!--mostrará una tabla con los productos que se pueden comprar y te dirá el nombre y tu sueldo si es posible comprar algo-->
         @if (comprables.length > 0){
             <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}, tu saldo ahora es {{ persona.saldo }} €</h3>
+        }
+        <!--mostrará una tabla con los productos que se pueden comprar y te dirá el nombre y tu sueldo si es posible comprar algo-->
+        @if (carritoAux.length > 0){
+            <table class="table table-bordered mt-2 table-striped caption-top">
+                <caption class="bg-light p-1" i18n>Mi carrito actual({{costeAcumulado.toFixed(2)}} €)</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th>Mis productos</th>
+                        <th>Cantidad</th>
+                    </tr>
 
+                </thead>
+                <tbody>
+                    @for (au of carritoAux; let i = $index; track i){
+                        <tr>
+                            <td>{{au.nombre}} </td>
+                            <td>{{au.cantidad}}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#modalReinicio">Reiniciar</button>
+            @if (costeAcumulado < persona.saldo){
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalConfirmaCompra" i18n>Comprar</button>
+            }
+            @else {
+                <div class="container mt-2 text-danger-emphasis bg-danger-subtle">
+                    <h2 i18n><span class="material-symbols-outlined">error</span>No puedes hacer la compra porque el importe no es inferior al saldo de tu cuenta</h2>
+                </div>
+            }
+        }
+        @if (comprables.length > 0){
             <h3 class="text-info-emphasis bg-info-subtle mt-1 p-1" i18n>Lista de productos disponibles</h3>
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>
                         <th i18n>Producto</th>
                         <th i18n>Precio</th>
+                        <th i18n>Añadir</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +60,14 @@
                         <tr>
                             <td>{{ compr.nombre }}</td>
                             <td> {{ compr.precio }} </td>
+                            <td>
+                                @if (!nombresEnCarrito.includes(compr.nombre)){
+                                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalAlCarro" (click)="tempCarr(compr)" i18n>Añadir</button>
+                                }
+                                @else {
+                                    <span class="fw-bold" i18n>Añadido</span>
+                                }
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -41,3 +80,65 @@
         <h2 i18n><span class="material-symbols-outlined">error</span>La tienda está vacía</h2>
     </div>
 }
+
+<div class="modal fade" id="modalAlCarro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border border-warning border-3 rounded">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" i18n>Confirmación</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-warning-subtle">
+                <img src="clipo.png">
+                <p i18n>¿Cuántas unidades quieres de {{temp.nombre}}?</p>
+                <input type="number" min="1" step="1" class="form-control" [(ngModel)]="cantidad">
+                @if (cantidad >= CANTIDAD_GRANDE){
+                    <p class="text-warning bg-dark p-1 mt-2" i18n>Parece que estás comprando mucho(s) {{temp.nombre}}. ¿Seguro que quieres tanto?</p>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="anyadirAlCarro()" i18n>Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalReinicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border border-warning border-3 rounded">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" i18n>Confirmación</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-warning-subtle">
+                <img src="clipo.png">
+                <p i18n>¿Seguro que quieres reiniciar el carrito?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="reiniciaCarrito()" i18n>Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalConfirmaCompra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border border-warning border-3 rounded">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" i18n>Confirmación</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-warning-subtle">
+                <img src="clipo.png">
+                <p i18n>¿Seguro que tu compra está bien?</p>
+                <p>{{carritoString()}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="comprar()" i18n>Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
