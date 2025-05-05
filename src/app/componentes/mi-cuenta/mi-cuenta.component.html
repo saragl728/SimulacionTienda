@@ -117,7 +117,15 @@
                                 <td>{{per.nombre}}</td>
                                 <td>{{per.correo}} </td>
                                 <td> {{per.adminis}} </td>
-                                <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" (click)="tempCambiar(per)" data-bs-target="#modalCambiaPermiso" i18n>Cambiar</button></td>
+                                <td>
+                                    <!--sólo da la opción de cambiar los permisos de administrador de los adultos-->
+                                    @if (esAdulto(per)){
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" (click)="tempCambiar(per)" data-bs-target="#modalCambiaPermiso" i18n>Cambiar</button>
+                                    }
+                                    @else {
+                                        <span i18n>Demasiado joven para ser administrador</span>
+                                    }
+                                </td>
                             </tr>
                         }
                     </tbody>
