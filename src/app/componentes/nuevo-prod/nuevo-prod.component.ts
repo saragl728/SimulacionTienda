@@ -15,7 +15,6 @@ export class NuevoProdComponent extends SesionAdmin {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
-    console.log(this.nombres)
   }
 
   prod: Producto = { Id: 0, nombre: '', precio: 0 };

@@ -18,7 +18,9 @@ export class MiCuentaComponent {
   }
   sesionIniciada = false;
   usuarioAdmin = false;
+  todosUsuarios: Array<Usuario> = [];
   usuario = "";
+  temp: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
   persona: Usuario;
   contr2 = "";
   inventario: Array<ProdCant> = [];
@@ -34,14 +36,25 @@ export class MiCuentaComponent {
           //ahora busco el inventario
           this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => {
             this.inventario = resultado;
-            console.log(this.inventario);
           });
           this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => {
             this.misReses = resu;
           });
+          if (this.persona.adminis == 'S'){
+            this.usuarioAdmin = true;
+            this.sacarTodos();
+          }
         } 
     }
   });    
+  }
+
+  sacarTodos(){
+    this.usuarioServicio.sacarTodosExceptoActual(this.persona.Id).subscribe((result: any) => {
+      if (result.length >= 1){
+        this.todosUsuarios = result;
+      }
+    });
   }
 
   cambiarContrasenya(){
@@ -92,4 +105,24 @@ export class MiCuentaComponent {
       });
     }
   }
+
+  cambiarPermiso(){
+    //compruebo qué permisos tiene
+    if (this.temp.adminis == 'S'){
+      this.temp.adminis = 'N';
+    }
+    else{
+      this.temp.adminis = 'S';
+    }
+
+    this.usuarioServicio.cambiaAdmin(this.temp).subscribe((result: any) => {
+      if (result.resultado == 'OK'){
+        this.sacarTodos();  //si funciona sacamos la lista actualizada
+      }
+    })
+  }
+
+   tempCambiar(usuario: Usuario) {
+      this.temp = usuario;
+    }
 }

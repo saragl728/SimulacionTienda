@@ -13,12 +13,20 @@ export class UsuarioService {
     return this.http.post(`${this.url}anyadir.php`, JSON.stringify(usuario));
   }
 
+  sacarTodosExceptoActual(id: number){
+    return this.http.get(`${this.url}sacarTodosMenosUsuario.php?Id=${id}`);
+  }
+
   baja(usuario: Usuario) {
     return this.http.get(`${this.url}borrar.php?Id=${usuario.Id}`);
   }
 
   cambiaPasswd(usuario: Usuario){
     return this.http.post(`${this.url}cambiaContrasenya.php`, JSON.stringify(usuario));
+  }
+
+  cambiaAdmin(usuario: Usuario){
+    return this.http.post(`${this.url}cambiaAdmin.php`, JSON.stringify(usuario));
   }
 
   cambiaNombre(usuario: Usuario){

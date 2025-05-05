@@ -96,13 +96,52 @@
                     <button class="btn btn-warning" i18n (click)="cambiarContrasenya()">Modificar</button>
                 </div>
             </div>
-
         </div>
         
         <!--sólo se mostrará si un administrador ha iniciado sesión-->
         @if (usuarioAdmin){
-
+            <div class="shadow card p-3 my-2 border border-dark border-2">
+                <h5 class="card-title" i18n>Permisos de otros usuarios</h5>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th i18n>Nombre</th>
+                            <th i18n>Correo electrónico</th>
+                            <th i18n>Admin</th>
+                            <th i18n>Cambiar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (per of todosUsuarios;let k = $index; track k){
+                            <tr>
+                                <td>{{per.nombre}}</td>
+                                <td>{{per.correo}} </td>
+                                <td> {{per.adminis}} </td>
+                                <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" (click)="tempCambiar(per)" data-bs-target="#modalCambiaPermiso" i18n>Cambiar</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         }
-
     }
+</div>
+
+<div class="modal fade" id="modalCambiaPermiso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border border-warning border-3 rounded">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" i18n>Confirmación</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-warning-subtle">
+                <img src="clipo.png">
+                <p i18n>¿Seguro que quieres cambiar los permisos de administrador de {{temp.nombre}}?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="cambiarPermiso()" i18n>Confirmar</button>
+            </div>
+        </div>
+    </div>
 </div>

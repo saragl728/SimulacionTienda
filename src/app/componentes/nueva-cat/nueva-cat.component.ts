@@ -15,7 +15,6 @@ export class NuevaCatComponent extends SesionAdmin {
   constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
-    console.log(this.categorias);
   }
 
   cat: Categoria = { Id: 0, nombre: '' };
