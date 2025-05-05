@@ -23,12 +23,6 @@
                 <h6> {{ persona.fechaNac }}</h6>
                 <h5 class="card-title" i18n>Mi saldo</h5>
                 <h6> {{ persona.saldo }} €</h6>
-                @if (esAdulto()){
-                    <p>Eres un adulto</p>
-                }
-                @else {
-                    <p>Sigues siendo menor de edad</p>
-                }
                 @if (inventario.length > 0){
                     <h5 class="card-title" i18n>Mi inventario</h5>
                     <table class="table table-bordered table-striped">

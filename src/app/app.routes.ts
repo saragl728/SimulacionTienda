@@ -10,6 +10,7 @@ import { MiCuentaComponent } from './componentes/mi-cuenta/mi-cuenta.component';
 import { ErrorComponent } from './componentes/error/error.component';
 import { ResenyaComponent } from './componentes/resenya/resenya.component';
 import { HacerCompraComponent } from './componentes/hacer-compra/hacer-compra.component';
+import { LoteriaComponent } from './componentes/loteria/loteria.component';
 
 export const routes: Routes = [
   { path: 'nuevo-prod', component: NuevoProdComponent },
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'mi-cuenta', component: MiCuentaComponent },
   { path: 'resenya', component: ResenyaComponent },
   { path: 'comprar', component: HacerCompraComponent },
+  { path: 'loteria', component: LoteriaComponent },
   { path: 'error', component: ErrorComponent },
   { path: '', redirectTo: 'mi-cuenta', pathMatch: 'full' },
   { path: '**', redirectTo: 'error', pathMatch: 'full' },

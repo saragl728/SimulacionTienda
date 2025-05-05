@@ -1,0 +1,55 @@
+<div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
+    @if (!this.sesionIniciada){
+        <div>
+            <h2 i18n>Inicia sesión para acceder a la lotería(sólo para adultos)</h2>
+            <div class="mb-3">
+                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="persona.nombre">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold" i18n>Contraseña:</label>
+                <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
+        </div>
+    }
+    @else {
+        <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}, tu saldo ahora es {{ persona.saldo }} €</h3>
+        <div class="mb-3">
+            <label for="price" class="form-label fw-bold" i18n>¿Cuánto quieres apostar?</label>
+            <input type="number" name="precio" id="price" class="form-control" (change)="sacaObjetos()" [(ngModel)]="cantidad">
+        </div>
+        @if (!puedeBuscar()){
+            <div class="container mt-2 text-danger-emphasis bg-danger-subtle">
+                <h2 i18n><span class="material-symbols-outlined">error</span>No podemos dejarte apostar esta cantidad. Supera el porcentaje máximo permitido: {{PORCENTAJE_MAX * 100}} %</h2>
+            </div>
+        }
+        @else {
+            @if (haBuscado){
+                @if (listaObjetos.length > 0){
+                    <h3 class="text-info-emphasis bg-info-subtle mt-1 p-1" i18n>Hay {{listaObjetos.length}} producto(s) disponible(s)</h3>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th i18n>Producto</th>
+                                <th i18n>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (compr of listaObjetos;let i = $index; track i) {
+                                <tr>
+                                    <td>{{ compr.nombre }}</td>
+                                    <td>{{ compr.precio }}</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                @else {
+                    <h2 class="text-danger-emphasis bg-danger-subtle" i18n><span class="material-symbols-outlined">error</span>No hay productos con un precio parecido al que buscas</h2>
+                }
+            }
+
+        }
+    }
+</div>

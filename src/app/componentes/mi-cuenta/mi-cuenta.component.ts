@@ -24,33 +24,6 @@ export class MiCuentaComponent {
   inventario: Array<ProdCant> = [];
   misReses: Array<any> = [];
 
-  esAdulto(): boolean{
-    //hacer algo parecido a la validación de 13 años
-    const ADULTO = 18;
-    let edadAdulto: boolean = true;
-    let fe = new Date(this.persona.fechaNac);
-    const aux: Date = new Date(); //fecha actual
-
-    let ed = aux.getFullYear() - fe.getFullYear();
-
-    if (ed < ADULTO) {
-      edadAdulto = false;
-    } else {
-      if (ed == ADULTO) {
-        //se comprueba si en este mes se ha cumplido la edad mínima
-        if (fe.getMonth() > aux.getMonth()) {
-          edadAdulto = false;
-        } else {
-          //si se cumple en este mes, se comprueba si ya se ha cumplido
-          if (aux.getMonth() == fe.getMonth() && fe.getDate() > aux.getDate())
-            edadAdulto = false;
-        }
-      }
-    }
-
-    return edadAdulto;
-  }
-
   inicioSesion() {
     this.usuarioServicio.entraNormal(this.persona).subscribe((result: any) => {      
       if (result != null && result.length > 0){

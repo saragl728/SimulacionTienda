@@ -45,6 +45,9 @@ export class MenuComponent {
       case '/comprar':
         info = $localize`Aquí puedes hacer tu compra.`;
         break;
+      case '/loteria':
+        info = $localize`Aquí puedes obtener un objeto aleatorio cuyo precio sea cercano al importe que quieras. Sólo para adultos.`
+        break;
       case '/error':
         info = $localize`Has escrito mal la ruta en el navegador, ¿no?`;
         break;
