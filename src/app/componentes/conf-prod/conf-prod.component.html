@@ -34,6 +34,10 @@
         <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}</h3>
     }
 
+    <div class="form-floating form-check-inline col-12 mb-2">
+        <input type="text" class="form-control" id="Filtro" name="filtro" (change)="buscaPorNombre()" [(ngModel)]="busca">
+        <label for="Filtro" i18n>Busca por nombre</label>
+    </div>
     <!--comprueba si productos no es nulo-->
     @if (this.productos != null) {
     <table class="table table-bordered table-striped">

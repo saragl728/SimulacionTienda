@@ -17,10 +17,15 @@ export class ConfProdComponent extends SesionAdmin {
   temp: Producto = { Id: 0, nombre: '', precio: 0 }; //variable temporal para cuando tengamos que borrar
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
   valido: boolean = true;
+  busca: string = "";
 
   constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService) {
     super();
     this.recuperarTodos();
+  }
+
+  buscaPorNombre(){
+    this.productoService.buscaPorNombre(this.busca).subscribe((result: any) => (this.productos = result));
   }
 
   override inicioSesion(): void {

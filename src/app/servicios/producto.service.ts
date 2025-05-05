@@ -31,4 +31,12 @@ export class ProductoService {
   modificacion(producto: Producto) {
     return this.http.post(`${this.url}modificacion.php`, JSON.stringify(producto));
   }
+
+  sacarEntrePrecios(min: number, max: number){
+    return this.http.get(`${this.url}seleccionarPorRangoPrecio.php?PrecioMin=${min}&PrecioMax=${max}`);
+  }
+
+  buscaPorNombre(palabra: string){
+    return this.http.get(`${this.url}buscarPorNombre.php?nombre=${palabra}`);
+  }
 }
