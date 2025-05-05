@@ -48,6 +48,12 @@
             <h2 i18n><span class="material-symbols-outlined">error</span>No se puede añadir reseñas porque no hay productos</h2>
         </div>
     }
+    @if (productos != null){
+        <div class="form-floating form-check-inline col-12 mb-2">
+            <input type="text" class="form-control" id="Filtro" name="filtro" (change)="buscarPorNombreProducto()" [(ngModel)]="filtro">
+            <label for="Filtro" i18n>Busca por nombre</label>
+        </div>
+    }
     @if (this.resenyas != null) {
         <table class="table table-bordered table-striped">
             <thead class="table-dark">

@@ -25,9 +25,16 @@ export class ResenyaComponent {
   rese: Resenya;
   sesionIniciada: boolean = false;
   valido: boolean = true;
+  filtro: string = "";
 
   sacarTodas(){
     this.resenyaServicio.mostrarTodas().subscribe((respuesta: any) => {
+      this.resenyas = respuesta;
+    });
+  }
+
+  buscarPorNombreProducto(){
+    this.resenyaServicio.resenyaPorNombre(this.filtro).subscribe((respuesta: any) => {
       this.resenyas = respuesta;
     });
   }

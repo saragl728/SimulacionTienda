@@ -23,4 +23,8 @@ export class ResenyaService {
     resenyaPorPersona(persona: Usuario){
       return this.http.get(`${this.url}resenyasDeUnaPersona.php?IdCliente=${persona.Id}`);
     }
+
+    resenyaPorNombre(nombre: string){
+      return this.http.get(`${this.url}resenyaPorFiltroNombre.php?nombre=${nombre}`);
+    }
 }
