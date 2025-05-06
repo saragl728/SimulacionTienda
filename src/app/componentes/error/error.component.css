@@ -1,18 +1,14 @@
 #er {
-     background-image: url("../../../../public/hoja2.png"), radial-gradient(#32253f, transparent, #32253f), url("../../../../public/img5.png");
-     animation-name: an;
-     animation-duration: 2s;
-     animation-iteration-count: infinite;
-     animation-direction: alternate-reverse;
-     animation-timing-function: linear;
-  }
+  background-image: url("../../../../public/hoja2.png"),
+    radial-gradient(#170825, #2e233833, #231f27),
+    url("../../../../public/img5.png");
+}
 
-  li {
-    list-style-type: none;
-    margin: 4px;
-  }
+li {
+  list-style-type: none;
+  margin: 3px;
+}
 
-@keyframes an {
-    from {background-image: url("../../../../public/hoja2.png"), radial-gradient(#191120, transparent, #191120), url("../../../../public/img5.png");}
-    to { background-image: url("../../../../public/hoja2.png"), radial-gradient(transparent, #191120, transparent), url("../../../../public/img5.png");}
+p, h2, li, .mono {
+  font-family: monospace;
 }
