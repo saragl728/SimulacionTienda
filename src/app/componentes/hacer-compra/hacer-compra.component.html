@@ -52,7 +52,9 @@
                     <tr>
                         <th i18n>Producto</th>
                         <th i18n>Precio</th>
-                        <th i18n>Añadir</th>
+                        @if (costeAcumulado < persona.saldo){
+                            <th i18n>Añadir</th>
+                        }
                     </tr>
                 </thead>
                 <tbody>
@@ -60,14 +62,16 @@
                         <tr>
                             <td>{{ compr.nombre }}</td>
                             <td> {{ compr.precio }} </td>
-                            <td>
-                                @if (!nombresEnCarrito.includes(compr.nombre)){
-                                    <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalAlCarro" (click)="tempCarr(compr)" i18n>Añadir</button>
-                                }
-                                @else {
-                                    <span class="fw-bold" i18n>Añadido</span>
-                                }
-                            </td>
+                            @if (costeAcumulado < persona.saldo){
+                                <td>
+                                    @if (!nombresEnCarrito.includes(compr.nombre)){
+                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalAlCarro" (click)="tempCarr(compr)" i18n>Añadir</button>
+                                    }
+                                    @else {
+                                        <span class="fw-bold" i18n>Añadido</span>
+                                    }
+                                </td>
+                            }
                         </tr>
                     }
                 </tbody>

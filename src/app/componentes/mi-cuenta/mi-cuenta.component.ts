@@ -133,12 +133,8 @@ export class MiCuentaComponent {
 
   cambiarPermiso(){
     //compruebo qué permisos tiene
-    if (this.temp.adminis == 'S'){
-      this.temp.adminis = 'N';
-    }
-    else{
-      this.temp.adminis = 'S';
-    }
+    if (this.temp.adminis == 'S') this.temp.adminis = 'N';
+    else this.temp.adminis = 'S';
 
     this.usuarioServicio.cambiaAdmin(this.temp).subscribe((result: any) => {
       if (result.resultado == 'OK'){
@@ -147,7 +143,15 @@ export class MiCuentaComponent {
     })
   }
 
-   tempCambiar(usuario: Usuario) {
-      this.temp = usuario;
+  borraCuenta(usuario: Usuario){
+   this.usuarioServicio.baja(usuario).subscribe((datos: any) => {
+    if (datos.resultado == 'OK') {
+      this.sacarTodos();
     }
+   })
+  }
+
+  tempElegir(usuario: Usuario) {
+    this.temp = usuario;
+  }
 }

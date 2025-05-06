@@ -109,6 +109,7 @@
                             <th i18n>Correo electrónico</th>
                             <th i18n>Admin</th>
                             <th i18n>Cambiar</th>
+                            <th i18n>Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -120,12 +121,13 @@
                                 <td>
                                     <!--sólo da la opción de cambiar los permisos de administrador de los adultos-->
                                     @if (esAdulto(per)){
-                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" (click)="tempCambiar(per)" data-bs-target="#modalCambiaPermiso" i18n>Cambiar</button>
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" (click)="tempElegir(per)" data-bs-target="#modalCambiaPermiso" i18n>Cambiar</button>
                                     }
                                     @else {
                                         <span i18n>Demasiado joven para ser administrador</span>
                                     }
                                 </td>
+                                <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra" (click)="tempElegir(temp)" i18n>Borrar</button></td>
                             </tr>
                         }
                     </tbody>
@@ -144,11 +146,35 @@
             </div>
             <div class="modal-body bg-warning-subtle">
                 <img src="clipo.png">
-                <p i18n>¿Seguro que quieres cambiar los permisos de administrador de {{temp.nombre}}?</p>
+                @if (temp.adminis == 'S'){
+                    <p i18n>¿Seguro que quieres quitar permisos de administrador a {{temp.nombre}}?</p>
+                }
+                @else {
+                    <p i18n>¿Seguro que quieres dar permisos de administrador a {{temp.nombre}}?</p>
+                }
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
                 <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="cambiarPermiso()" i18n>Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalBorra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border border-warning border-3 rounded">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" i18n>Confirmación</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-warning-subtle">
+                <img src="clipo.png">
+                <p>Seguro que quieres eliminar la cuenta de {{temp.nombre}}?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="borraCuenta(temp)" i18n>Confirmar</button>
             </div>
         </div>
     </div>

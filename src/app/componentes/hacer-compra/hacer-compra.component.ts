@@ -7,7 +7,6 @@ import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../models/Usuario';
 import { Compra } from '../../models/Compra';
 import { Carrito } from '../../models/Carrito';
-import { Inventario } from '../../models/Inventario';
 import { AuxCarro } from '../../models/AuxCarro';
 import { Producto } from '../../models/Producto';
 
@@ -34,7 +33,7 @@ export class HacerCompraComponent {
   carritoAux: Array<AuxCarro> = [];  //puede que necesite esto
   comprables: any;
   nombresEnCarrito: Array<string> = []; //variable que se usará para comprobar si un nombre está en el carrito
-  cantidad: number = 0;
+  cantidad: number = 1;
   costeAcumulado: number = 0; //lo necesitaremos para saber cuánto hay que quitar de la cuenta del usuario y si el usuario tiene saldo suficiente
 
   iniciarSesion() {
@@ -70,7 +69,7 @@ export class HacerCompraComponent {
       this.costeAcumulado += this.temp.precio * this.cantidad;
       this.nombresEnCarrito.push(this.temp.nombre);
     }
-    this.cantidad = 0;  //se reinicia para que después no vuelva a aparecer con el mismo valor
+    this.cantidad = 1;  //se reinicia para que después no vuelva a aparecer con el mismo valor
   }
 
   sacarComprables() {
