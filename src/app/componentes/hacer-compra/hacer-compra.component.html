@@ -47,6 +47,10 @@
         }
         @if (comprables.length > 0){
             <h3 class="text-info-emphasis bg-info-subtle mt-1 p-1" i18n>Lista de productos disponibles</h3>
+            <div class="form-floating form-check-inline col-12 mb-2">
+                <input type="text" class="form-control" id="Filtro" name="filtro" (change)="buscaPorNombre()" [(ngModel)]="busca">
+                <label for="Filtro" i18n>Busca por nombre</label>
+            </div>
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                     <tr>

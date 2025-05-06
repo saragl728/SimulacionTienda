@@ -35,6 +35,7 @@ export class HacerCompraComponent {
   nombresEnCarrito: Array<string> = []; //variable que se usará para comprobar si un nombre está en el carrito
   cantidad: number = 1;
   costeAcumulado: number = 0; //lo necesitaremos para saber cuánto hay que quitar de la cuenta del usuario y si el usuario tiene saldo suficiente
+  busca: string = "";
 
   iniciarSesion() {
     this.usuarioServicio.entraNormal(this.persona).subscribe((result: any) => {
@@ -46,6 +47,10 @@ export class HacerCompraComponent {
         }
       }
     });
+  }
+
+  buscaPorNombre(){
+    this.productoServicio.buscaPorNombre(this.busca).subscribe((result: any) => (this.comprables = result));
   }
 
   //para sacar en un string los datos básicos del carrito del usuario
