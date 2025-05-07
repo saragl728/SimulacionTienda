@@ -1,37 +1,37 @@
 <div class="container mt-3">
     <h1 class="text-center bg-light" i18n>Productos y sus categorías</h1>
-
-    @if (!sesionIniciada){
-        <div class="bg-primary-subtle p-2 mb-2 border border-primary rounded border-2">
-            <div class="accordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed bg-primary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <span class="fw-bold" i18n>Inicia sesión como administrador para eliminar conexiones entre productos y categorías</span>
-                        </button>
-                      </h2>
-                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="mb-3">
-                                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
-                                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="persona.nombre">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold" i18n>Contraseña:</label>
-                                <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
-                        </div>
-                      </div>
-                </div>
-            </div>
-        </div>
-    }
-    @else {
-        <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}</h3>
-    }
         <!--comprueba si el objeto de nombres no está vacío-->
     @if (this.nombres != null){
+        @if (!sesionIniciada){
+            <div class="bg-primary-subtle p-2 mb-2 border border-primary rounded border-2">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-primary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <span class="fw-bold" i18n>Inicia sesión como administrador para eliminar conexiones entre productos y categorías</span>
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="mb-3">
+                                    <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                                    <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="persona.nombre">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold" i18n>Contraseña:</label>
+                                    <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @else {
+            <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}</h3>
+        }
+
         <div class="shadow my-2 p-2 border border-secondary border-3 rounded bg-light">
             <div class="form-floating form-check-inline col-6">
                 <input type="text" class="form-control" id="Filtro" name="filtro" [(ngModel)]="filtrio" i18n-placeholder placeholder="Busca por producto o categoría">
@@ -68,8 +68,7 @@
                 <td>{{p.producto}}</td>
                 <td>{{p.categoria}}</td>
                 @if (sesionIniciada){
-                    <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra" i18n
-                        (click)="tempBorr(prodCats[i].IdProd, prodCats[i].IdCat, p)">Borrar</button></td>
+                    <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra" i18n (click)="tempBorr(prodCats[i].IdProd, prodCats[i].IdCat, p)">Borrar</button></td>
                 }
             </tr>
             }
@@ -80,7 +79,6 @@
     <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
         <h2 i18n><span class="material-symbols-outlined">error</span>No hay relaciones entre productos y categorías</h2>
     </div>
-
     }
 </div>
 
@@ -93,8 +91,7 @@
             </div>
             <div class="modal-body bg-warning-subtle">
                 <img src="clipo.png">
-                <p i18n>¿Seguro que quieres eliminar la relación entre la categoría {{auxNombres.categoria}} y el
-                    producto {{auxNombres.producto}}?</p>
+                <p i18n>¿Seguro que quieres eliminar la relación entre la categoría {{auxNombres.categoria}} y el producto {{auxNombres.producto}}?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
