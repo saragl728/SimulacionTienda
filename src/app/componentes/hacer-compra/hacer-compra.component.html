@@ -1,93 +1,91 @@
-<div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
-    @if (!sesionIniciada){
-    <h2 i18n>Inicia sesión para comprar productos</h2>
-    <div class="mb-3">
-        <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
-        <input type="text" name="usuario" id="usuario" class="form-control" [(ngModel)]="persona.nombre" i18n-placeholder placeholder="Usuario">
-    </div>
-    <div class="mb-3">
-        <label class="form-label fw-bold" i18n>Contraseña:</label>
-        <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder [(ngModel)]="persona.contrasenya" placeholder="Contraseña" />
-    </div>
-    <button type="submit" class="btn btn-primary mb-3" i18n (click)="iniciarSesion()">Iniciar sesión</button>
+<div class="container mt-4">
+    @if (comprables == null) {
+        <div class="text-danger-emphasis bg-danger-subtle">
+            <h2 i18n><span class="material-symbols-outlined">error</span>La tienda está vacía</h2>
+        </div>
+        <img src="BlissInv.bmp" class="img-fluid">
     }
     @else {
-        @if (comprables.length > 0){
-            <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}, tu saldo ahora es {{ persona.saldo }} €</h3>
-        }
-        <!--mostrará una tabla con los productos que se pueden comprar y te dirá el nombre y tu sueldo si es posible comprar algo-->
-        @if (carritoAux.length > 0){
-            <table class="table table-bordered mt-2 table-striped caption-top">
-                <caption class="bg-light p-1" i18n>Mi carrito actual({{costeAcumulado.toFixed(2)}} €)</caption>
-                <thead class="table-dark">
-                    <tr>
-                        <th>Mis productos</th>
-                        <th>Cantidad</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    @for (au of carritoAux; let i = $index; track i){
-                        <tr>
-                            <td>{{au.nombre}} </td>
-                            <td>{{au.cantidad}}</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#modalReinicio">Reiniciar</button>
-            @if (costeAcumulado < persona.saldo){
-                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalConfirmaCompra" i18n>Comprar</button>
-            }
-            @else {
-                <div class="container mt-2 text-danger-emphasis bg-danger-subtle">
-                    <h2 i18n><span class="material-symbols-outlined">error</span>No puedes hacer la compra porque el importe no es inferior al saldo de tu cuenta</h2>
+        <div class="bg-primary-subtle border border-primary rounded border-2 p-2">
+            @if (!sesionIniciada){
+                <h2 i18n>Inicia sesión para comprar productos</h2>
+                <div class="mb-3">
+                    <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                    <input type="text" name="usuario" id="usuario" class="form-control" [(ngModel)]="persona.nombre" i18n-placeholder placeholder="Usuario">
                 </div>
-            }
-        }
-        @if (comprables.length > 0){
-            <h3 class="text-info-emphasis bg-info-subtle mt-1 p-1" i18n>Lista de productos disponibles</h3>
-            <div class="form-floating form-check-inline col-12 mb-2">
-                <input type="text" class="form-control" id="Filtro" name="filtro" (change)="buscaPorNombre()" [(ngModel)]="busca">
-                <label for="Filtro" i18n>Busca por nombre</label>
-            </div>
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th i18n>Producto</th>
-                        <th i18n>Precio</th>
-                        @if (costeAcumulado < persona.saldo){
-                            <th i18n>Añadir</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (compr of comprables;let i = $index; track i) {
+                <div class="mb-3">
+                    <label class="form-label fw-bold" i18n>Contraseña:</label>
+                    <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder [(ngModel)]="persona.contrasenya" placeholder="Contraseña" />
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" i18n (click)="iniciarSesion()">Iniciar sesión</button>
+                }
+            @else {
+                <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}, tu saldo ahora es {{ persona.saldo }} €</h3>
+                @if (carritoAux.length > 0){
+                    <table class="table table-bordered mt-2 table-striped caption-top">
+                        <caption class="bg-light p-1" i18n>Mi carrito actual({{costeAcumulado.toFixed(2)}} €)</caption>
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Mis productos</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (au of carritoAux; let i = $index; track i){
+                                <tr>
+                                    <td>{{au.nombre}} </td>
+                                    <td>{{au.cantidad}}</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#modalReinicio">Reiniciar</button>
+                    @if (costeAcumulado < persona.saldo){
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalConfirmaCompra" i18n>Comprar</button>
+                    }
+                    @else {
+                        <div class="container mt-2 text-danger-emphasis bg-danger-subtle">
+                            <h2 i18n><span class="material-symbols-outlined">error</span>No puedes hacer la compra porque el importe no es inferior al saldo de tu cuenta</h2>
+                        </div>
+                    }
+                }
+                <h3 class="text-info-emphasis bg-info-subtle mt-1 p-1" i18n>Lista de productos disponibles</h3>
+                <div class="form-floating form-check-inline col-12 mb-2">
+                    <input type="text" class="form-control" id="Filtro" name="filtro" (change)="buscaPorNombre()" [(ngModel)]="busca">
+                    <label for="Filtro" i18n>Busca por nombre</label>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
                         <tr>
-                            <td>{{ compr.nombre }}</td>
-                            <td> {{ compr.precio }} </td>
+                            <th i18n>Producto</th>
+                            <th i18n>Precio</th>
                             @if (costeAcumulado < persona.saldo){
-                                <td>
-                                    @if (!nombresEnCarrito.includes(compr.nombre)){
-                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalAlCarro" (click)="tempCarr(compr)" i18n>Añadir</button>
-                                    }
-                                    @else {
-                                        <span class="fw-bold" i18n>Añadido</span>
-                                    }
-                                </td>
+                                <th i18n>Añadir</th>
                             }
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
+                    </thead>
+                    <tbody>
+                        @for (compr of comprables;let i = $index; track i) {
+                            <tr>
+                                <td>{{ compr.nombre }}</td>
+                                <td> {{ compr.precio }} </td>
+                                @if (costeAcumulado < persona.saldo){
+                                    <td>
+                                        @if (!nombresEnCarrito.includes(compr.nombre)){
+                                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalAlCarro" (click)="tempCarr(compr)" i18n>Añadir</button>
+                                        }
+                                        @else {
+                                            <span class="fw-bold" i18n>Añadido</span>
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
     }
-</div>
-@if (comprables == null) {
-    <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
-        <h2 i18n><span class="material-symbols-outlined">error</span>La tienda está vacía</h2>
-    </div>
-}
 
 <div class="modal fade" id="modalAlCarro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

@@ -1,79 +1,78 @@
 <div class="container mt-3">
-    <!--poner algo que diga que inicies sesión para añadir reseñas-->
-    @if (!sesionIniciada){
-        <div class="bg-primary-subtle p-2 mb-2 border border-primary rounded border-2">
-            <div class="accordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed bg-primary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <span class="fw-bold" i18n>Inicia sesión para añadir reseñas de productos</span>
-                        </button>
-                      </h2>
-                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="mb-3">
-                                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
-                                <input type="text" name="usuario" id="usuario" class="form-control" [(ngModel)]="persona.nombre" i18n-placeholder placeholder="Usuario">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold" i18n>Contraseña:</label>
-                                <input type="password" name="contrasenya" id="contrasenya" class="form-control" [(ngModel)]="persona.contrasenya" i18n-placeholder placeholder="Contraseña"/>
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-3" i18n (click)="iniciarSesion()">Iniciar sesión</button>
-                        </div>
-                      </div>
-                </div>
-            </div>
-        </div>
-    }
-    @else {
-        <div class="bg-primary-subtle p-2 mb-2 border border-primary rounded border-2">
-            <h3 i18n>Danos tu opinión, {{ persona.nombre }}</h3>
-            <label for="pr" class="form-label fw-bold" i18n>Selecciona un producto: </label>
-            <select class="form-select mb-3" name="IdProducto" id="prodc" [(ngModel)]="rese.IdProducto">
-                @for(prod of productos; track prod.Id) {
-                <option value="{{ prod.Id }}">{{ prod.nombre }}</option>
-                }
-            </select>
-            <div class="mb-3">
-                <h5 i18n>Tu opinión</h5>
-                <textarea class="form-control" name="contenido" id="areaOp" rows="3" [(ngModel)]="rese.contenido"></textarea>
-
-            </div>
-            <button type="submit" class="btn btn-primary mb-3" i18n (click)="anyadirResenya()">Añadir reseña</button>
-        </div>
-    }
     @if (productos == null){
         <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
-            <h2 i18n><span class="material-symbols-outlined">error</span>No se puede añadir reseñas porque no hay productos</h2>
+            <h2 i18n><span class="material-symbols-outlined">error</span>No se puede añadir o ver reseñas porque no hay productos</h2>
         </div>
+        <img src="BlissInv.bmp" class="img-fluid">
     }
-    @if (productos != null){
-        <div class="form-floating form-check-inline col-12 mb-2">
-            <input type="text" class="form-control" id="Filtro" name="filtro" (change)="buscarPorNombreProducto()" [(ngModel)]="filtro">
-            <label for="Filtro" i18n>Busca por nombre</label>
-        </div>
-    }
-    @if (this.resenyas != null) {
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th i18n>Usuario</th>
-                    <th i18n>Producto</th>
-                    <th i18n>Opinión</th>
-                    <th i18n>Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (rese of resenyas;let i = $index; track i) {
+    @else {
+        @if (!sesionIniciada){
+            <div class="bg-primary-subtle p-2 mb-2 border border-primary rounded border-2">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-primary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <span class="fw-bold" i18n>Inicia sesión para añadir reseñas de productos</span>
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="mb-3">
+                                    <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                                    <input type="text" name="usuario" id="usuario" class="form-control" [(ngModel)]="persona.nombre" i18n-placeholder placeholder="Usuario">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold" i18n>Contraseña:</label>
+                                    <input type="password" name="contrasenya" id="contrasenya" class="form-control" [(ngModel)]="persona.contrasenya" i18n-placeholder placeholder="Contraseña"/>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-3" i18n (click)="iniciarSesion()">Iniciar sesión</button>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @else {
+            <div class="bg-primary-subtle p-2 mb-2 border border-primary rounded border-2">
+                <h3 i18n>Danos tu opinión, {{ persona.nombre }}</h3>
+                <label for="pr" class="form-label fw-bold" i18n>Selecciona un producto: </label>
+                <select class="form-select mb-3" name="IdProducto" id="prodc" [(ngModel)]="rese.IdProducto">
+                    @for(prod of productos; track prod.Id) {
+                    <option value="{{ prod.Id }}">{{ prod.nombre }}</option>
+                    }
+                </select>
+                <div class="mb-3">
+                    <h5 i18n>Tu opinión(max 200 caracteres)</h5>
+                    <textarea class="form-control" name="contenido" id="areaOp" rows="3" [(ngModel)]="rese.contenido"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" i18n (click)="anyadirResenya()">Añadir reseña</button>
+            </div>
+        }
+        @if (this.resenyas != null) {
+            <div class="form-floating form-check-inline col-12 mb-2">
+                <input type="text" class="form-control" id="Filtro" name="filtro" (change)="buscarPorNombreProducto()" [(ngModel)]="filtro">
+                <label for="Filtro" i18n>Busca por nombre</label>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
                     <tr>
-                        <td> {{ rese.cliente }} </td>
-                        <td> {{ rese.producto }} </td>
-                        <td> {{ rese.opinion }}</td>
-                        <td> {{ rese.fecha }} </td>
+                        <th i18n>Usuario</th>
+                        <th i18n>Producto</th>
+                        <th i18n>Opinión</th>
+                        <th i18n>Fecha</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @for (rese of resenyas;let i = $index; track i) {
+                        <tr>
+                            <td> {{ rese.cliente }} </td>
+                            <td> {{ rese.producto }} </td>
+                            <td> {{ rese.opinion }}</td>
+                            <td> {{ rese.fecha }} </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     }
 </div>

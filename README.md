@@ -8,3 +8,4 @@
 4. Añadición y eliminación de relaciones entre productos y categorías(admin)
 5. Añadición y visualización de reseñas
 6. Compra de productos
+7. Lotería(para adultos)
