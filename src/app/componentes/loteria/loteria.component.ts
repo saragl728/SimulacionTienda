@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { InventarioService } from '../../servicios/inventario.service';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { Usuario } from '../../models/Usuario';
-import { FormsModule } from '@angular/forms';
 import { ProductoService } from '../../servicios/producto.service';
+import { Usuario } from '../../models/Usuario';
 import { Producto } from '../../models/Producto';
+import { FormsModule } from '@angular/forms';
+import { Inventario } from '../../models/Inventario';
 
 @Component({
   selector: 'app-loteria',
@@ -18,7 +19,7 @@ export class LoteriaComponent {
     }
 
     readonly PORCENTAJE_MAX: number = 0.3333; //porcentaje máximo del saldo que se puede apostar
-    cantidad: number = 1;
+    cantidad: number = 0;
     haBuscado: boolean = false;
     persona: Usuario;
     sesionIniciada = false;
@@ -67,6 +68,29 @@ export class LoteriaComponent {
           } 
       }
     });    
+    }
+
+    apostar(){
+      let produ : Producto= { Id: 0, nombre: '', precio: 0 };
+      let n = Math.floor(Math.random() * this.listaObjetos.length); //sacamos el índice del objeto del array
+      produ = this.listaObjetos[n];
+
+      //hay que hacer que añada una unidad de este producto al inventario del usuario
+      this.inventarioServicio.cantidadInventario(this.persona.Id, produ.Id).subscribe((result: any) => {
+        if (result != null) {
+          let can1 = result[0].cantidad++;
+          let novInv = new Inventario(this.persona.Id, produ.Id, can1);
+          this.inventarioServicio.actualizaInventario(novInv).subscribe((result: any) => {});
+        }
+        else{
+          //se añade uno
+          let nuevoInv = new Inventario(this.persona.Id, produ.Id, 1);
+          this.inventarioServicio.anyadeInventario(nuevoInv).subscribe((result: any) => {})
+        }
+        this.persona.saldo -= this.cantidad;
+        this.usuarioServicio.actualizaSaldo(this.persona).subscribe((result: any) => {})
+      }
+    )
     }
     
     redondeaDecimales(numero: number){
