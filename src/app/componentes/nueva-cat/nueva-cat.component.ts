@@ -21,16 +21,19 @@ export class NuevaCatComponent extends SesionAdmin {
   valido: boolean = true;
   categorias: Array<any> = [];
   
-    override inicioSesion(): void {
-      this.usuarioServicio.entraAdmin(this.persona).subscribe((result: any) => {      
-          if (result != null && result.length > 0){
-            this.aiuda = result[0].adminis;
-            if (this.aiuda == 'S') {
-              this.sesionIniciada = true;
-            }
+  inicioSesion(): void {
+    this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
+      if (result != null){
+        this.persona = result;
+        if (this.persona.adminis == "S") {
+          this.sesionIniciada = true;
+        } 
+        else {
+          this.persona.contrasenya = "";
         }
-      });    
     }
+    })
+  }  
 
   obtenerNombres() {
     this.categoriaServicio.obtenerNombres().subscribe((result: any) => {

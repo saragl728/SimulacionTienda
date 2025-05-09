@@ -27,13 +27,11 @@ export class MiCuentaComponent {
   misReses: Array<any> = [];
 
   inicioSesion() {
-    this.usuarioServicio.entraNormal(this.persona).subscribe((result: any) => {      
-      if (result != null && result.length > 0){
-        this.persona = result[0];
-        if (this.persona.adminis != ""){
-          this.sesionIniciada = true;
+    this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
+      if (result != null){
+        this.persona = result;
           this.persona.contrasenya = "";  //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
-          //ahora busco el inventario
+          this.sesionIniciada = true;
           this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => {
             this.inventario = resultado;
           });
@@ -44,9 +42,9 @@ export class MiCuentaComponent {
             this.usuarioAdmin = true;
             this.sacarTodos();
           }
-        } 
+        
     }
-  });    
+    })
   }
 
   esAdulto(usuaario: Usuario): boolean {

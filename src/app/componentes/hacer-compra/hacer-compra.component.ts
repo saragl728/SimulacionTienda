@@ -30,7 +30,7 @@ export class HacerCompraComponent {
   compra: Compra;
   temp: Producto = { Id: 0, nombre: '', precio: 0 };  //lo necesitaremos después
   carro: Array<Carrito> = [];
-  carritoAux: Array<AuxCarro> = [];  //puede que necesite esto
+  carritoAux: Array<AuxCarro> = [];
   comprables: any;
   nombresEnCarrito: Array<string> = []; //variable que se usará para comprobar si un nombre está en el carrito
   cantidad: number = 1;
@@ -38,15 +38,13 @@ export class HacerCompraComponent {
   busca: string = "";
 
   iniciarSesion() {
-    this.usuarioServicio.entraNormal(this.persona).subscribe((result: any) => {
-      if (result != null && result.length > 0) {
-        this.persona = result[0];
-        if (this.persona.adminis != '') {
+    this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
+      if (result != null){
+        this.persona = result;
+          this.persona.contrasenya = "";
           this.sesionIniciada = true;
-          this.compra.IdCliente = this.persona.Id;  //le asignamos a la compra el id del usuario actual
-        }
-      }
-    });
+    }
+    })
   }
 
   buscaPorNombre(){

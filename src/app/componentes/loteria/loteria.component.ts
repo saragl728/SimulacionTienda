@@ -57,17 +57,16 @@ export class LoteriaComponent {
     }
 
     inicioSesion() {
-      this.usuarioServicio.entraNormal(this.persona).subscribe((result: any) => {      
-        if (result != null && result.length > 0){
-          this.persona = result[0];
-          if (this.persona.adminis != "") {
-            this.persona.contrasenya = "";  //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
-            if (this.esAdulto()){
-              this.sesionIniciada = true;
-            }
-          } 
-      }
-    });    
+    this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
+      if (result != null){
+        this.persona = result;
+          if (this.esAdulto()){
+            this.sesionIniciada = true;
+          }else{
+            this.persona.contrasenya = "";
+          }
+    }
+    })
     }
 
     apostar(){

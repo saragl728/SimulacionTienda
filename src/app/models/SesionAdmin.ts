@@ -9,8 +9,4 @@ export class SesionAdmin {
     sesionIniciada = false;
     persona: Usuario;
     aiuda: string = 'N';
-
-    inicioSesion(){
-      if (this.usuario.trim()!= "") this.sesionIniciada = true;
-    }
 }
