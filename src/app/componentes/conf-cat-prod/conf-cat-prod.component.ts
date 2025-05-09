@@ -25,18 +25,25 @@ export class ConfCatProdComponent extends SesionAdmin {
     this.muestraTodo();
   }
 
-  inicioSesion(): void {
+  inicioSesion() {
+    let usu = document.getElementById('usuario') as HTMLInputElement;
+    let contr = document.getElementById('contrasenya') as HTMLInputElement;
+
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
-      if (result != null){
+      if (result != null) {
         this.persona = result;
-        if (this.persona.adminis == "S") {
+        if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+        } else {
+          this.persona.contrasenya = '';
+          usu.classList.add('is-invalid');
+          contr.classList.add('is-invalid');
         }
-        else{
-          this.persona.contrasenya = "";
-        }
-    }
-    })
+      } else {
+        usu.classList.add('is-invalid');
+        contr.classList.add('is-invalid');
+      }
+    });
   }  
 
   muestraTodo() {

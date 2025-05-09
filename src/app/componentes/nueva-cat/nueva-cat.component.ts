@@ -22,17 +22,23 @@ export class NuevaCatComponent extends SesionAdmin {
   categorias: Array<any> = [];
   
   inicioSesion(): void {
+    let usu = document.getElementById('usuario') as HTMLInputElement;
+    let contr = document.getElementById('contrasenya') as HTMLInputElement;
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
-      if (result != null){
+      if (result != null) {
         this.persona = result;
-        if (this.persona.adminis == "S") {
+        if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
-        } 
-        else {
-          this.persona.contrasenya = "";
+        } else {
+          this.persona.contrasenya = '';
+          usu.classList.add('is-invalid');
+          contr.classList.add('is-invalid');
         }
-    }
-    })
+      } else {
+        usu.classList.add('is-invalid');
+        contr.classList.add('is-invalid');
+      }
+    });
   }  
 
   obtenerNombres() {

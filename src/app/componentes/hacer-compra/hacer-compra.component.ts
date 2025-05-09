@@ -38,13 +38,21 @@ export class HacerCompraComponent {
   busca: string = "";
 
   iniciarSesion() {
+    let usu = document.getElementById('usuario') as HTMLInputElement;
+    let contr = document.getElementById('contrasenya') as HTMLInputElement;
+
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
-      if (result != null){
+      if (result != null) {
         this.persona = result;
-          this.persona.contrasenya = "";
-          this.sesionIniciada = true;
-    }
-    })
+        this.persona.contrasenya = '';
+        this.sesionIniciada = true;
+        this.compra.IdCliente = this.persona.Id; //le asignamos a la compra el id del usuario actual
+      }
+      else{
+        usu.classList.add('is-invalid');
+        contr.classList.add('is-invalid');
+      }
+    });
   }
 
   buscaPorNombre(){

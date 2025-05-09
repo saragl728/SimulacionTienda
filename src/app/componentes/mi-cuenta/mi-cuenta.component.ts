@@ -27,24 +27,29 @@ export class MiCuentaComponent {
   misReses: Array<any> = [];
 
   inicioSesion() {
+    let usu = document.getElementById('usuario') as HTMLInputElement;
+    let contr = document.getElementById('contrasenia') as HTMLInputElement;
+
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
-      if (result != null){
+      if (result != null) {
         this.persona = result;
-          this.persona.contrasenya = "";  //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
-          this.sesionIniciada = true;
-          this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => {
+        this.persona.contrasenya = ''; //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
+        this.sesionIniciada = true;
+        this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => {
             this.inventario = resultado;
           });
-          this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => {
+        this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => {
             this.misReses = resu;
           });
-          if (this.persona.adminis == 'S'){
-            this.usuarioAdmin = true;
-            this.sacarTodos();
-          }
-        
-    }
-    })
+        if (this.persona.adminis == 'S') {
+          this.usuarioAdmin = true;
+          this.sacarTodos();
+        }
+      } else {
+        usu.classList.add('is-invalid');
+        contr.classList.add('is-invalid');
+      }
+    });
   }
 
   esAdulto(usuaario: Usuario): boolean {
@@ -98,7 +103,7 @@ export class MiCuentaComponent {
 
     if (valido){
       this.usuarioServicio.cambiaNombre(this.persona).subscribe((datos: any) => {
-        if (datos['resultado'] == 'OK') {
+        if (datos.resultado == 'OK') {
           con1.classList.add('is-valid');
           con2.classList.add('is-valid');
         }

@@ -11,107 +11,113 @@ import { Inventario } from '../../models/Inventario';
   selector: 'app-loteria',
   imports: [FormsModule],
   templateUrl: './loteria.component.html',
-  styleUrl: './loteria.component.css'
+  styleUrl: './loteria.component.css',
 })
 export class LoteriaComponent {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private productoServicio: ProductoService) {
-      this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
-    }
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '',adminis: 'N'};
+  }
 
-    readonly PORCENTAJE_MAX: number = 0.3333; //porcentaje máximo del saldo que se puede apostar
-    cantidad: number = 0;
-    haBuscado: boolean = false;
-    persona: Usuario;
-    sesionIniciada = false;
-    listaObjetos: Array<Producto> = [];
+  readonly PORCENTAJE_MAX: number = 0.3333; //porcentaje máximo del saldo que se puede apostar
+  cantidad: number = 0;
+  haBuscado: boolean = false;
+  persona: Usuario;
+  sesionIniciada = false;
+  listaObjetos: Array<Producto> = [];
 
-    puedeBuscar(): boolean{
-      return this.cantidad < (this.persona.saldo * this.PORCENTAJE_MAX)
-    }
+  puedeBuscar(): boolean {
+    return this.cantidad < this.persona.saldo * this.PORCENTAJE_MAX;
+  }
 
-    //lo necesitamos para saber si el usuario puede usar la lotería
-    esAdulto(): boolean {
-      const ADULTO = 18;
-      let edadAdulto: boolean = true;
-      let fe = new Date(this.persona.fechaNac);
-      const aux: Date = new Date(); //fecha actual
-  
-      let ed = aux.getFullYear() - fe.getFullYear();
-  
-      if (ed < ADULTO) {
-        edadAdulto = false;
-      } else {
-        if (ed == ADULTO) {
-          //se comprueba si en este mes se ha cumplido la edad mínima
-          if (fe.getMonth() > aux.getMonth()) {
+  //lo necesitamos para saber si el usuario puede usar la lotería
+  esAdulto(): boolean {
+    const ADULTO = 18;
+    let edadAdulto: boolean = true;
+    let fe = new Date(this.persona.fechaNac);
+    const aux: Date = new Date(); //fecha actual
+
+    let ed = aux.getFullYear() - fe.getFullYear();
+
+    if (ed < ADULTO) {
+      edadAdulto = false;
+    } else {
+      if (ed == ADULTO) {
+        //se comprueba si en este mes se ha cumplido la edad mínima
+        if (fe.getMonth() > aux.getMonth()) {
+          edadAdulto = false;
+        } else {
+          //si se cumple en este mes, se comprueba si ya se ha cumplido
+          if (aux.getMonth() == fe.getMonth() && fe.getDate() > aux.getDate())
             edadAdulto = false;
-          } else {
-            //si se cumple en este mes, se comprueba si ya se ha cumplido
-            if (aux.getMonth() == fe.getMonth() && fe.getDate() > aux.getDate())
-              edadAdulto = false;
-          }
         }
       }
-  
-      return edadAdulto;
     }
 
-    inicioSesion() {
+    return edadAdulto;
+  }
+
+  inicioSesion() {
+    let usu = document.getElementById('usuario') as HTMLInputElement;
+    let contr = document.getElementById('contrasenya') as HTMLInputElement;
+
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
-      if (result != null){
+      if (result != null) {
         this.persona = result;
-          if (this.esAdulto()){
-            this.sesionIniciada = true;
-          }else{
-            this.persona.contrasenya = "";
-          }
-    }
-    })
-    }
+        if (this.esAdulto()) {
+          this.sesionIniciada = true;
+        } else {
+          this.persona.contrasenya = '';
+          usu.classList.add('is-invalid');
+          contr.classList.add('is-invalid');
+        }
+      } else {
+        usu.classList.add('is-invalid');
+        contr.classList.add('is-invalid');
+      }
+    });
+  }
 
-    apostar(){
-      let produ : Producto= { Id: 0, nombre: '', precio: 0 };
-      let n = Math.floor(Math.random() * this.listaObjetos.length); //sacamos el índice del objeto del array
-      produ = this.listaObjetos[n];
+  apostar() {
+    let produ: Producto = { Id: 0, nombre: '', precio: 0 };
+    let n = Math.floor(Math.random() * this.listaObjetos.length); //sacamos el índice del objeto del array
+    produ = this.listaObjetos[n];
 
-      //hay que hacer que añada una unidad de este producto al inventario del usuario
-      this.inventarioServicio.cantidadInventario(this.persona.Id, produ.Id).subscribe((result: any) => {
+    //hay que hacer que añada una unidad de este producto al inventario del usuario
+    this.inventarioServicio.cantidadInventario(this.persona.Id, produ.Id).subscribe((result: any) => {
         if (result != null) {
           let can1 = result[0].cantidad++;
           let novInv = new Inventario(this.persona.Id, produ.Id, can1);
           this.inventarioServicio.actualizaInventario(novInv).subscribe((result: any) => {});
-        }
-        else{
+        } else {
           //se añade uno
           let nuevoInv = new Inventario(this.persona.Id, produ.Id, 1);
-          this.inventarioServicio.anyadeInventario(nuevoInv).subscribe((result: any) => {})
+          this.inventarioServicio.anyadeInventario(nuevoInv).subscribe((result: any) => {});
         }
         this.persona.saldo -= this.cantidad;
-        this.usuarioServicio.actualizaSaldo(this.persona).subscribe((result: any) => {})
-      }
-    )
-    }
-    
-    redondeaDecimales(numero: number){
-      return Math.round(numero * 100) / 100;
-    }
+        this.usuarioServicio.actualizaSaldo(this.persona).subscribe((result: any) => {});
+      });
+  }
 
-    sacaObjetos(){
-      let min = this.redondeaDecimales(this.cantidad * 0.9)
-       let max = this.redondeaDecimales(this.cantidad * 1.1)
+  redondeaDecimales(numero: number) {
+    return Math.round(numero * 100) / 100;
+  }
 
-      if (!this.haBuscado) this.haBuscado = true;
+  sacaObjetos() {
+    let min = this.redondeaDecimales(this.cantidad * 0.9);
+    let max = this.redondeaDecimales(this.cantidad * 1.1);
 
-      if (this.puedeBuscar()){
-        this.productoServicio.sacarEntrePrecios(min, max).subscribe((result: any) => {
+    if (!this.haBuscado) this.haBuscado = true;
+
+    if (this.puedeBuscar()) {
+      this.productoServicio.sacarEntrePrecios(min, max).subscribe((result: any) => {
           this.listaObjetos = [];
           if (result != null) {
-            for (let i = 0; i < result.length; i++){
+            for (let i = 0; i < result.length; i++) {
               let au = new Producto(result[i].Id, result[i].nombre, result[i].precio);
               this.listaObjetos.push(au);
             }
           }
-        })
-      }
+        });
     }
+  }
 }

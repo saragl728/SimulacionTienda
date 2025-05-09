@@ -46,14 +46,19 @@ export class ResenyaComponent {
   }
 
   iniciarSesion(){
+    let usu = document.getElementById('usuario') as HTMLInputElement;
+    let contr = document.getElementById('contrasenya') as HTMLInputElement;
+
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
-      if (result != null){
+      if (result != null) {
         this.persona = result;
-          this.persona.contrasenya = "";
-          this.sesionIniciada = true;
-        
-    }
-    })
+        this.persona.contrasenya = '';
+        this.sesionIniciada = true;
+      } else {
+        usu.classList.add('is-invalid');
+        contr.classList.add('is-invalid');
+      }
+    });
   }
 
   validar(){
