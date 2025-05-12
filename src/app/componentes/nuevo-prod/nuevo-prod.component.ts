@@ -15,6 +15,7 @@ export class NuevoProdComponent extends SesionAdmin {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
+    document.title = $localize`Nuevo producto`;
   }
 
   prod: Producto = { Id: 0, nombre: '', precio: 0 };

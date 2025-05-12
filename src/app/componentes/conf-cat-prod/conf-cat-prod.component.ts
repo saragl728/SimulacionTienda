@@ -23,6 +23,7 @@ export class ConfCatProdComponent extends SesionAdmin {
   constructor(private proCatService: CatProdService, private usuarioServicio: UsuarioService) {
     super();
     this.muestraTodo();
+    document.title = $localize`Ver productos con categorías`;
   }
 
   inicioSesion() {
@@ -34,6 +35,7 @@ export class ConfCatProdComponent extends SesionAdmin {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          document.title = $localize`Administrar conexiones de productos con categorías`;
         } else {
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');

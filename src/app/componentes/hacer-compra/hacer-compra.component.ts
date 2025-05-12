@@ -21,6 +21,7 @@ export class HacerCompraComponent {
     this.sacarComprables();
     this.persona = {Id: 0, nombre: '', correo: '',fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.compra = {Id: 0, IdCliente: 0, fecha: ''};
+    document.title = $localize`Comprar`;
   }
   
   readonly CANTIDAD_GRANDE: number = 15;

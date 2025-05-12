@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './error.component.css'
 })
 export class ErrorComponent {
+  constructor(){
+    document.title = $localize`Error`;
+  }
   readonly LIMITE : number = 1000 * 60 * 15;
   
   a = setTimeout(this.salta, this.LIMITE);  //después de que pase el tiempo se hará la redirección

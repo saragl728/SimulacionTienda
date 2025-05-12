@@ -24,6 +24,7 @@ export class NuevoCatProdComponent extends SesionAdmin {
     super();
     this.recuperaProds();
     this.recuperaCats();
+    document.title = $localize`Conectar productos con categorías`;
   }
 
   inicioSesion(): void {

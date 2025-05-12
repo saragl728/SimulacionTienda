@@ -20,6 +20,7 @@ export class ConfCatComponent extends SesionAdmin {
   constructor(private categoriaService: CategoriaService, private usuarioServicio: UsuarioService) {
     super();
     this.recuperarTodos();
+    document.title = $localize`Ver categorías`;
   }
 
   inicioSesion() {
@@ -31,6 +32,7 @@ export class ConfCatComponent extends SesionAdmin {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          document.title = $localize`Administrar categorías`;
         } else {
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');

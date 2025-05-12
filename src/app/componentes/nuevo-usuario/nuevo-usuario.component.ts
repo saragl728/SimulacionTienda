@@ -10,7 +10,9 @@ import { Usuario } from '../../models/Usuario';
   styleUrl: './nuevo-usuario.component.css',
 })
 export class NuevoUsuarioComponent {
-  constructor(private usuarioServicio: UsuarioService) {}
+  constructor(private usuarioServicio: UsuarioService) {
+    document.title = $localize`Crear cuenta`;
+  }
 
   confirmado: boolean = false; //se usa para ver si se ha marcado la casilla de verificación
   cont2: string = '';

@@ -16,6 +16,7 @@ import { Inventario } from '../../models/Inventario';
 export class LoteriaComponent {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private productoServicio: ProductoService) {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '',adminis: 'N'};
+    document.title = $localize`Lotería`;
   }
 
   readonly PORCENTAJE_MAX: number = 0.3333; //porcentaje máximo del saldo que se puede apostar

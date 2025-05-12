@@ -15,6 +15,7 @@ import { ResenyaService } from '../../servicios/resenya.service';
 export class MiCuentaComponent {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private resenyaServicio: ResenyaService) {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    document.title = $localize`Mi cuenta`;
   }
   sesionIniciada = false;
   usuarioAdmin = false;
@@ -45,6 +46,7 @@ export class MiCuentaComponent {
           this.usuarioAdmin = true;
           this.sacarTodos();
         }
+        document.title = $localize`Cuenta de ${this.persona.nombre}`;
       } else {
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');

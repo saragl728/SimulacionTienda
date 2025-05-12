@@ -18,6 +18,7 @@ export class ResenyaComponent {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.rese = { Id: 0, IdProducto: 0, IdCliente: 0, contenido: '', fecha: ''};
     this.recuperaProds();
+    document.title = $localize`Reseñas`;
   }
   resenyas: any;
   productos: any;

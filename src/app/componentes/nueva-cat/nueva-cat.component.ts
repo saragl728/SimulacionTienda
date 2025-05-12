@@ -15,6 +15,7 @@ export class NuevaCatComponent extends SesionAdmin {
   constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
+    document.title = $localize`Nueva categoría`;
   }
 
   cat: Categoria = { Id: 0, nombre: '' };

@@ -22,6 +22,7 @@ export class ConfProdComponent extends SesionAdmin {
   constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService) {
     super();
     this.recuperarTodos();
+    document.title = $localize`Ver productos`;
   }
 
   buscaPorNombre(){
@@ -36,6 +37,7 @@ export class ConfProdComponent extends SesionAdmin {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          document.title = $localize`Administrar productos`;
         } else {
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
