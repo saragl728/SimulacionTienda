@@ -28,6 +28,12 @@ export class ResenyaComponent {
   valido: boolean = true;
   filtro: string = "";
 
+  cierraSesion(){
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    this.rese = { Id: 0, IdProducto: 0, IdCliente: 0, contenido: '', fecha: ''};
+    this.sesionIniciada = false;
+  }
+
   sacarTodas(){
     this.resenyaServicio.mostrarTodas().subscribe((respuesta: any) => {
       this.resenyas = respuesta;

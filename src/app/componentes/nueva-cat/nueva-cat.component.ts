@@ -21,6 +21,12 @@ export class NuevaCatComponent extends SesionAdmin {
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
   categorias: Array<any> = [];
+
+  cierraSesion(){
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    this.sesionIniciada = false;
+    this.cat= { Id: 0, nombre: '' };
+  }
   
   inicioSesion(): void {
     let usu = document.getElementById('usuario') as HTMLInputElement;

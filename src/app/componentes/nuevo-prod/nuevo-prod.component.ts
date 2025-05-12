@@ -22,6 +22,12 @@ export class NuevoProdComponent extends SesionAdmin {
   valido: boolean = true;
   nombres: Array<any> = []; //array con los nombres de los productos, se usará para que el usuario tenga claro qué nombres no se pueden meter
   
+  cierraSesion(){
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    this.sesionIniciada = false;
+    this.prod  = { Id: 0, nombre: '', precio: 0 };
+  }
+
   inicioSesion(): void {
     let usu = document.getElementById('usuario') as HTMLInputElement;
     let contr = document.getElementById('contrasenya') as HTMLInputElement;

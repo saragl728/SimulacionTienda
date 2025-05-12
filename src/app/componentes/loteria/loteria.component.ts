@@ -26,6 +26,14 @@ export class LoteriaComponent {
   sesionIniciada = false;
   listaObjetos: Array<Producto> = [];
 
+  cierraSesion(){
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    this.sesionIniciada = false;
+    this.cantidad = 0;
+    this.haBuscado = false;
+    this.listaObjetos = [];
+}
+
   puedeBuscar(): boolean {
     return this.cantidad < this.persona.saldo * this.PORCENTAJE_MAX;
   }

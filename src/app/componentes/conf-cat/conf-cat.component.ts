@@ -23,6 +23,15 @@ export class ConfCatComponent extends SesionAdmin {
     document.title = $localize`Ver categorías`;
   }
 
+  cierraSesion(){
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    this.sesionIniciada = false;
+    this.temp = { Id: 0, nombre: '' };
+    this.cat = { Id: 0, nombre: '' };
+    this.valido = true;
+    document.title = $localize`Ver categorías`;
+  }
+
   inicioSesion() {
     let usu = document.getElementById('usuario') as HTMLInputElement;
     let contr = document.getElementById('contrasenya') as HTMLInputElement;

@@ -25,6 +25,15 @@ export class ConfProdComponent extends SesionAdmin {
     document.title = $localize`Ver productos`;
   }
 
+  cierraSesion(){
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    this.sesionIniciada = false;
+    this.temp = { Id: 0, nombre: '', precio: 0 };
+    this.prod = { Id: 0, nombre: '', precio: 0 };
+    this.valido = true;
+    document.title = $localize`Ver productos`;
+  }
+
   buscaPorNombre(){
     this.productoService.buscaPorNombre(this.busca).subscribe((result: any) => (this.productos = result));
   }

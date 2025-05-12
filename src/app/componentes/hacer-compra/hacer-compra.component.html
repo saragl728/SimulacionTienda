@@ -20,7 +20,16 @@
                 <button type="submit" class="btn btn-primary mb-3" i18n (click)="iniciarSesion()">Iniciar sesión</button>
                 }
             @else {
-                <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}, tu saldo ahora es {{ persona.saldo }} €</h3>
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-9 mt-2">
+                            <h3 class="text-success-emphasis bg-success-subtle mt-1 p-1" i18n>Hola, {{ persona.nombre }}, tu saldo ahora es {{ persona.saldo }} €.</h3>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <button class="btn btn-warning" i18n (click)="cierraSesion()">Cerrar sesión</button>
+                        </div>
+                    </div>
+                </div>
                 @if (carritoAux.length > 0){
                     <table class="table table-bordered mt-2 table-striped caption-top">
                         <caption class="bg-light p-1" i18n>Mi carrito actual({{costeAcumulado.toFixed(2)}} €)</caption>

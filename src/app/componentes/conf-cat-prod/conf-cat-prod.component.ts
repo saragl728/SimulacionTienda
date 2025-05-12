@@ -26,6 +26,16 @@ export class ConfCatProdComponent extends SesionAdmin {
     document.title = $localize`Ver productos con categorías`;
   }
 
+  cierraSesion(){
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    this.sesionIniciada = false;
+    this.filtroElegido = "";
+    this.filtrio = ""
+    this.temp = { IdProd: 0, IdCat: 0 };
+    this.auxNombres = { producto: '', categoria: '' };
+    document.title = $localize`Ver productos con categorías`;
+  }
+
   inicioSesion() {
     let usu = document.getElementById('usuario') as HTMLInputElement;
     let contr = document.getElementById('contrasenya') as HTMLInputElement;

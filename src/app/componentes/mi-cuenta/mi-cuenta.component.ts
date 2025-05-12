@@ -27,6 +27,12 @@ export class MiCuentaComponent {
   inventario: Array<ProdCant> = [];
   misReses: Array<any> = [];
 
+  cierraSesion(){
+    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+    this.sesionIniciada = false;
+    document.title = $localize`Mi cuenta`;
+  }
+
   inicioSesion() {
     let usu = document.getElementById('usuario') as HTMLInputElement;
     let contr = document.getElementById('contrasenia') as HTMLInputElement;
