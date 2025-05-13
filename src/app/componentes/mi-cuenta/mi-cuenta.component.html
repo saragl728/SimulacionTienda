@@ -128,7 +128,7 @@
         </div>
         
         <!--sólo se mostrará si un administrador ha iniciado sesión-->
-        @if (usuarioAdmin){
+        @if (this.persona.adminis == 'S'){
             <div class="shadow card p-3 my-2 border border-dark border-2">
                 <h5 class="card-title" i18n>Permisos de otros usuarios</h5>
                 <table class="table table-bordered table-striped">

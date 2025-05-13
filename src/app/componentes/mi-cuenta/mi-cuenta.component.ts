@@ -18,7 +18,6 @@ export class MiCuentaComponent {
     document.title = $localize`Mi cuenta`;
   }
   sesionIniciada = false;
-  usuarioAdmin = false;
   todosUsuarios: Array<Usuario> = [];
   usuario = "";
   temp: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
@@ -53,7 +52,6 @@ export class MiCuentaComponent {
           this.misCompras = res;
         });
         if (this.persona.adminis == 'S') {
-          this.usuarioAdmin = true;
           this.sacarTodos();
         }
         document.title = $localize`Cuenta de ${this.persona.nombre}`;
