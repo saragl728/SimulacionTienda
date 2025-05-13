@@ -51,7 +51,27 @@
                         </tbody>
                     </table>
                 }
-
+                @if (misCompras.length > 0){
+                    <h5 class="card-title" i18n>Mis compras</h5>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th i18n>Importe</th>
+                                <th i18n>Nº de objetos</th>
+                                <th i18n>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (compr of misCompras;let k = $index; track k){
+                                <tr>
+                                    <td> {{ compr.importe }} </td>
+                                    <td> {{ compr.nObjetos }} </td>
+                                    <td> {{compr.fecha}} </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
                 @if (misReses.length > 0){
                     <h5 class="card-title" i18n>Mis opiniones</h5>
                     <table class="table table-bordered table-striped">

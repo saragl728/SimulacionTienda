@@ -41,4 +41,8 @@ export class UsuarioService {
     return this.http.post(`${this.url}iniSesion.php`, JSON.stringify(usuario));
   }
 
+  datosComprasUsuarios(id: number){
+    return this.http.get(`${this.url}datosComprasUsuario.php?Id=${id}`);
+  }
+
 }

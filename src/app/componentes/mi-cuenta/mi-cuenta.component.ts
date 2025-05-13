@@ -26,6 +26,7 @@ export class MiCuentaComponent {
   contr2 = "";
   inventario: Array<ProdCant> = [];
   misReses: Array<any> = [];
+  misCompras: Array<any> = [];
 
   cierraSesion(){
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
@@ -48,6 +49,9 @@ export class MiCuentaComponent {
         this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => {
             this.misReses = resu;
           });
+        this.usuarioServicio.datosComprasUsuarios(this.persona.Id).subscribe((res: any) => {
+          this.misCompras = res;
+        });
         if (this.persona.adminis == 'S') {
           this.usuarioAdmin = true;
           this.sacarTodos();
