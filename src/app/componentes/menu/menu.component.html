@@ -3,49 +3,42 @@
         <div id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item-dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false" i18n>Usuarios</a>
+                    <a [ngClass]="{'aqui':this.arraiRutUsu.includes(this.location.path())}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" i18n>Usuarios</a>
                     <ul class="dropdown-menu">
-                        <li i18n><a class="dropdown-item" href="#" routerLink="/nuevo-usuario">Crear cuenta</a></li>
-                        <li i18n><a class="dropdown-item" href="#" routerLink="/mi-cuenta">Mi cuenta</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/nuevo-usuario'}" class="dropdown-item" href="#" routerLink="/nuevo-usuario">Crear cuenta</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/mi-cuenta'}" class="dropdown-item" href="#" routerLink="/mi-cuenta">Mi cuenta</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" i18n>Productos</a>
+                    <a [ngClass]="{'aqui':this.arraiRutProd.includes(this.location.path())}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" i18n>Productos</a>
                     <ul class="dropdown-menu">
-                        <li i18n><a class="dropdown-item" href="#" routerLink="/nuevo-prod">Añadir</a></li>
-                        <li i18n><a class="dropdown-item" href="#" routerLink="/conf-prod">Ver</a></li>
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" i18n>Categorías</a>
-                    <ul class="dropdown-menu">
-                        <li i18n><a class="dropdown-item" href="#" routerLink="nueva-cat">Añadir</a></li>
-                        <li i18n><a class="dropdown-item" href="#" routerLink="conf-cat">Ver</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/nuevo-prod'}" class="dropdown-item" href="#" routerLink="/nuevo-prod">Añadir</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/conf-prod'}" class="dropdown-item" href="#" routerLink="/conf-prod">Ver</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" i18n>Categorías y productos</a>
+                    <a [ngClass]="{'aqui':this.arraiRutCat.includes(this.location.path())}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" i18n>Categorías</a>
                     <ul class="dropdown-menu">
-                        <li i18n><a class="dropdown-item" href="#" routerLink="nuevo-cat-prod">Añadir</a></li>
-                        <li i18n><a class="dropdown-item" href="#" routerLink="conf-cat-prod">Ver</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/nueva-cat'}" class="dropdown-item" href="#" routerLink="nueva-cat">Añadir</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/conf-cat'}" class="dropdown-item" href="#" routerLink="conf-cat">Ver</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" i18n><span class="material-symbols-outlined"> shopping_cart </span></a>
+                    <a [ngClass]="{'aqui':this.arraiRutCaPr.includes(this.location.path())}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" i18n>Categorías y productos</a>
                     <ul class="dropdown-menu">
-                        <li i18n><a class="dropdown-item" href="#" routerLink="resenya">Reseñas</a></li>
-                        <li i18n><a class="dropdown-item" href="#" routerLink="comprar">Comprar</a></li>
-                        <li i18n><a class="dropdown-item" href="#" routerLink="loteria">Lotería</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/nuevo-cat-prod'}" class="dropdown-item" href="#" routerLink="nuevo-cat-prod">Añadir</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/conf-cat-prod'}" class="dropdown-item" href="#" routerLink="conf-cat-prod">Ver</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a [ngClass]="{'aqui':this.arraiRutUsuPr.includes(this.location.path())}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" i18n><span class="material-symbols-outlined"> shopping_cart </span></a>
+                    <ul class="dropdown-menu">
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/resenya'}" class="dropdown-item" href="#" routerLink="resenya">Reseñas</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/comprar'}" class="dropdown-item" href="#" routerLink="comprar">Comprar</a></li>
+                        <li i18n><a [ngClass]="{'aqui':this.location.path()=='/loteria'}" class="dropdown-item" href="#" routerLink="loteria">Lotería</a></li>
                     </ul>
                 </li>
             </ul>
-
         </div>
         <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModal"i18n>Ayuda</button>
     </div>

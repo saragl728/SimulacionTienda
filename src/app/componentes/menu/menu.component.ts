@@ -1,15 +1,23 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Location } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
-  imports: [RouterLink],
+  imports: [RouterLink, NgClass],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
 })
 export class MenuComponent {
-  constructor(private location: Location) {}
+  constructor(public location: Location) {}
+
+  //arrays con rutas para comprobar en qué tipo de ruta estamos y cambiar el estilo
+  arraiRutProd = ['/nuevo-prod', '/conf-prod'];
+  arraiRutCat = ['/nueva-cat', '/conf-cat'];
+  arraiRutCaPr = ['/nuevo-cat-prod', '/conf-cat-prod'];
+  arraiRutUsu = ['/mi-cuenta', '/nuevo-usuario'];
+  arraiRutUsuPr = ['/resenya', '/comprar', '/loteria'];
 
   //función que devuelve cambia cosas sobre la página
   infoPag() {
@@ -49,7 +57,6 @@ export class MenuComponent {
         info = $localize`Aquí puedes obtener un objeto aleatorio cuyo precio sea cercano al importe que quieras. Sólo para adultos.`
         break;
       case '/error':
-
         info = $localize`Has escrito mal la ruta en el navegador, ¿no?`;
         break;
       default:
