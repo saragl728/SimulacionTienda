@@ -9,6 +9,7 @@ import { Compra } from '../../models/Compra';
 import { Carrito } from '../../models/Carrito';
 import { AuxCarro } from '../../models/AuxCarro';
 import { Producto } from '../../models/Producto';
+import { Inventario } from '../../models/Inventario';
 
 @Component({
   selector: 'app-hacer-compra',
@@ -47,7 +48,7 @@ export class HacerCompraComponent {
     this.nombresEnCarrito = [];
     this.costeAcumulado = 0;
     this.busca = '';
-    this.temp= { Id: 0, nombre: '', precio: 0 };
+    this.temp = { Id: 0, nombre: '', precio: 0 };
   }
 
   iniciarSesion() {
@@ -61,7 +62,7 @@ export class HacerCompraComponent {
         this.sesionIniciada = true;
         this.compra.IdCliente = this.persona.Id; //le asignamos a la compra el id del usuario actual
       }
-      else{
+      else {
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -104,13 +105,23 @@ export class HacerCompraComponent {
 
   //se usa un bucle porque el objeto carrito es un array
   ponerEnCarritoComprado(){
-    for (let i = 0; i < this.carro.length; i++){
+    for (let i = 0; i < this.carro.length; i++) {
       this.compraServicio.anyadeCarrito(this.carro[i]).subscribe((datos: any) => {
-        if (datos.resultado == 'OK'){
-          console.log('Producto añadido al carrito');
-          //buscar la forma de actualizar el inventario del usuario
-        }
-      })
+          if (datos.resultado == 'OK') {
+            console.log('Producto añadido al carrito');
+            //actualizar correctamante cuando se añaden objetos
+            this.inventarioServicio.cantidadInventario(this.persona.Id, this.carro[i].IdProducto).subscribe((res: any) => {
+                if (res != null) {
+                  let can1 = Number(res[0].cantidad) + this.carro[i].cantidad;
+                  let novInv = new Inventario(this.persona.Id, this.carro[i].IdProducto, can1);
+                  this.inventarioServicio.actualizaInventario(novInv).subscribe((result: any) => {});
+                } else {
+                  let nuevoInv = new Inventario(this.persona.Id, this.carro[i].IdProducto, this.carro[i].cantidad);
+                  this.inventarioServicio.anyadeInventario(nuevoInv).subscribe((result: any) => {});
+                }
+              });
+          }
+        });
     }
   }
 
@@ -118,30 +129,32 @@ export class HacerCompraComponent {
     this.temp = producto;
   }
 
-  reiniciaCarrito(){
+  reiniciaCarrito() {
     this.costeAcumulado = 0;
     this.carritoAux = [];
     this.nombresEnCarrito = [];
   }
 
-  comprar(){
+  comprar() {
     this.compraServicio.creaCompra(this.compra).subscribe((datos: any) => {
       if (datos.resultado == 'OK') {
         console.log('Compra realizada');
         this.compraServicio.ultimoId().subscribe((d: any) => {
-          for (let ca of this.carro){
-            ca.IdCompra = d[0].Id;  //asigno el último Id a los elementos de carro
+          for (let ca of this.carro) {
+            ca.IdCompra = d[0].Id; //asigno el último Id a los elementos de carro
           }
           this.ponerEnCarritoComprado();
 
           //se actualiza el saldo del usuario
           this.persona.saldo -= this.costeAcumulado;
           this.usuarioServicio.actualizaSaldo(this.persona).subscribe((v: any) => {
-            if (v.resultado == 'OK'){
-              console.log('Saldo actualizado');
-            }
-          })
-        })
+              if (v.resultado == 'OK') {
+                console.log('Saldo actualizado');
+                this.reiniciaCarrito(); //se reinicia el carrito para comprar sin problemas
+              }
+            });
+        }
+      );
       }
     });
   }
