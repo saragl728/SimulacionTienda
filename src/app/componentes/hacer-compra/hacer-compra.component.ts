@@ -20,16 +20,14 @@ import { Inventario } from '../../models/Inventario';
 export class HacerCompraComponent {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService, private compraServicio: CompraService, private inventarioServicio: InventarioService) {
     this.sacarComprables();
-    this.persona = {Id: 0, nombre: '', correo: '',fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
-    this.compra = {Id: 0, IdCliente: 0, fecha: ''};
     document.title = $localize`Comprar`;
   }
   
   readonly CANTIDAD_GRANDE: number = 15;
 
   sesionIniciada: boolean = false;
-  persona: Usuario;
-  compra: Compra;
+  persona: Usuario = {Id: 0, nombre: '', correo: '',fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
+  compra: Compra = {Id: 0, IdCliente: 0, fecha: ''};;
   temp: Producto = { Id: 0, nombre: '', precio: 0 };  //lo necesitaremos después
   carro: Array<Carrito> = [];
   carritoAux: Array<AuxCarro> = [];
@@ -63,6 +61,7 @@ export class HacerCompraComponent {
         this.compra.IdCliente = this.persona.Id; //le asignamos a la compra el id del usuario actual
       }
       else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -98,9 +97,7 @@ export class HacerCompraComponent {
   }
 
   sacarComprables() {
-    this.productoServicio.recuperarTodos().subscribe((respuesta: any) => {
-      this.comprables = respuesta;
-    });
+    this.productoServicio.recuperarTodos().subscribe((respuesta: any) => { this.comprables = respuesta; });
   }
 
   //se usa un bucle porque el objeto carrito es un array

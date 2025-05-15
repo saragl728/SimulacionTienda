@@ -13,7 +13,12 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './nuevo-cat-prod.component.html',
   styleUrl: './nuevo-cat-prod.component.css',
 })
-export class NuevoCatProdComponent{
+export class NuevoCatProdComponent {
+  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService, private usuarioServicio: UsuarioService) {
+  this.recuperaProds();
+  this.recuperaCats();
+  document.title = $localize`Conectar productos con categorías`;
+  }
   //variables que se usarán para ver si se cargan datos para insertar
   productos: any;
   categorias: any;
@@ -21,12 +26,6 @@ export class NuevoCatProdComponent{
   valido: boolean = true;
   sesionIniciada: boolean = false;
   proCat: ProdCat = { IdProd: 0, IdCat: 0 };
-
-  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService, private usuarioServicio: UsuarioService) {
-    this.recuperaProds();
-    this.recuperaCats();
-    document.title = $localize`Conectar productos con categorías`;
-  }
 
   cierraSesion(){
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
@@ -43,11 +42,13 @@ export class NuevoCatProdComponent{
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
         } else {
+          alert($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -72,15 +73,11 @@ export class NuevoCatProdComponent{
   }
 
   recuperaProds() {
-    this.productoService.recuperarTodos().subscribe((respuesta: any) => {
-      this.productos = respuesta;
-    });
+    this.productoService.recuperarTodos().subscribe((respuesta: any) => { this.productos = respuesta; });
   }
 
   recuperaCats() {
-    this.categoriaService.recuperarTodos().subscribe((respuesta: any) => {
-      this.categorias = respuesta;
-    });
+    this.categoriaService.recuperarTodos().subscribe((respuesta: any) => { this.categorias = respuesta; });
   }
 
   alta() {

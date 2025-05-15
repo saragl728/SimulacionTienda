@@ -13,6 +13,10 @@ import { ProductoService } from '../../servicios/producto.service';
 })
 
 export class ConfProdComponent {
+  constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService) {
+  this.recuperarTodos();
+  document.title = $localize`Ver productos`;
+  }
   productos: any;
   temp: Producto = { Id: 0, nombre: '', precio: 0 }; //variable temporal para cuando tengamos que borrar
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
@@ -20,11 +24,6 @@ export class ConfProdComponent {
   sesionIniciada: boolean = false;
   valido: boolean = true;
   busca: string = "";
-
-  constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService) {
-    this.recuperarTodos();
-    document.title = $localize`Ver productos`;
-  }
 
   cierraSesion(){
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
@@ -49,11 +48,13 @@ export class ConfProdComponent {
           this.sesionIniciada = true;
           document.title = $localize`Administrar productos`;
         } else {
+          alert($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -83,9 +84,7 @@ export class ConfProdComponent {
   }
 
   recuperarTodos() {
-    this.productoService.recuperarTodos().subscribe((respuesta: any) => {
-      this.productos = respuesta;
-    });
+    this.productoService.recuperarTodos().subscribe((respuesta: any) => { this.productos = respuesta; });
   }
 
   tempBorr(producto: Producto) {
@@ -94,16 +93,12 @@ export class ConfProdComponent {
 
   confirmaBorrar() {
     //comprueba el código, si es diferente al original, es que se ha seleccionado un artículo
-    if (this.temp.Id != 0) {
-      this.baja(this.temp);
-    }
+    if (this.temp.Id != 0) this.baja(this.temp);
   }
 
   baja(producto: Producto) {
     this.productoService.baja(producto).subscribe((datos: any) => {
-      if (datos.resultado == 'OK') {
-        this.recuperarTodos();
-      }
+      if (datos.resultado == 'OK') this.recuperarTodos();
     });
   }
 

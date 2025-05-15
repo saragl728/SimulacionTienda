@@ -25,7 +25,7 @@ export class NuevoProdComponent {
   cierraSesion(){
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
-    this.prod  = { Id: 0, nombre: '', precio: 0 };
+    this.prod = { Id: 0, nombre: '', precio: 0 };
   }
 
   inicioSesion(): void {
@@ -37,11 +37,13 @@ export class NuevoProdComponent {
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
         } else {
+          alert($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -68,16 +70,12 @@ export class NuevoProdComponent {
     if (!this.prod.nombre || this.prod.nombre.length > longMax || this.nombres.includes(this.prod.nombre)) {
       nom.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      nom.classList.remove('is-invalid');
-    }
+    } else nom.classList.remove('is-invalid');
 
     if (!this.prod.precio || this.prod.precio <= 0) {
       prc.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      prc.classList.remove('is-invalid');
-    }
+    } else prc.classList.remove('is-invalid');
   }
 
   alta() {

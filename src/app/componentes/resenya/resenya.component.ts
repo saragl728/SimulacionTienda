@@ -15,15 +15,13 @@ import { Resenya } from '../../models/Resenya';
 export class ResenyaComponent {
   constructor(private resenyaServicio: ResenyaService, private usuarioServicio: UsuarioService, private productoService: ProductoService){
     this.sacarTodas();
-    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
-    this.rese = { Id: 0, IdProducto: 0, IdCliente: 0, contenido: '', fecha: ''};
     this.recuperaProds();
     document.title = $localize`Reseñas`;
   }
   resenyas: any;
   productos: any;
-  persona: Usuario;
-  rese: Resenya;
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
+  rese: Resenya = { Id: 0, IdProducto: 0, IdCliente: 0, contenido: '', fecha: ''};;
   sesionIniciada: boolean = false;
   valido: boolean = true;
   filtro: string = "";
@@ -35,21 +33,15 @@ export class ResenyaComponent {
   }
 
   sacarTodas(){
-    this.resenyaServicio.mostrarTodas().subscribe((respuesta: any) => {
-      this.resenyas = respuesta;
-    });
+    this.resenyaServicio.mostrarTodas().subscribe((respuesta: any) => { this.resenyas = respuesta; });
   }
 
   buscarPorNombreProducto(){
-    this.resenyaServicio.resenyaPorNombre(this.filtro).subscribe((respuesta: any) => {
-      this.resenyas = respuesta;
-    });
+    this.resenyaServicio.resenyaPorNombre(this.filtro).subscribe((respuesta: any) => { this.resenyas = respuesta; });
   }
 
   recuperaProds() {
-    this.productoService.recuperarTodos().subscribe((respuesta: any) => {
-      this.productos = respuesta;
-    });
+    this.productoService.recuperarTodos().subscribe((respuesta: any) => { this.productos = respuesta; });
   }
 
   iniciarSesion(){
@@ -62,6 +54,7 @@ export class ResenyaComponent {
         this.persona.contrasenya = '';
         this.sesionIniciada = true;
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -84,9 +77,7 @@ export class ResenyaComponent {
     if (!this.rese.contenido || this.rese.contenido.length > LONG_MAX) {
       opi.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      opi.classList.remove('is-invalid');
-    }
+    } else opi.classList.remove('is-invalid');
   }
 
   anyadirResenya(){

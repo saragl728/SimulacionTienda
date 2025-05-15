@@ -15,14 +15,13 @@ import { Inventario } from '../../models/Inventario';
 })
 export class LoteriaComponent {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private productoServicio: ProductoService) {
-    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '',adminis: 'N'};
     document.title = $localize`Lotería`;
   }
 
   readonly PORCENTAJE_MAX: number = 0.3333; //porcentaje máximo del saldo que se puede apostar
   cantidad: number = 0;
   haBuscado: boolean = false;
-  persona: Usuario;
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '',adminis: 'N'};;
   sesionIniciada = false;
   listaObjetos: Array<Producto> = [];
 
@@ -47,21 +46,17 @@ export class LoteriaComponent {
 
     let ed = aux.getFullYear() - fe.getFullYear();
 
-    if (ed < ADULTO) {
-      edadAdulto = false;
-    } else {
+    if (ed < ADULTO) edadAdulto = false;
+    else {
       if (ed == ADULTO) {
         //se comprueba si en este mes se ha cumplido la edad mínima
-        if (fe.getMonth() > aux.getMonth()) {
-          edadAdulto = false;
-        } else {
+        if (fe.getMonth() > aux.getMonth()) edadAdulto = false;
+        else {
           //si se cumple en este mes, se comprueba si ya se ha cumplido
-          if (aux.getMonth() == fe.getMonth() && fe.getDate() > aux.getDate())
-            edadAdulto = false;
+          if (aux.getMonth() == fe.getMonth() && fe.getDate() > aux.getDate()) edadAdulto = false;
         }
       }
     }
-
     return edadAdulto;
   }
 
@@ -72,14 +67,15 @@ export class LoteriaComponent {
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
       if (result != null) {
         this.persona = result;
-        if (this.esAdulto()) {
-          this.sesionIniciada = true;
-        } else {
+        if (this.esAdulto()) this.sesionIniciada = true;
+        else {
+          alert($localize`Eres demasiado joven para esto. Tienes que tener al menos 18 años`)
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }

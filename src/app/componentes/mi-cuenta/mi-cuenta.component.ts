@@ -14,14 +14,13 @@ import { ResenyaService } from '../../servicios/resenya.service';
 })
 export class MiCuentaComponent {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private resenyaServicio: ResenyaService) {
-    this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     document.title = $localize`Mi cuenta`;
   }
   sesionIniciada = false;
   todosUsuarios: Array<Usuario> = [];
   usuario = "";
   temp: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
-  persona: Usuario;
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
   contr2 = "";
   inventario: Array<ProdCant> = [];
   misReses: Array<any> = [];
@@ -48,6 +47,7 @@ export class MiCuentaComponent {
         if (this.persona.adminis == 'S') this.sacarTodos();        
         document.title = $localize`Cuenta de ${this.persona.nombre}`;
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -60,7 +60,6 @@ export class MiCuentaComponent {
     let edadAdulto: boolean = true;
     let fe = new Date(usuaario.fechaNac);
     const aux: Date = new Date(); //fecha actual
-
     let ed = aux.getFullYear() - fe.getFullYear();
 
     if (ed < ADULTO) edadAdulto = false;
@@ -74,7 +73,7 @@ export class MiCuentaComponent {
       }
     }
   }
-    return edadAdulto;
+  return edadAdulto;
   }
 
   sacarTodos(){
@@ -88,7 +87,6 @@ export class MiCuentaComponent {
 
     let con1 = document.getElementById('contrasenya') as HTMLInputElement;
     let con2 = document.getElementById('contrasenya2') as HTMLInputElement;
-
     
     if (!this.persona.contrasenya || this.persona.contrasenya != this.contr2) {
       con1.classList.add('is-invalid');

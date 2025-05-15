@@ -14,6 +14,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './conf-cat-prod.component.css',
 })
 export class ConfCatProdComponent {
+  constructor(private proCatService: CatProdService, private usuarioServicio: UsuarioService) {
+  this.muestraTodo();
+  document.title = $localize`Ver productos con categorías`;
+  }
   prodCats: any; //ids conectados
   persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
   filtroElegido: string = ""; //se usará para la búsqueda
@@ -22,11 +26,6 @@ export class ConfCatProdComponent {
   temp: ProdCat = { IdProd: 0, IdCat: 0 }; //variable temporal para cuando tengamos que borrar
   auxNombres: ProductoCategoria = { producto: '', categoria: '' };
   sesionIniciada: boolean = false;
-
-  constructor(private proCatService: CatProdService, private usuarioServicio: UsuarioService) {
-    this.muestraTodo();
-    document.title = $localize`Ver productos con categorías`;
-  }
 
   cierraSesion(){
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
@@ -49,11 +48,13 @@ export class ConfCatProdComponent {
           this.sesionIniciada = true;
           document.title = $localize`Administrar conexiones de productos con categorías`;
         } else {
+          alert($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -66,28 +67,20 @@ export class ConfCatProdComponent {
   }
 
   recuperarIdsPorCategoria(cat: string) {
-  	this.proCatService.recuperaIdsPorCategoria(cat).subscribe((respuesta: any) => {
-    this.prodCats = respuesta;
-  });
+  	this.proCatService.recuperaIdsPorCategoria(cat).subscribe((respuesta: any) => { this.prodCats = respuesta; });
 }
 
   recuperaNombresPorCategoria(cat: string) {
-  this.proCatService.recuperaNombresPorCategoria(cat).subscribe((respuesta: any) => {
-    this.nombres = respuesta;
-  });
+  this.proCatService.recuperaNombresPorCategoria(cat).subscribe((respuesta: any) => { this.nombres = respuesta; });
 }
 
 
   recuperarIdsPorProducto(pro: string) {
-  	this.proCatService.recuperarIdsPorProducto(pro).subscribe((respuesta: any) => {
-    this.prodCats = respuesta;
-  });
+  	this.proCatService.recuperarIdsPorProducto(pro).subscribe((respuesta: any) => { this.prodCats = respuesta; });
 }
 
   recuperaNombresPorProducto(pro: string) {
-  this.proCatService.recuperaNombresPorProducto(pro).subscribe((respuesta: any) => {
-    this.nombres = respuesta;
-  });
+  this.proCatService.recuperaNombresPorProducto(pro).subscribe((respuesta: any) => { this.nombres = respuesta; });
 }
 
   buscarPorProducto(filtro: string){
@@ -115,15 +108,11 @@ export class ConfCatProdComponent {
   }
 
   recuperarTodos() {
-    this.proCatService.recuperarTodos().subscribe((respuesta: any) => {
-      this.prodCats = respuesta;
-    });
+    this.proCatService.recuperarTodos().subscribe((respuesta: any) => { this.prodCats = respuesta; });
   }
 
   recuperaNombres() {
-    this.proCatService.recuperaNombres().subscribe((respuesta: any) => {
-      this.nombres = respuesta;
-    });
+    this.proCatService.recuperaNombres().subscribe((respuesta: any) => { this.nombres = respuesta; });
   }
 
   tempBorr(pr: number, cat: number, pC: ProductoCategoria) {
@@ -132,16 +121,12 @@ export class ConfCatProdComponent {
   }
 
   confirmaBorrar() {
-    if (this.temp.IdProd != 0 && this.temp.IdCat != 0) {
-      this.baja(this.temp);
-    }
+    if (this.temp.IdProd != 0 && this.temp.IdCat != 0) this.baja(this.temp);
   }
 
   baja(prCt: ProdCat) {
     this.proCatService.baja(prCt).subscribe((datos: any) => {
-      if (datos.resultado == 'OK') {
-        this.muestraTodo();
-      }
+      if (datos.resultado == 'OK') this.muestraTodo();
     });
   }
 }

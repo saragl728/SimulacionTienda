@@ -12,17 +12,16 @@ import { CategoriaService } from '../../servicios/categoria.service';
   styleUrl: './conf-cat.component.css',
 })
 export class ConfCatComponent {
+  constructor(private categoriaService: CategoriaService, private usuarioServicio: UsuarioService) {
+  this.recuperarTodos();
+  document.title = $localize`Ver categorías`;
+}
   categorias: any;
   temp: Categoria = { Id: 0, nombre: '' };
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
   persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
   sesionIniciada: boolean = false;
-
-  constructor(private categoriaService: CategoriaService, private usuarioServicio: UsuarioService) {
-    this.recuperarTodos();
-    document.title = $localize`Ver categorías`;
-  }
 
   cierraSesion(){
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
@@ -44,11 +43,13 @@ export class ConfCatComponent {
           this.sesionIniciada = true;
           document.title = $localize`Administrar categorías`;
         } else {
+          alert($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -62,15 +63,11 @@ export class ConfCatComponent {
     if (!this.cat.nombre || this.cat.nombre.length > longMax) {
       nom.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      nom.classList.remove('is-invalid');
-    }
+    } else nom.classList.remove('is-invalid');
   }
 
   recuperarTodos() {
-    this.categoriaService.recuperarTodos().subscribe((respuesta: any) => {
-      this.categorias = respuesta;
-    });
+    this.categoriaService.recuperarTodos().subscribe((respuesta: any) => { this.categorias = respuesta; });
   }
 
   tempBorr(categoria: Categoria) {
@@ -78,16 +75,12 @@ export class ConfCatComponent {
   }
 
   confirmaBorrar() {
-    if (this.temp.Id != 0) {
-      this.baja(this.temp);
-    }
+    if (this.temp.Id != 0) this.baja(this.temp);
   }
 
   baja(categoria: Categoria) {
     this.categoriaService.baja(categoria).subscribe((datos: any) => {
-      if (datos['resultado'] == 'OK') {
-        this.recuperarTodos();
-      }
+      if (datos.resultado == 'OK') this.recuperarTodos();
     });
   }
   modificacion() {
@@ -99,7 +92,7 @@ export class ConfCatComponent {
 
     if (this.valido) {
       this.categoriaService.modificacion(this.cat).subscribe((datos: any) => {
-        if (datos['resultado'] == 'OK') {
+        if (datos.resultado == 'OK') {
           this.recuperarTodos();
           nom.classList.add('is-valid');
         }

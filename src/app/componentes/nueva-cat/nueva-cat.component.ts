@@ -26,7 +26,7 @@ export class NuevaCatComponent {
   cierraSesion(){
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
-    this.cat= { Id: 0, nombre: '' };
+    this.cat = { Id: 0, nombre: '' };
   }
   
   inicioSesion(): void {
@@ -38,11 +38,13 @@ export class NuevaCatComponent {
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
         } else {
+          alert($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
+        alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -64,9 +66,8 @@ export class NuevaCatComponent {
     if (!this.cat.nombre || this.cat.nombre.length > longMax || this.categorias.includes(this.cat.nombre)) {
       nom.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      nom.classList.remove('is-invalid');
     }
+    else nom.classList.remove('is-invalid');
   }
 
   alta() {

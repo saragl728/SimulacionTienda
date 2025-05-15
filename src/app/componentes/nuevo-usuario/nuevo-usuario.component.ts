@@ -19,16 +19,7 @@ export class NuevoUsuarioComponent {
   valido: boolean = true;
   auxFecha: string = "";
   ayuda: string = new Date().toLocaleDateString('sv');
-
-  usuario: Usuario = {
-    Id: 0,
-    nombre: '',
-    correo: '',
-    fechaNac: '',
-    saldo: 150,
-    contrasenya: '',
-    adminis: 'N',
-  };
+  usuario: Usuario = { Id: 0, nombre: '', correo: '',fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N' };
 
   //método que se usará para comprobar si la fecha de nacimiento es válida
   validaEdad(): boolean {
@@ -40,21 +31,15 @@ export class NuevoUsuarioComponent {
     this.usuario.fechaNac = this.auxFecha;
 
     //primero se comprueba si en este año se ha cumplido la edad mímima
-    if (ed < EDAD_MIN) {
-      edadOk = false;
-    } else {
+    if (ed < EDAD_MIN) edadOk = false; else {
       if (ed == EDAD_MIN) {
         //se comprueba si en este mes se ha cumplido la edad mínima
-        if (fecha.getMonth() > aux.getMonth()) {
-          edadOk = false;
-        } else {
+        if (fecha.getMonth() > aux.getMonth()) edadOk = false; else {
           //si se cumple en este mes, se comprueba si ya se ha cumplido
-          if (aux.getMonth() == fecha.getMonth() && fecha.getDate() > aux.getDate())
-            edadOk = false;
+          if (aux.getMonth() == fecha.getMonth() && fecha.getDate() > aux.getDate()) edadOk = false;
         }
       }
     }
-
     return edadOk;
   }
 
@@ -104,32 +89,24 @@ export class NuevoUsuarioComponent {
     if (!this.confirmado) {
       this.valido = false;
       conf.classList.add('is-invalid');
-    } else {
-      conf.classList.remove('is-invalid');
-    }
+    } else conf.classList.remove('is-invalid');
 
     if (!this.usuario.nombre || this.usuario.nombre.length > LONG_NOM) {
       nom.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      nom.classList.remove('is-invalid');
-    }
+    } else nom.classList.remove('is-invalid');
 
     //usa una expresión regular para ver si se ha metido un correo válido
     if (!this.usuario.correo || this.usuario.correo.length > LONG_MAIL || !this.usuario.correo.match(/@hotmail.|@yahoo.|@gmail./)) {
       cor.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      cor.classList.remove('is-invalid');
-    }
+    } else cor.classList.remove('is-invalid');
 
     //hacer que entienda la fecha
     if (!this.validaEdad()) {
       fec.classList.add('is-invalid');
       this.valido = false;
-    } else {
-      fec.classList.remove('is-invalid');
-    }
+    } else fec.classList.remove('is-invalid');
 
     if (!this.usuario.contrasenya || this.usuario.contrasenya != this.cont2) {
       cont1.classList.add('is-invalid');
