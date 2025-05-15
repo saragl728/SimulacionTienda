@@ -42,18 +42,10 @@ export class MiCuentaComponent {
         this.persona = result;
         this.persona.contrasenya = ''; //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
         this.sesionIniciada = true;
-        this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => {
-            this.inventario = resultado;
-          });
-        this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => {
-            this.misReses = resu;
-          });
-        this.usuarioServicio.datosComprasUsuarios(this.persona.Id).subscribe((res: any) => {
-          this.misCompras = res;
-        });
-        if (this.persona.adminis == 'S') {
-          this.sacarTodos();
-        }
+        this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => { this.inventario = resultado; });
+        this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => { this.misReses = resu; });
+        this.usuarioServicio.datosComprasUsuarios(this.persona.Id).subscribe((res: any) => { this.misCompras = res; });
+        if (this.persona.adminis == 'S') this.sacarTodos();        
         document.title = $localize`Cuenta de ${this.persona.nombre}`;
       } else {
         usu.classList.add('is-invalid');
@@ -62,6 +54,7 @@ export class MiCuentaComponent {
     });
   }
 
+  //se necesita para saber a qué usuarios se les puede dar permisos de administrador
   esAdulto(usuaario: Usuario): boolean {
     const ADULTO = 18;
     let edadAdulto: boolean = true;
@@ -70,28 +63,23 @@ export class MiCuentaComponent {
 
     let ed = aux.getFullYear() - fe.getFullYear();
 
-    if (ed < ADULTO) {
-      edadAdulto = false;
-    } else {
-      if (ed == ADULTO) {
-        //se comprueba si en este mes se ha cumplido la edad mínima
-        if (fe.getMonth() > aux.getMonth()) {
-          edadAdulto = false;
-        } else {
-          //si se cumple en este mes, se comprueba si ya se ha cumplido
-          if (aux.getMonth() == fe.getMonth() && fe.getDate() > aux.getDate())
-            edadAdulto = false;
-        }
+    if (ed < ADULTO) edadAdulto = false;
+    else {
+    if (ed == ADULTO) {
+      //se comprueba si en este mes se ha cumplido la edad mínima
+      if (fe.getMonth() > aux.getMonth()) edadAdulto = false;        
+      else {
+        //si se cumple en este mes, se comprueba si ya se ha cumplido
+        if (aux.getMonth() == fe.getMonth() && fe.getDate() > aux.getDate()) edadAdulto = false;
       }
     }
+  }
     return edadAdulto;
   }
 
   sacarTodos(){
     this.usuarioServicio.sacarTodosExceptoActual(this.persona.Id).subscribe((result: any) => {
-      if (result.length >= 1){
-        this.todosUsuarios = result;
-      }
+      if (result.length >= 1) this.todosUsuarios = result;
     });
   }
 
@@ -130,15 +118,14 @@ export class MiCuentaComponent {
     if (!this.persona.nombre || this.persona.nombre.length > LONG_NOM) {
       nom.classList.add('is-invalid');
       valido = false;
-    } else {
-      nom.classList.remove('is-invalid');
-    }
+    } else nom.classList.remove('is-invalid');
 
     if (valido){
       //si el nombre está bien, hace la actualización
       this.usuarioServicio.cambiaNombre(this.persona).subscribe((datos: any) => {
         if (datos['resultado'] == 'OK') {
           nom.classList.add('is-valid');
+          document.title = $localize`Cuenta de ${this.persona.nombre}`; //hago que vuelva a cambiar el título
         }
       });
     }
@@ -150,18 +137,14 @@ export class MiCuentaComponent {
     else this.temp.adminis = 'S';
 
     this.usuarioServicio.cambiaAdmin(this.temp).subscribe((result: any) => {
-      if (result.resultado == 'OK'){
-        this.sacarTodos();  //si funciona sacamos la lista actualizada
-      }
+      if (result.resultado == 'OK') this.sacarTodos();  //si funciona sacamos la lista actualizada        
     })
   }
 
   borraCuenta(usuario: Usuario){
    this.usuarioServicio.baja(usuario).subscribe((datos: any) => {
-    if (datos.resultado == 'OK') {
-      this.sacarTodos();
-    }
-   })
+    if (datos.resultado == 'OK') this.sacarTodos();      
+  })
   }
 
   tempElegir(usuario: Usuario) {
