@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/Producto';
-import { SesionAdmin } from '../../models/SesionAdmin';
+import { Usuario } from '../../models/Usuario';
 import { ProductoService } from '../../servicios/producto.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 
@@ -11,15 +11,15 @@ import { UsuarioService } from '../../servicios/usuario.service';
   templateUrl: './nuevo-prod.component.html',
   styleUrl: './nuevo-prod.component.css',
 })
-export class NuevoProdComponent extends SesionAdmin {
+export class NuevoProdComponent {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService) {
-    super();
     this.obtenerNombres();
     document.title = $localize`Nuevo producto`;
   }
-
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
   valido: boolean = true;
+  sesionIniciada: boolean = false;
   nombres: Array<any> = []; //array con los nombres de los productos, se usará para que el usuario tenga claro qué nombres no se pueden meter
   
   cierraSesion(){

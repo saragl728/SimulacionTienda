@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ProdCat } from '../../models/ProdCat';
+import { Usuario } from '../../models/Usuario';
 import { ProductoCategoria } from '../../models/ProductoCategoria';
-import { SesionAdmin } from '../../models/SesionAdmin';
 import { CatProdService } from '../../servicios/cat-prod.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-conf-cat-prod',
@@ -12,16 +13,17 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './conf-cat-prod.component.html',
   styleUrl: './conf-cat-prod.component.css',
 })
-export class ConfCatProdComponent extends SesionAdmin {
+export class ConfCatProdComponent {
   prodCats: any; //ids conectados
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
   filtroElegido: string = ""; //se usará para la búsqueda
   filtrio: string = "";  //lo que hay en la barra de búsqueda
   nombres: any; //resultado de la consulta con join
   temp: ProdCat = { IdProd: 0, IdCat: 0 }; //variable temporal para cuando tengamos que borrar
   auxNombres: ProductoCategoria = { producto: '', categoria: '' };
+  sesionIniciada: boolean = false;
 
   constructor(private proCatService: CatProdService, private usuarioServicio: UsuarioService) {
-    super();
     this.muestraTodo();
     document.title = $localize`Ver productos con categorías`;
   }

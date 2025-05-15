@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/Producto';
-import { SesionAdmin } from '../../models/SesionAdmin';
+import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ProductoService } from '../../servicios/producto.service';
 
@@ -12,15 +12,16 @@ import { ProductoService } from '../../servicios/producto.service';
   styleUrl: './conf-prod.component.css',
 })
 
-export class ConfProdComponent extends SesionAdmin {
+export class ConfProdComponent {
   productos: any;
   temp: Producto = { Id: 0, nombre: '', precio: 0 }; //variable temporal para cuando tengamos que borrar
   prod: Producto = { Id: 0, nombre: '', precio: 0 };
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
+  sesionIniciada: boolean = false;
   valido: boolean = true;
   busca: string = "";
 
   constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService) {
-    super();
     this.recuperarTodos();
     document.title = $localize`Ver productos`;
   }

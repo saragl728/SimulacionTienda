@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Categoria } from '../../models/Categoria';
-import { SesionAdmin } from '../../models/SesionAdmin';
+import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { CategoriaService } from '../../servicios/categoria.service';
 
@@ -11,14 +11,15 @@ import { CategoriaService } from '../../servicios/categoria.service';
   templateUrl: './conf-cat.component.html',
   styleUrl: './conf-cat.component.css',
 })
-export class ConfCatComponent extends SesionAdmin {
+export class ConfCatComponent {
   categorias: any;
   temp: Categoria = { Id: 0, nombre: '' };
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
+  sesionIniciada: boolean = false;
 
   constructor(private categoriaService: CategoriaService, private usuarioServicio: UsuarioService) {
-    super();
     this.recuperarTodos();
     document.title = $localize`Ver categorías`;
   }
@@ -106,8 +107,6 @@ export class ConfCatComponent extends SesionAdmin {
     }
   }
   seleccionar(categoria: Categoria) {
-    this.categoriaService
-      .seleccionar(categoria)
-      .subscribe((result: any) => (this.cat = result[0]));
+    this.categoriaService.seleccionar(categoria).subscribe((result: any) => (this.cat = result[0]));
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProdCat } from '../../models/ProdCat';
-import { SesionAdmin } from '../../models/SesionAdmin';
+import { Usuario } from '../../models/Usuario';
 import { CatProdService } from '../../servicios/cat-prod.service';
 import { CategoriaService } from '../../servicios/categoria.service';
 import { ProductoService } from '../../servicios/producto.service';
@@ -13,15 +13,16 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './nuevo-cat-prod.component.html',
   styleUrl: './nuevo-cat-prod.component.css',
 })
-export class NuevoCatProdComponent extends SesionAdmin {
+export class NuevoCatProdComponent{
   //variables que se usarán para ver si se cargan datos para insertar
   productos: any;
   categorias: any;
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
   valido: boolean = true;
+  sesionIniciada: boolean = false;
   proCat: ProdCat = { IdProd: 0, IdCat: 0 };
 
   constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService, private usuarioServicio: UsuarioService) {
-    super();
     this.recuperaProds();
     this.recuperaCats();
     document.title = $localize`Conectar productos con categorías`;
@@ -67,8 +68,7 @@ export class NuevoCatProdComponent extends SesionAdmin {
     if (!this.proCat.IdCat) {
       categ.classList.add('is-invalid');
       this.valido = false;
-    } else categ.classList.remove('is-invalid');
-         
+    } else categ.classList.remove('is-invalid');       
   }
 
   recuperaProds() {

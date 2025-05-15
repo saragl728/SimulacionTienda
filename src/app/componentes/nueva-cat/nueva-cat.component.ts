@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Categoria } from '../../models/Categoria';
-import { SesionAdmin } from '../../models/SesionAdmin';
+import { Usuario } from '../../models/Usuario';
 import { CategoriaService } from '../../servicios/categoria.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 
@@ -11,16 +11,17 @@ import { UsuarioService } from '../../servicios/usuario.service';
   templateUrl: './nueva-cat.component.html',
   styleUrl: './nueva-cat.component.css',
 })
-export class NuevaCatComponent extends SesionAdmin {
+export class NuevaCatComponent {
   constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService) {
-    super();
     this.obtenerNombres();
     document.title = $localize`Nueva categoría`;
   }
 
+  persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
   categorias: Array<any> = [];
+  sesionIniciada: boolean = false;
 
   cierraSesion(){
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
