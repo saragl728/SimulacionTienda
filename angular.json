@@ -21,7 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "localize": true,
+            "localize": ["en", "es"],
             "outputPath": "dist/simulacion-tienda",
             "index": "src/index.html",
             "browser": "src/main.ts",

@@ -60,7 +60,7 @@ export class MenuComponent {
         info = $localize`Has escrito mal la ruta en el navegador, ¿no?`;
         break;
       default:
-        info = $localize`Esto está por defecto`;
+        info = "Esto está por defecto";
         break;
     }
 

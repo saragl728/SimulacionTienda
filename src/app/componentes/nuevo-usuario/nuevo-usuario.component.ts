@@ -34,7 +34,8 @@ export class NuevoUsuarioComponent {
     if (ed < EDAD_MIN) edadOk = false; else {
       if (ed == EDAD_MIN) {
         //se comprueba si en este mes se ha cumplido la edad mínima
-        if (fecha.getMonth() > aux.getMonth()) edadOk = false; else {
+        if (fecha.getMonth() > aux.getMonth()) edadOk = false;
+        else {
           //si se cumple en este mes, se comprueba si ya se ha cumplido
           if (aux.getMonth() == fecha.getMonth() && fecha.getDate() > aux.getDate()) edadOk = false;
         }

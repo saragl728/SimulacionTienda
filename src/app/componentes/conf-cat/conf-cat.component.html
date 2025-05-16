@@ -84,7 +84,7 @@
     }
     @else {
         <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
-            <h2 i18n><span class="material-symbols-outlined">error</span>No se han encontrado categorías</h2>
+            <h2><span class="material-symbols-outlined">error</span><span i18n>No se han encontrado categorías</span></h2>
         </div>
         <img src="BlissInv.bmp" class="img-fluid">
     }
@@ -102,8 +102,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" i18n
-                    (click)="confirmaBorrar()">Eliminar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" i18n (click)="confirmaBorrar()">Eliminar</button>
             </div>
         </div>
     </div>

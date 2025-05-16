@@ -42,17 +42,15 @@
                     <option value="{{ cats.Id }}">{{ cats.nombre }}</option>
                     }
                 </select>
-    
             </div>
             <button type="submit" class="btn btn-primary mb-3" (click)="alta()" i18n>Guardar</button>
         </form>
     }
-
 </div>
 }
 @else {
 <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
-    <h2 i18n><span class="material-symbols-outlined">error</span>No se han encontrado productos y/o categorías</h2>
+    <h2><span class="material-symbols-outlined">error</span><span i18n>No se han encontrado productos y/o categorías</span></h2>
     <img src="BlissInv.bmp" class="img-fluid">
 </div>
 }

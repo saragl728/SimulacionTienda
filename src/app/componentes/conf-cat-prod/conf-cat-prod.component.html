@@ -39,7 +39,6 @@
                 </div>
             </div>
         }
-
         <div class="shadow my-2 p-2 border border-secondary border-3 rounded bg-light">
             <div class="form-floating form-check-inline col-6">
                 <input type="text" class="form-control" id="Filtro" name="filtro" [(ngModel)]="filtrio" i18n-placeholder placeholder="Busca por producto o categoría">
@@ -76,7 +75,7 @@
                 <td>{{p.producto}}</td>
                 <td>{{p.categoria}}</td>
                 @if (sesionIniciada){
-                    <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra" i18n (click)="tempBorr(prodCats[i].IdProd, prodCats[i].IdCat, p)">Borrar</button></td>
+                    <td><button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra" (click)="tempBorr(prodCats[i].IdProd, prodCats[i].IdCat, p)"><span i18n>Borrar</span></button></td>
                 }
             </tr>
             }
@@ -85,7 +84,7 @@
     }
     @else {
     <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
-        <h2 i18n><span class="material-symbols-outlined">error</span>No hay relaciones entre productos y categorías</h2>
+        <h2><span class="material-symbols-outlined">error</span><span i18n>No hay relaciones entre productos y categorías</span></h2>
     </div>
     <img src="BlissInv.bmp" class="img-fluid">
     }

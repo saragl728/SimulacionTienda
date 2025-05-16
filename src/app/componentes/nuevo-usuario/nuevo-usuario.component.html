@@ -1,47 +1,39 @@
 <div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
     <form>
         <div class="col-12 mt-2">
-            <h1 i18n>Crea tu cuenta<button class="btn btn-warning rounded-circle float-end" data-bs-toggle="modal" data-bs-target="#modalAviso">?</button></h1>
+            <h1><span i18n>Crea tu cuenta</span><button class="btn btn-warning rounded-circle float-end" data-bs-toggle="modal" data-bs-target="#modalAviso">?</button></h1>
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Nombre(max 50 caracteres):</label>
             <input type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="usuario.nombre"/>
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Email(sólo admitimos gmail, yahoo y hotmail, max 200 caracteres):</label>
             <input type="email" id="correo" name="correo" class="form-control" [(ngModel)]="usuario.correo"/>
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Fecha de nacimiento (AÑO-MES-DÍA) (debes tener al menos 13 años):</label>
             <input type="text" id="fechaNac" name="fechaNac" class="form-control" [(ngModel)]="auxFecha" />
             <p>  {{ usuario.fechaNac }} </p>
         </div>
-
         @if (usuario.contrasenya != cont2){
-            <h3 i18n class="text-danger-emphasis bg-warning-subtle p-2 border border-dark border-2 rounded"><span class="material-symbols-outlined"> error </span>Las contraseñas no coinciden</h3>
+            <h3 class="text-danger-emphasis bg-warning-subtle p-2 border border-dark border-2 rounded"><span class="material-symbols-outlined"> error </span><span i18n>Las contraseñas no coinciden</span></h3>
         }
         @else {
-            <h3 i18n class="bg-success-subtle border border-light p-2 border-2 rounded"><span class="material-symbols-outlined"> check_circle </span>Las contraseñas coinciden</h3>
+            <h3 class="bg-success-subtle border border-light p-2 border-2 rounded"><span class="material-symbols-outlined"> check_circle </span><span i18n>Las contraseñas coinciden</span></h3>
         }
-
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Contraseña(usa una de la que te puedas acordar fácilmente):</label>
             <input type="password" name="contrasenya" id="contrasenya" class="form-control" [(ngModel)]="usuario.contrasenya" />
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Repite la contraseña:</label>
             <input type="password" name="cont2" id="contrasenya2" class="form-control" [(ngModel)]="cont2" />
         </div>
-
         <div class="mb-3">
             <input class="form-check-input me-2" name="acepto" type="checkbox" id="acepto" [(ngModel)]="confirmado">
-            <label i18n class="form-check-label" for="acepto">Acepto los términos y condiciones de uso y me hago responsable de mis acciones</label>
+            <label class="form-check-label" for="acepto" i18n>Acepto los términos y condiciones de uso y me hago responsable de mis acciones</label>
         </div>
-
         <button type="submit" class="btn btn-primary mb-3" i18n (click)="crearCuenta()">Crear cuenta</button>
     </form>
 
@@ -51,7 +43,7 @@
     <div class="modal-dialog">
       <div class="modal-content border border-warning border-3 rounded text-warning-emphasis">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel"><span class="material-symbols-outlined"> warning </span>Aviso</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><span class="material-symbols-outlined"> warning </span><span i18n>Aviso</span></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body fw-bold bg-light">
@@ -63,4 +55,4 @@
         </div>
       </div>
     </div>
-  </div>
+</div>

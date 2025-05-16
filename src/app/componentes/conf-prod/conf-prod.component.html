@@ -19,7 +19,7 @@
                                     <label class="form-label fw-bold" i18n>Contraseña:</label>
                                     <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
                                 </div>
-                                <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
+                                <button type="submit" class="btn btn-primary mb-3" (click)="inicioSesion()" i18n>Iniciar sesión</button>
                             </div>
                           </div>
                     </div>
@@ -64,8 +64,7 @@
                     <td>{{prod.precio}} €</td>
                     @if (sesionIniciada){
                         <td>
-                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra"
-                                (click)="tempBorr(prod)" i18n>Borrar</button>
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorra" (click)="tempBorr(prod)" i18n>Borrar</button>
                         </td>
                         <td>
                             <button class="btn btn-primary btn-sm" (click)="seleccionar(prod)" i18n>Seleccionar</button>
@@ -94,11 +93,10 @@
     }
     @else {
         <div class="container mt-4 text-danger-emphasis bg-danger-subtle">
-            <h2 i18n><span class="material-symbols-outlined">error</span>No se han encontrado productos</h2>
+            <h2><span class="material-symbols-outlined">error</span><span i18n>No se han encontrado productos</span></h2>
         </div>
         <img src="BlissInv.bmp" class="img-fluid">
     }
-
 <div class="modal fade" id="modalBorra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content border border-warning border-3 rounded">
@@ -112,8 +110,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" i18n
-                    (click)="confirmaBorrar()">Eliminar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="confirmaBorrar()" i18n>Eliminar</button>
             </div>
         </div>
     </div>

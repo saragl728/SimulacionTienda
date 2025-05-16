@@ -108,10 +108,10 @@
             <div class="shadow card p-3 my-2 border border-dark border-2">
                 <h5 class="card-title" i18n>Cambiar mi contraseña</h5>
                 @if (persona.contrasenya != contr2){
-                    <h3 i18n class="text-danger-emphasis bg-warning-subtle p-2 border border-dark border-2 rounded"><span class="material-symbols-outlined"> error </span>Las contraseñas no coinciden</h3>
+                    <h3 class="text-danger-emphasis bg-warning-subtle p-2 border border-dark border-2 rounded"><span class="material-symbols-outlined"> error </span><span i18n>Las contraseñas no coinciden</span></h3>
                 }
                 @else{
-                    <h3 i18n class="bg-success-subtle border border-light p-2 border-2 rounded"><span class="material-symbols-outlined"> check_circle </span>Las contraseñas coinciden</h3>
+                    <h3 class="bg-success-subtle border border-light p-2 border-2 rounded"><span class="material-symbols-outlined"> check_circle </span><span i18n>Las contraseñas coinciden</span></h3>
                 }
                 <div class="mb-3">
                     <label class="form-label fw-bold" i18n>Nueva contraseña:</label>
@@ -135,7 +135,7 @@
                     <thead class="table-dark">
                         <tr>
                             <th i18n>Nombre</th>
-                            <th i18n>Correo electrónico</th>
+                            <th i18n>Email</th>
                             <th i18n>Admin</th>
                             <th i18n>Cambiar</th>
                             <th i18n>Borrar</th>
@@ -199,7 +199,7 @@
             </div>
             <div class="modal-body bg-warning-subtle">
                 <img src="clipo.png">
-                <p>Seguro que quieres eliminar la cuenta de {{temp.nombre}}?</p>
+                <p i18n>¿Seguro que quieres eliminar la cuenta de {{temp.nombre}}?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>

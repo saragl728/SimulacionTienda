@@ -30,7 +30,7 @@
         </div>
         @if (!puedeBuscar()){
             <div class="container mt-2 text-danger-emphasis bg-danger-subtle">
-                <h2 i18n><span class="material-symbols-outlined">error</span>No podemos dejarte apostar esta cantidad. Supera el porcentaje máximo permitido: {{PORCENTAJE_MAX * 100}} %</h2>
+                <h2><span class="material-symbols-outlined">error</span><span i18n>No podemos dejarte apostar esta cantidad. Supera el porcentaje máximo permitido: {{PORCENTAJE_MAX * 100}} %</span></h2>
             </div>
         }
         @else {
@@ -56,7 +56,7 @@
                     </table>
                 }
                 @else {
-                    <h2 class="text-danger-emphasis bg-danger-subtle" i18n><span class="material-symbols-outlined">error</span>No hay productos con un precio parecido al que buscas</h2>
+                    <h2 class="text-danger-emphasis bg-danger-subtle"><span class="material-symbols-outlined">error</span><span i18n>No hay productos con un precio parecido al que buscas</span></h2>
                 }
             }
         }
