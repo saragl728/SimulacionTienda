@@ -92,10 +92,11 @@ export class ConfCatComponent {
 
     if (this.valido) {
       this.categoriaService.modificacion(this.cat).subscribe((datos: any) => {
-        if (datos.resultado == 'OK') {
+        if (datos != null) {
           this.recuperarTodos();
           nom.classList.add('is-valid');
         }
+        else nom.classList.add('is-invalid');
       });
     }
   }

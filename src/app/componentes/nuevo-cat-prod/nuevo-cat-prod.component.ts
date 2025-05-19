@@ -91,10 +91,14 @@ export class NuevoCatProdComponent {
 
     if (this.valido) {
       this.catProdService.alta(this.proCat).subscribe((datos: any) => {
-        if (datos.resultado == 'OK') {
+        if (datos != null) {
           console.log('Conexión añadida');
           pro.classList.add('is-valid');
           categ.classList.add('is-valid');
+        }
+        else{
+          pro.classList.add('is-invalid');
+          categ.classList.add('is-invalid');
         }
       });
     }

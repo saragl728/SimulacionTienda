@@ -113,7 +113,7 @@ export class ConfProdComponent {
 
     if (this.valido) {
       this.productoService.modificacion(this.prod).subscribe((datos: any) => {
-        if (datos.resultado == 'OK') {
+        if (datos != null) {
           this.recuperarTodos();
           nom.classList.add('is-valid');
           prc.classList.add('is-valid');
