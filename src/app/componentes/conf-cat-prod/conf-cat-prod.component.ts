@@ -64,6 +64,8 @@ export class ConfCatProdComponent {
   muestraTodo() {
     this.recuperarTodos();
     this.recuperaNombres();
+    this.filtroElegido = "";
+    this.filtrio = "";
   }
 
   recuperarIdsPorCategoria(cat: string) {
@@ -126,7 +128,20 @@ export class ConfCatProdComponent {
 
   baja(prCt: ProdCat) {
     this.proCatService.baja(prCt).subscribe((datos: any) => {
-      if (datos.resultado == 'OK') this.muestraTodo();
+      if (datos.resultado == 'OK'){
+        //pongo esto para que no reinicie la búsqueda
+            switch (this.filtroElegido) {
+              case 'produc':
+                this.buscarPorProducto(this.filtrio);
+                break;
+              case 'categ':
+                this.buscarPorCategoria(this.filtrio);
+                break;
+              default:
+                this.muestraTodo();
+                break;
+            }
+      } 
     });
   }
 }
