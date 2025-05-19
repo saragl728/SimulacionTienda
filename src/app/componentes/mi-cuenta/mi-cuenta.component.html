@@ -93,7 +93,6 @@
                         </tbody>
                     </table>
                 }
-
             </div>
             <div class="shadow card p-3 my-2 border border-dark border-2">
                 <h5 class="card-title" i18n>Cambiar mi nombre</h5>
@@ -126,16 +125,23 @@
                 </div>
             </div>
         </div>
-        
         <!--sólo se mostrará si un administrador ha iniciado sesión-->
         @if (this.persona.adminis == 'S'){
             <div class="shadow card p-3 my-2 border border-dark border-2">
-                <h5 class="card-title" i18n>Permisos de otros usuarios</h5>
+                <div class="row justify-content-between">
+                    <div class="col-4 card-title my-2">
+                        <h5 i18n>Permisos de otros usuarios</h5>
+                    </div>
+                    <div class="col-1 my-2">
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalInfoAdmin" i18n>?</button>
+                    </div>
+                </div>
                 <table class="table table-bordered table-striped">
                     <thead class="table-dark">
                         <tr>
                             <th i18n>Nombre</th>
                             <th i18n>Email</th>
+                            <th i18n>Fecha de nacimiento</th>
                             <th i18n>Admin</th>
                             <th i18n>Cambiar</th>
                             <th i18n>Borrar</th>
@@ -146,9 +152,9 @@
                             <tr>
                                 <td>{{per.nombre}}</td>
                                 <td>{{per.correo}} </td>
+                                <td>{{per.fechaNac}}</td>
                                 <td> {{per.adminis}} </td>
                                 <td>
-                                    <!--sólo da la opción de cambiar los permisos de administrador de los adultos-->
                                     @if (esAdulto(per)){
                                         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" (click)="tempElegir(per)" data-bs-target="#modalCambiaPermiso" i18n>Cambiar</button>
                                     }
@@ -165,7 +171,6 @@
         }
     }
 </div>
-
 <div class="modal fade" id="modalCambiaPermiso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content border border-warning border-3 rounded">
@@ -204,6 +209,22 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" i18n>Cancelar</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="borraCuenta(temp)" i18n>Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalInfoAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border border-info border-3 rounded">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" i18n>Información</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-info-subtle">
+                <p i18n>Aquí puedes dar y quitar permisos de administrador a otros usuarios siempre que tengan al menos 18 años. También puedes borrar las cuentas de otros usuarios.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" i18n>Vale</button>
             </div>
         </div>
     </div>
