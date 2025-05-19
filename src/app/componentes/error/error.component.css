@@ -12,3 +12,11 @@ li {
 p, h2, li, .mono {
   font-family: monospace;
 }
+
+p, h2, .mono {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}

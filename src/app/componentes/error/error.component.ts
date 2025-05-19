@@ -20,16 +20,10 @@ export class ErrorComponent {
     const MINUT = 60000;
     const SEGU = 1000;
 
-    if (this.LIMITE < MINUT){
-      mens = (this.LIMITE / SEGU).toString() + $localize` segundo(s)`;
-    }
-    else{
-      if (this.LIMITE % MINUT == 0){
-        mens = (this.LIMITE / MINUT).toString() + $localize` minuto(s)`;
-      }
-      else {
-        mens = ((this.LIMITE - (this.LIMITE % MINUT)) / MINUT).toString() + $localize` minuto(s) y ` + ((this.LIMITE % MINUT) / SEGU).toString() + $localize` segundo(s)`;
-      }
+    if (this.LIMITE < MINUT) mens = (this.LIMITE / SEGU).toString() + $localize` segundo(s)`;
+    else {
+      if (this.LIMITE % MINUT == 0) mens = (this.LIMITE / MINUT).toString() + $localize` minuto(s)`;
+      else mens = ((this.LIMITE - (this.LIMITE % MINUT)) / MINUT).toString() + $localize` minuto(s) y ` + ((this.LIMITE % MINUT) / SEGU).toString() + $localize` segundo(s)`;
     }
 
     return mens;
