@@ -13,21 +13,21 @@
                     <a [ngClass]="{'aqui':this.arraiRutProd.includes(this.location.path())}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span i18n>Productos</span></a>
                     <ul class="dropdown-menu">
                         <li><a [ngClass]="{'aqui':this.location.path()=='/nuevo-prod'}" class="dropdown-item" href="#" routerLink="/nuevo-prod"><span i18n>Añadir</span></a></li>
-                        <li><a [ngClass]="{'aqui':this.location.path()=='/conf-prod'}" class="dropdown-item" href="#" routerLink="/conf-prod"><span i18n>Ver</span></a></li>
+                        <li><a [ngClass]="{'aqui':this.location.path()=='/ver-prod'}" class="dropdown-item" href="#" routerLink="/ver-prod"><span i18n>Ver</span></a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a [ngClass]="{'aqui':this.arraiRutCat.includes(this.location.path())}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span i18n>Categorías</span></a>
                     <ul class="dropdown-menu">
                         <li><a [ngClass]="{'aqui':this.location.path()=='/nueva-cat'}" class="dropdown-item" href="#" routerLink="nueva-cat"><span i18n>Añadir</span></a></li>
-                        <li><a [ngClass]="{'aqui':this.location.path()=='/conf-cat'}" class="dropdown-item" href="#" routerLink="conf-cat"><span i18n>Ver</span></a></li>
+                        <li><a [ngClass]="{'aqui':this.location.path()=='/ver-cat'}" class="dropdown-item" href="#" routerLink="ver-cat"><span i18n>Ver</span></a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a [ngClass]="{'aqui':this.arraiRutCaPr.includes(this.location.path())}" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span i18n>Categorías y productos</span></a>
                     <ul class="dropdown-menu">
                         <li><a [ngClass]="{'aqui':this.location.path()=='/nuevo-cat-prod'}" class="dropdown-item" href="#" routerLink="nuevo-cat-prod"><span i18n>Añadir</span></a></li>
-                        <li><a [ngClass]="{'aqui':this.location.path()=='/conf-cat-prod'}" class="dropdown-item" href="#" routerLink="conf-cat-prod"><span i18n>Ver</span></a></li>
+                        <li><a [ngClass]="{'aqui':this.location.path()=='/ver-cat-prod'}" class="dropdown-item" href="#" routerLink="ver-cat-prod"><span i18n>Ver</span></a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

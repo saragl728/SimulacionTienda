@@ -13,9 +13,9 @@ export class MenuComponent {
   constructor(public location: Location) {}
 
   //arrays con rutas para comprobar en qué tipo de ruta estamos y cambiar el estilo
-  arraiRutProd = ['/nuevo-prod', '/conf-prod'];
-  arraiRutCat = ['/nueva-cat', '/conf-cat'];
-  arraiRutCaPr = ['/nuevo-cat-prod', '/conf-cat-prod'];
+  arraiRutProd = ['/nuevo-prod', '/ver-prod'];
+  arraiRutCat = ['/nueva-cat', '/ver-cat'];
+  arraiRutCaPr = ['/nuevo-cat-prod', '/ver-cat-prod'];
   arraiRutUsu = ['/mi-cuenta', '/nuevo-usuario'];
   arraiRutUsuPr = ['/resenya', '/comprar', '/loteria'];
 
@@ -29,16 +29,16 @@ export class MenuComponent {
       case '/nueva-cat':
         info = $localize`Aquí puedes añadir nuevas categorías de productos. Tienen nombres únicos.`;
         break;
-      case '/conf-prod':
+      case '/ver-prod':
         info = $localize`Aquí puedes ver los productos actuales. Puedes modificarlos y eliminarlos si eres administrador.`;
         break;
-      case '/conf-cat':
+      case '/ver-cat':
         info = $localize`Aquí puedes ver las categorías disponibles de productos y eliminarlas si eres administrador.`;
         break;
       case '/nuevo-cat-prod':
         info = $localize`Aquí puedes conectar categorías con productos.`;
         break;
-      case '/conf-cat-prod':
+      case '/ver-cat-prod':
         info = $localize`Aquí puedes ver las conexiones de categorías con productos y eliminarlas si eres administrador. También puedes hacer búsquedas.`;
         break;
       case '/nuevo-usuario':
