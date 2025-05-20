@@ -403,11 +403,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">141,142</context>
+          <context context-type="linenumber">147,148</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7940923979225369807" datatype="html">
@@ -445,11 +445,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">173,174</context>
+          <context context-type="linenumber">178,179</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">197,198</context>
+          <context context-type="linenumber">202,203</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4355194263413336566" datatype="html">
@@ -487,11 +487,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">187,188</context>
+          <context context-type="linenumber">192,193</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">205,206</context>
+          <context context-type="linenumber">210,211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6665903341931535342" datatype="html">
@@ -645,7 +645,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">137,138</context>
+          <context context-type="linenumber">142,143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2229594745304510307" datatype="html">
@@ -805,11 +805,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">105,106</context>
+          <context context-type="linenumber">104,105</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">125,126</context>
+          <context context-type="linenumber">124,125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3875002907670942314" datatype="html">
@@ -920,25 +920,25 @@
         <source> segundo(s)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/error/error.component.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/error/error.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3789945714753962406" datatype="html">
         <source> minuto(s)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/error/error.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8717778117906281384" datatype="html">
         <source> minuto(s) y </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/error/error.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4116045977739252055" datatype="html">
@@ -1068,11 +1068,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">188,189</context>
+          <context context-type="linenumber">193,194</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">206,207</context>
+          <context context-type="linenumber">211,212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="418139061423420801" datatype="html">
@@ -1265,6 +1265,10 @@
           <context context-type="linenumber">58,59</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
+          <context context-type="linenumber">227,228</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
           <context context-type="linenumber">54,55</context>
         </context-group>
@@ -1368,7 +1372,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">138,139</context>
+          <context context-type="linenumber">143,144</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5663773212361906083" datatype="html">
@@ -1376,6 +1380,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
           <context context-type="linenumber">31,32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
+          <context context-type="linenumber">144,145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7173095561232174008" datatype="html">
@@ -1450,28 +1458,28 @@
         <source>Cambiar mi nombre</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">99,100</context>
+          <context context-type="linenumber">98,99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8380230687728276598" datatype="html">
         <source>Nuevo nombre(max 50 caracteres):</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">101,102</context>
+          <context context-type="linenumber">100,101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3953280662196654459" datatype="html">
         <source>Cambiar mi contraseña</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">109,110</context>
+          <context context-type="linenumber">108,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="728039864504584525" datatype="html">
         <source>Las contraseñas no coinciden</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">110</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
@@ -1482,7 +1490,7 @@
         <source>Las contraseñas coinciden</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">113</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
@@ -1493,14 +1501,14 @@
         <source>Nueva contraseña:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">117,118</context>
+          <context context-type="linenumber">116,117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3864907705426766660" datatype="html">
         <source>Repite la contraseña:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">121,122</context>
+          <context context-type="linenumber">120,121</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
@@ -1518,46 +1526,60 @@
         <source>Admin</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">139,140</context>
+          <context context-type="linenumber">145,146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8242485735462684029" datatype="html">
         <source>Cambiar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">140,141</context>
+          <context context-type="linenumber">146,147</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">153,154</context>
+          <context context-type="linenumber">159,160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6960884227075558060" datatype="html">
         <source>Demasiado joven para ser administrador</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">156,157</context>
+          <context context-type="linenumber">162,163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4954415178477853397" datatype="html">
         <source>¿Seguro que quieres quitar permisos de administrador a <x id="INTERPOLATION" equiv-text="{{temp.nombre}}"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">179,180</context>
+          <context context-type="linenumber">184,185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1987002153024915176" datatype="html">
         <source>¿Seguro que quieres dar permisos de administrador a <x id="INTERPOLATION" equiv-text="{{temp.nombre}}"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">182,183</context>
+          <context context-type="linenumber">187,188</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8331057090427089993" datatype="html">
         <source>¿Seguro que quieres eliminar la cuenta de <x id="INTERPOLATION" equiv-text="{{temp.nombre}}"/>?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
-          <context context-type="linenumber">202,203</context>
+          <context context-type="linenumber">207,208</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8152041600291841538" datatype="html">
+        <source>Información</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
+          <context context-type="linenumber">220,221</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4784615903126919279" datatype="html">
+        <source>Aquí puedes dar y quitar permisos de administrador a otros usuarios siempre que tengan al menos 18 años. También puedes borrar las cuentas de otros usuarios.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
+          <context context-type="linenumber">224,225</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7248594191035346625" datatype="html">
