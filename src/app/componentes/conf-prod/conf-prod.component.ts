@@ -4,6 +4,7 @@ import { Producto } from '../../models/Producto';
 import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ProductoService } from '../../servicios/producto.service';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-conf-prod',
@@ -12,8 +13,9 @@ import { ProductoService } from '../../servicios/producto.service';
   styleUrl: './conf-prod.component.css',
 })
 
-export class ConfProdComponent {
+export class ConfProdComponent extends Sonido {
   constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService) {
+  super();
   this.recuperarTodos();
   document.title = $localize`Ver productos`;
   }
@@ -25,20 +27,21 @@ export class ConfProdComponent {
   valido: boolean = true;
   busca: string = "";
 
-  cierraSesion(){
+  cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.temp = { Id: 0, nombre: '', precio: 0 };
     this.prod = { Id: 0, nombre: '', precio: 0 };
     this.valido = true;
     document.title = $localize`Ver productos`;
+    this.suenaCierre();
   }
 
-  buscaPorNombre(){
+  buscaPorNombre() {
     this.productoService.buscaPorNombre(this.busca).subscribe((result: any) => (this.productos = result));
   }
 
-  inicioSesion(): void {
+  inicioSesion() {
     let usu = document.getElementById('usuario') as HTMLInputElement;
     let contr = document.getElementById('contrasenya') as HTMLInputElement;
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
@@ -46,14 +49,16 @@ export class ConfProdComponent {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          this.suenaInicio();
           document.title = $localize`Administrar productos`;
         } else {
-          alert($localize`No tienes los permisos necesarios`);
+          this.alertaFallo($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         alert($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
@@ -98,7 +103,10 @@ export class ConfProdComponent {
 
   baja(producto: Producto) {
     this.productoService.baja(producto).subscribe((datos: any) => {
-      if (datos.resultado == 'OK') this.recuperarTodos();
+      if (datos.resultado == 'OK'){
+        this.suenaError();
+        this.recuperarTodos();
+      }
     });
   }
 
@@ -117,14 +125,16 @@ export class ConfProdComponent {
           this.recuperarTodos();
           nom.classList.add('is-valid');
           prc.classList.add('is-valid');
+          this.suenaGlobo();
         }
         else {
           nom.classList.add('is-invalid');
           prc.classList.add('is-invalid');
+          this.suenaError();
         }
       }
     );
-    }
+    } else this.suenaError();
   }
   seleccionar(producto: Producto) {
     this.productoService.seleccionar(producto).subscribe((result: any) => (this.prod = result[0]));

@@ -5,6 +5,7 @@ import { ProductoService } from '../../servicios/producto.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../models/Usuario';
 import { Resenya } from '../../models/Resenya';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-resenya',
@@ -12,8 +13,9 @@ import { Resenya } from '../../models/Resenya';
   templateUrl: './resenya.component.html',
   styleUrl: './resenya.component.css'
 })
-export class ResenyaComponent {
+export class ResenyaComponent extends Sonido {
   constructor(private resenyaServicio: ResenyaService, private usuarioServicio: UsuarioService, private productoService: ProductoService){
+    super();
     this.sacarTodas();
     this.recuperaProds();
     document.title = $localize`Reseñas`;
@@ -26,17 +28,18 @@ export class ResenyaComponent {
   valido: boolean = true;
   filtro: string = "";
 
-  cierraSesion(){
+  cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.rese = { Id: 0, IdProducto: 0, IdCliente: 0, contenido: '', fecha: ''};
     this.sesionIniciada = false;
+    this.suenaCierre();
   }
 
-  sacarTodas(){
+  sacarTodas() {
     this.resenyaServicio.mostrarTodas().subscribe((respuesta: any) => { this.resenyas = respuesta; });
   }
 
-  buscarPorNombreProducto(){
+  buscarPorNombreProducto() {
     this.resenyaServicio.resenyaPorNombre(this.filtro).subscribe((respuesta: any) => { this.resenyas = respuesta; });
   }
 
@@ -44,7 +47,7 @@ export class ResenyaComponent {
     this.productoService.recuperarTodos().subscribe((respuesta: any) => { this.productos = respuesta; });
   }
 
-  iniciarSesion(){
+  iniciarSesion() {
     let usu = document.getElementById('usuario') as HTMLInputElement;
     let contr = document.getElementById('contrasenya') as HTMLInputElement;
 
@@ -53,17 +56,17 @@ export class ResenyaComponent {
         this.persona = result;
         this.persona.contrasenya = '';
         this.sesionIniciada = true;
+        this.suenaInicio();
       } else {
-        alert($localize`Usuario y/o contraseña incorrectos`);
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
     });
   }
 
-  validar(){
+  validar() {
     this.valido = true;
-
     const LONG_MAX = 200;
 
     let opi = document.getElementById('areaOp') as HTMLInputElement;
@@ -80,7 +83,7 @@ export class ResenyaComponent {
     } else opi.classList.remove('is-invalid');
   }
 
-  anyadirResenya(){
+  anyadirResenya() {
     let opi = document.getElementById('areaOp') as HTMLInputElement;
     let pro = document.getElementById('prodc') as HTMLInputElement;
 
@@ -89,17 +92,20 @@ export class ResenyaComponent {
 
     this.validar();
 
+    if (this.valido) {
     this.rese.IdCliente = this.persona.Id;
-
-    this.resenyaServicio.anyadir(this.rese).subscribe((datos: any) => {
+        this.resenyaServicio.anyadir(this.rese).subscribe((datos: any) => {
       if (datos.resultado == 'OK') {
         console.log('Reseña añadida');
         this.sacarTodas();  //si funciona, hace que cargue las reseñas
         opi.classList.add('is-valid');
         pro.classList.add('is-valid');
+        this.suenaGlobo();
       } else {
         console.log('No se ha podido añadir la reseña');
       }
     });
+    }
+    else this.suenaError();
   }
 }

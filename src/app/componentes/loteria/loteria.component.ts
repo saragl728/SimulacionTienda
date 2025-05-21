@@ -6,6 +6,7 @@ import { Usuario } from '../../models/Usuario';
 import { Producto } from '../../models/Producto';
 import { FormsModule } from '@angular/forms';
 import { Inventario } from '../../models/Inventario';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-loteria',
@@ -13,31 +14,37 @@ import { Inventario } from '../../models/Inventario';
   templateUrl: './loteria.component.html',
   styleUrl: './loteria.component.css',
 })
-export class LoteriaComponent {
+export class LoteriaComponent extends Sonido {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private productoServicio: ProductoService) {
+    super();
     document.title = $localize`Lotería`;
   }
 
-  readonly PORCENTAJE_MAX: number = 0.3333; //porcentaje máximo del saldo que se puede apostar
+  /**Porcentaje máximo del saldo que se puede apostar */
+  readonly PORCENTAJE_MAX: number = 0.3333;
   cantidad: number = 0;
   haBuscado: boolean = false;
   persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '',adminis: 'N'};;
   sesionIniciada = false;
   listaObjetos: Array<Producto> = [];
 
-  cierraSesion(){
+  cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.cantidad = 0;
     this.haBuscado = false;
     this.listaObjetos = [];
+    this.suenaCierre();
 }
 
   puedeBuscar(): boolean {
     return this.cantidad < this.persona.saldo * this.PORCENTAJE_MAX;
   }
 
-  //lo necesitamos para saber si el usuario puede usar la lotería
+  /**
+   * Comprueba si el usuario que inicia sesión es adulto o no
+   * @returns True si tiene 18 años o más, false si no
+   */
   esAdulto(): boolean {
     const ADULTO = 18;
     let edadAdulto: boolean = true;
@@ -67,15 +74,18 @@ export class LoteriaComponent {
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
       if (result != null) {
         this.persona = result;
-        if (this.esAdulto()) this.sesionIniciada = true;
+        if (this.esAdulto()){
+          this.sesionIniciada = true;
+          this.suenaInicio();
+        }
         else {
-          alert($localize`Eres demasiado joven para esto. Tienes que tener al menos 18 años`)
+          this.alertaFallo($localize`Eres demasiado joven para esto. Tienes que tener al menos 18 años`)
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
-        alert($localize`Usuario y/o contraseña incorrectos`);
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -87,7 +97,6 @@ export class LoteriaComponent {
     let n = Math.floor(Math.random() * this.listaObjetos.length); //sacamos el índice del objeto del array
     produ = this.listaObjetos[n];
 
-    //hay que hacer que añada una unidad de este producto al inventario del usuario
     this.inventarioServicio.cantidadInventario(this.persona.Id, produ.Id).subscribe((result: any) => {
         if (result != null) {
           let can1 = result[0].cantidad++;
@@ -99,7 +108,7 @@ export class LoteriaComponent {
           this.inventarioServicio.anyadeInventario(nuevoInv).subscribe((result: any) => {});
         }
         this.persona.saldo -= this.cantidad;
-        this.usuarioServicio.actualizaSaldo(this.persona).subscribe((result: any) => {});
+        this.usuarioServicio.actualizaSaldo(this.persona).subscribe((result: any) => { this.suenaGlobo() });
       });
   }
 
@@ -107,6 +116,9 @@ export class LoteriaComponent {
     return Math.round(numero * 100) / 100;
   }
 
+  /**
+   * Obtiene los productos cuyo precio está en un rango de +-10% del precio que se ha puesto
+   */
   sacaObjetos() {
     let min = this.redondeaDecimales(this.cantidad * 0.9);
     let max = this.redondeaDecimales(this.cantidad * 1.1);

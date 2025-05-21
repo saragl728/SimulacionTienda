@@ -5,6 +5,7 @@ import { ProdCant } from '../../models/ProdCant';
 import { InventarioService } from '../../servicios/inventario.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ResenyaService } from '../../servicios/resenya.service';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-mi-cuenta',
@@ -12,8 +13,9 @@ import { ResenyaService } from '../../servicios/resenya.service';
   templateUrl: './mi-cuenta.component.html',
   styleUrl: './mi-cuenta.component.css'
 })
-export class MiCuentaComponent {
+export class MiCuentaComponent extends Sonido {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private resenyaServicio: ResenyaService) {
+    super();
     document.title = $localize`Mi cuenta`;
   }
   sesionIniciada = false;
@@ -26,9 +28,10 @@ export class MiCuentaComponent {
   misReses: Array<any> = [];
   misCompras: Array<any> = [];
 
-  cierraSesion(){
+  cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
+    this.suenaCierre();
     document.title = $localize`Mi cuenta`;
   }
 
@@ -44,17 +47,22 @@ export class MiCuentaComponent {
         this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => { this.inventario = resultado; });
         this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => { this.misReses = resu; });
         this.usuarioServicio.datosComprasUsuarios(this.persona.Id).subscribe((res: any) => { this.misCompras = res; });
+        this.suenaInicio();
         if (this.persona.adminis == 'S') this.sacarTodos();        
         document.title = $localize`Cuenta de ${this.persona.nombre}`;
       } else {
-        alert($localize`Usuario y/o contraseña incorrectos`);
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
     });
   }
 
-  //se necesita para saber a qué usuarios se les puede dar permisos de administrador
+  /**
+   * Para saber si un usuario es adulto, se necesita para saber si se le pueden dar permisos de administrador
+   * @param usuaario Usuario
+   * @returns True si tiene 18 años o más, false si no
+   */
   esAdulto(usuaario: Usuario): boolean {
     const ADULTO = 18;
     let edadAdulto: boolean = true;
@@ -76,13 +84,16 @@ export class MiCuentaComponent {
   return edadAdulto;
   }
 
-  sacarTodos(){
+  /**
+   * Hace que se carguen el resto de usuario para los administradores
+   */
+  sacarTodos() {
     this.usuarioServicio.sacarTodosExceptoActual(this.persona.Id).subscribe((result: any) => {
       if (result.length >= 1) this.todosUsuarios = result;
     });
   }
 
-  cambiarContrasenya(){
+  cambiarContrasenya() {
     let valido: boolean = true;
 
     let con1 = document.getElementById('contrasenya') as HTMLInputElement;
@@ -97,17 +108,19 @@ export class MiCuentaComponent {
       con2.classList.remove('is-invalid');
     }
 
-    if (valido){
+    if (valido) {
       this.usuarioServicio.cambiaNombre(this.persona).subscribe((datos: any) => {
         if (datos.resultado == 'OK') {
           con1.classList.add('is-valid');
           con2.classList.add('is-valid');
+          this.suenaGlobo();
         }
       });
     }
+    else this.suenaError();
   }
 
-  cambiarNombre(){
+  cambiarNombre() {
     let valido: boolean = true;
     const LONG_NOM = 50;
     let nom = document.getElementById('nombre') as HTMLInputElement;
@@ -118,30 +131,38 @@ export class MiCuentaComponent {
       valido = false;
     } else nom.classList.remove('is-invalid');
 
-    if (valido){
+    if (valido) {
       //si el nombre está bien, hace la actualización
       this.usuarioServicio.cambiaNombre(this.persona).subscribe((datos: any) => {
-        if (datos['resultado'] == 'OK') {
+        if (datos.resultado == 'OK') {
           nom.classList.add('is-valid');
+          this.suenaGlobo();
           document.title = $localize`Cuenta de ${this.persona.nombre}`; //hago que vuelva a cambiar el título
         }
       });
     }
+    else this.suenaError();
   }
 
-  cambiarPermiso(){
+  cambiarPermiso() {
     //compruebo qué permisos tiene
     if (this.temp.adminis == 'S') this.temp.adminis = 'N';
     else this.temp.adminis = 'S';
 
     this.usuarioServicio.cambiaAdmin(this.temp).subscribe((result: any) => {
-      if (result.resultado == 'OK') this.sacarTodos();  //si funciona sacamos la lista actualizada        
+      if (result.resultado == 'OK'){
+        this.sacarTodos();  //si funciona sacamos la lista actualizada 
+        this.suenaGlobo();
+      }        
     })
   }
 
   borraCuenta(usuario: Usuario){
    this.usuarioServicio.baja(usuario).subscribe((datos: any) => {
-    if (datos.resultado == 'OK') this.sacarTodos();      
+    if (datos.resultado == 'OK') {
+      this.sacarTodos();
+      this.suenaBorra();
+    }  
   })
   }
 

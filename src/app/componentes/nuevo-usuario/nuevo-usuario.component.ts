@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../models/Usuario';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-nuevo-usuario',
@@ -9,8 +10,9 @@ import { Usuario } from '../../models/Usuario';
   templateUrl: './nuevo-usuario.component.html',
   styleUrl: './nuevo-usuario.component.css',
 })
-export class NuevoUsuarioComponent {
+export class NuevoUsuarioComponent extends Sonido {
   constructor(private usuarioServicio: UsuarioService) {
+    super();
     document.title = $localize`Crear cuenta`;
   }
 
@@ -21,7 +23,10 @@ export class NuevoUsuarioComponent {
   ayuda: string = new Date().toLocaleDateString('sv');
   usuario: Usuario = { Id: 0, nombre: '', correo: '',fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N' };
 
-  //método que se usará para comprobar si la fecha de nacimiento es válida
+  /**
+   * Método que comprueba si la fecha de nacimiento del usuario es válida(mínimo 13 años)
+   * @returns Devuelve false si el usuario es menor de 13 años, la edad mínima requerida, true si tiene al menos 13 años
+   */
   validaEdad(): boolean {
     let fecha = new Date(this.auxFecha);
     const EDAD_MIN = 13;
@@ -66,11 +71,12 @@ export class NuevoUsuarioComponent {
           cor.classList.add('is-valid');
           fec.classList.add('is-valid');
           cont1.classList.add('is-valid');
+          this.suenaGlobo();
         } else {
           console.log('No se ha podido añadir el usuario');
         }
       });
-    }
+    } else this.suenaError();
   }
 
   validar() {

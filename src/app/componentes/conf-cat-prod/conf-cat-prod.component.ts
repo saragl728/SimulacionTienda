@@ -5,6 +5,7 @@ import { ProductoCategoria } from '../../models/ProductoCategoria';
 import { CatProdService } from '../../servicios/cat-prod.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { FormsModule } from '@angular/forms';
+import { Sonido } from '../../models/Sonido';
 
 
 @Component({
@@ -13,8 +14,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './conf-cat-prod.component.html',
   styleUrl: './conf-cat-prod.component.css',
 })
-export class ConfCatProdComponent {
+export class ConfCatProdComponent extends Sonido {
   constructor(private proCatService: CatProdService, private usuarioServicio: UsuarioService) {
+  super();
   this.muestraTodo();
   document.title = $localize`Ver productos con categorías`;
   }
@@ -27,7 +29,7 @@ export class ConfCatProdComponent {
   auxNombres: ProductoCategoria = { producto: '', categoria: '' };
   sesionIniciada: boolean = false;
 
-  cierraSesion(){
+  cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.filtroElegido = "";
@@ -35,6 +37,7 @@ export class ConfCatProdComponent {
     this.temp = { IdProd: 0, IdCat: 0 };
     this.auxNombres = { producto: '', categoria: '' };
     document.title = $localize`Ver productos con categorías`;
+    this.suenaCierre();
   }
 
   inicioSesion() {
@@ -46,15 +49,16 @@ export class ConfCatProdComponent {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          this.suenaInicio();
           document.title = $localize`Administrar conexiones de productos con categorías`;
         } else {
-          alert($localize`No tienes los permisos necesarios`);
+          this.alertaFallo($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
-        alert($localize`Usuario y/o contraseña incorrectos`);
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -85,17 +89,17 @@ export class ConfCatProdComponent {
   this.proCatService.recuperaNombresPorProducto(pro).subscribe((respuesta: any) => { this.nombres = respuesta; });
 }
 
-  buscarPorProducto(filtro: string){
+  buscarPorProducto(filtro: string) {
     this.recuperarIdsPorProducto(filtro);
     this.recuperaNombresPorProducto(filtro);
   }
 
-  buscarPorCategoria(filtro: string){
+  buscarPorCategoria(filtro: string) {
     this.recuperarIdsPorCategoria(filtro);
     this.recuperaNombresPorCategoria(filtro);
   }
 
-  busca(){
+  busca() {
     switch(this.filtroElegido){
       case "produc":
         this.buscarPorProducto(this.filtrio);
@@ -141,6 +145,7 @@ export class ConfCatProdComponent {
                 this.muestraTodo();
                 break;
             }
+            this.suenaBorra();
       } 
     });
   }

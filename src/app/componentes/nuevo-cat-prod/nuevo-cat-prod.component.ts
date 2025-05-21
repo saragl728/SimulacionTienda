@@ -6,6 +6,7 @@ import { CategoriaService } from '../../servicios/categoria.service';
 import { ProductoService } from '../../servicios/producto.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { FormsModule } from '@angular/forms';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-nuevo-cat-prod',
@@ -13,8 +14,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './nuevo-cat-prod.component.html',
   styleUrl: './nuevo-cat-prod.component.css',
 })
-export class NuevoCatProdComponent {
+export class NuevoCatProdComponent extends Sonido {
   constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService, private usuarioServicio: UsuarioService) {
+  super();
   this.recuperaProds();
   this.recuperaCats();
   document.title = $localize`Conectar productos con categorías`;
@@ -31,9 +33,10 @@ export class NuevoCatProdComponent {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.proCat = { IdProd: 0, IdCat: 0 };
+    this.suenaCierre();
   }
 
-  inicioSesion(): void {
+  inicioSesion() {
     let usu = document.getElementById('usuario') as HTMLInputElement;
     let contr = document.getElementById('contrasenya') as HTMLInputElement;
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
@@ -41,14 +44,15 @@ export class NuevoCatProdComponent {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          this.suenaInicio();
         } else {
-          alert($localize`No tienes los permisos necesarios`);
+          this.alertaFallo($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
-        alert($localize`Usuario y/o contraseña incorrectos`);
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`)
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -95,12 +99,15 @@ export class NuevoCatProdComponent {
           console.log('Conexión añadida');
           pro.classList.add('is-valid');
           categ.classList.add('is-valid');
+          this.suenaGlobo();
         }
-        else{
+        else {
           pro.classList.add('is-invalid');
           categ.classList.add('is-invalid');
+          this.suenaError();
         }
       });
     }
+    else this.suenaError();
   }
 }

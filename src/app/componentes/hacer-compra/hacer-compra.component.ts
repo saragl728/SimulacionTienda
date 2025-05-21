@@ -10,6 +10,7 @@ import { Carrito } from '../../models/Carrito';
 import { AuxCarro } from '../../models/AuxCarro';
 import { Producto } from '../../models/Producto';
 import { Inventario } from '../../models/Inventario';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-hacer-compra',
@@ -17,12 +18,14 @@ import { Inventario } from '../../models/Inventario';
   templateUrl: './hacer-compra.component.html',
   styleUrl: './hacer-compra.component.css',
 })
-export class HacerCompraComponent {
+export class HacerCompraComponent extends Sonido {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService, private compraServicio: CompraService, private inventarioServicio: InventarioService) {
+    super();
     this.sacarComprables();
     document.title = $localize`Comprar`;
   }
   
+  /**Nº de unidades a comprar que se considera mucho */
   readonly CANTIDAD_GRANDE: number = 15;
 
   sesionIniciada: boolean = false;
@@ -37,7 +40,7 @@ export class HacerCompraComponent {
   costeAcumulado: number = 0; //lo necesitaremos para saber cuánto hay que quitar de la cuenta del usuario y si el usuario tiene saldo suficiente
   busca: string = "";
 
-  cierraSesion(){
+  cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.cantidad = 1;
@@ -47,6 +50,7 @@ export class HacerCompraComponent {
     this.costeAcumulado = 0;
     this.busca = '';
     this.temp = { Id: 0, nombre: '', precio: 0 };
+    this.suenaCierre();
   }
 
   iniciarSesion() {
@@ -59,16 +63,17 @@ export class HacerCompraComponent {
         this.persona.contrasenya = '';
         this.sesionIniciada = true;
         this.compra.IdCliente = this.persona.Id; //le asignamos a la compra el id del usuario actual
+        this.suenaInicio();
       }
       else {
-        alert($localize`Usuario y/o contraseña incorrectos`);
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
     });
   }
 
-  buscaPorNombre(){
+  buscaPorNombre() {
     this.productoServicio.buscaPorNombre(this.busca).subscribe((result: any) => (this.comprables = result));
   }
 
@@ -82,7 +87,7 @@ export class HacerCompraComponent {
     return salida;
   }
 
-  anyadirAlCarro(){
+  anyadirAlCarro() {
     if (this.cantidad > 0 && this.cantidad % 1 == 0){
       let c = new Carrito(0, this.temp.Id, this.cantidad);
       this.carro.push(c);
@@ -101,7 +106,7 @@ export class HacerCompraComponent {
   }
 
   //se usa un bucle porque el objeto carrito es un array
-  ponerEnCarritoComprado(){
+  ponerEnCarritoComprado() {
     for (let i = 0; i < this.carro.length; i++) {
       this.compraServicio.anyadeCarrito(this.carro[i]).subscribe((datos: any) => {
           if (datos.resultado == 'OK') {
@@ -122,7 +127,7 @@ export class HacerCompraComponent {
     }
   }
 
-  tempCarr(producto: Producto){
+  tempCarr(producto: Producto) {
     this.temp = producto;
   }
 
@@ -130,6 +135,7 @@ export class HacerCompraComponent {
     this.costeAcumulado = 0;
     this.carritoAux = [];
     this.nombresEnCarrito = [];
+    this.suenaBorra();
   }
 
   comprar() {
@@ -148,6 +154,7 @@ export class HacerCompraComponent {
               if (v.resultado == 'OK') {
                 console.log('Saldo actualizado');
                 this.reiniciaCarrito(); //se reinicia el carrito para comprar sin problemas
+                this.suenaGlobo();
               }
             });
         }

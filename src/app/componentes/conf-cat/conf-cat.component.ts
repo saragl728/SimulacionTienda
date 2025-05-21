@@ -4,6 +4,7 @@ import { Categoria } from '../../models/Categoria';
 import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { CategoriaService } from '../../servicios/categoria.service';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-conf-cat',
@@ -11,8 +12,9 @@ import { CategoriaService } from '../../servicios/categoria.service';
   templateUrl: './conf-cat.component.html',
   styleUrl: './conf-cat.component.css',
 })
-export class ConfCatComponent {
+export class ConfCatComponent extends Sonido {
   constructor(private categoriaService: CategoriaService, private usuarioServicio: UsuarioService) {
+  super();
   this.recuperarTodos();
   document.title = $localize`Ver categorías`;
 }
@@ -23,13 +25,14 @@ export class ConfCatComponent {
   persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
   sesionIniciada: boolean = false;
 
-  cierraSesion(){
+  cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.temp = { Id: 0, nombre: '' };
     this.cat = { Id: 0, nombre: '' };
     this.valido = true;
     document.title = $localize`Ver categorías`;
+    this.suenaCierre();
   }
 
   inicioSesion() {
@@ -42,14 +45,15 @@ export class ConfCatComponent {
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
           document.title = $localize`Administrar categorías`;
+          this.suenaInicio();
         } else {
-          alert($localize`No tienes los permisos necesarios`);
+          this.alertaFallo($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
-        alert($localize`Usuario y/o contraseña incorrectos`);
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
@@ -80,9 +84,13 @@ export class ConfCatComponent {
 
   baja(categoria: Categoria) {
     this.categoriaService.baja(categoria).subscribe((datos: any) => {
-      if (datos.resultado == 'OK') this.recuperarTodos();
+      if (datos.resultado == 'OK'){
+      this.recuperarTodos();
+      this.suenaBorra();
+      } 
     });
   }
+  
   modificacion() {
     this.validar();
 
@@ -95,10 +103,15 @@ export class ConfCatComponent {
         if (datos != null) {
           this.recuperarTodos();
           nom.classList.add('is-valid');
+          this.suenaGlobo();
         }
-        else nom.classList.add('is-invalid');
+        else {
+          nom.classList.add('is-invalid');
+          this.suenaError();
+        } 
       });
     }
+    else this.suenaError();
   }
   seleccionar(categoria: Categoria) {
     this.categoriaService.seleccionar(categoria).subscribe((result: any) => (this.cat = result[0]));

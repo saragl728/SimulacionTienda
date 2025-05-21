@@ -535,11 +535,11 @@
         <target>See products with categories</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">21</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1024872998549953161" datatype="html">
@@ -547,7 +547,7 @@
         <target>Administrate connections of products with categories</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7499378905600463727" datatype="html">
@@ -555,27 +555,27 @@
         <target>You don't have the required permissions</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.ts</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.ts</context>
           <context context-type="linenumber">45</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6706866735072770624" datatype="html">
@@ -583,43 +583,47 @@
         <target>Incorrect user and/or password</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat-prod/conf-cat-prod.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.ts</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/hacer-compra/hacer-compra.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/loteria/loteria.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.ts</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.ts</context>
           <context context-type="linenumber">51</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/resenya/resenya.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7598297213808999974" datatype="html">
@@ -747,11 +751,11 @@
         <target>See categories</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8730008762681316371" datatype="html">
@@ -759,7 +763,7 @@
         <target>Administrate categories</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-cat/conf-cat.component.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2744715654489302924" datatype="html">
@@ -879,11 +883,11 @@
         <target>See products</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="579431987054324913" datatype="html">
@@ -891,7 +895,7 @@
         <target>Administrate products</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1519954996184640001" datatype="html">
@@ -967,39 +971,35 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/hacer-compra/hacer-compra.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
           <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7614743092507747226" datatype="html">
-        <source> segundo(s)</source>
-        <target> second(s)</target>
+      <trans-unit id="8450656804467442838" datatype="html">
+        <source><x id="PH" equiv-text="(this.LIMITE / SEGU).toString()"/> segundos</source>
+        <target><x id="PH" equiv-text="(this.LIMITE / SEGU).toString()"/> seconds</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/error/error.component.ts</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/componentes/error/error.component.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3789945714753962406" datatype="html">
-        <source> minuto(s)</source>
-        <target> minute(s)</target>
+      <trans-unit id="5333908601391199736" datatype="html">
+        <source><x id="PH" equiv-text="(this.LIMITE / MINUT).toString()"/> minutos(s)</source>
+        <target><x id="PH" equiv-text="(this.LIMITE / MINUT).toString()"/> minutes(s)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/error/error.component.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="8717778117906281384" datatype="html">
-        <source> minuto(s) y </source>
-        <target> minut(s) y </target>
+      <trans-unit id="7428527681212094124" datatype="html">
+        <source><x id="PH" equiv-text="((this.LIMITE - (this.LIMITE % MINUT)) / MINUT).toString()"/> minutos(s) y <x id="PH_1" equiv-text="((this.LIMITE % MINUT) / SEGU).toString()"/> segundo(s)</source>
+        <target><x id="PH" equiv-text="((this.LIMITE - (this.LIMITE % MINUT)) / MINUT).toString()"/> minutes(s) and <x id="PH_1" equiv-text="((this.LIMITE % MINUT) / SEGU).toString()"/> second(s)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/error/error.component.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4116045977739252055" datatype="html">
@@ -1227,7 +1227,7 @@
         <target>Lottery</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/loteria/loteria.component.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
@@ -1239,7 +1239,7 @@
         <target>You're too young for this. You must be at least 18 years old</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/loteria/loteria.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5359751386135164450" datatype="html">
@@ -1263,7 +1263,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7313248319531675391" datatype="html">
@@ -1279,11 +1279,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1815920507891249355" datatype="html">
@@ -1335,7 +1335,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/resenya/resenya.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="67890544561792238" datatype="html">
@@ -1356,7 +1356,7 @@
       </trans-unit>
       <trans-unit id="2775687410740132207" datatype="html">
         <source>Vale</source>
-        <target>Okay</target>
+        <target>Ok</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/menu/menu.component.html</context>
           <context context-type="linenumber">58,59</context>
@@ -1420,7 +1420,7 @@
       </trans-unit>
       <trans-unit id="437131297302443950" datatype="html">
         <source>Crea tu cuenta de usuario.</source>
-        <target>Create your user account</target>
+        <target>Create your user account.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
           <context context-type="linenumber">45</context>
@@ -1444,7 +1444,7 @@
       </trans-unit>
       <trans-unit id="6797783573209854986" datatype="html">
         <source>Aquí puedes hacer tu compra.</source>
-        <target>Log in to make your purchase</target>
+        <target>You can make your purchase here.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/menu/menu.component.ts</context>
           <context context-type="linenumber">54</context>
@@ -1584,7 +1584,7 @@
       </trans-unit>
       <trans-unit id="8380230687728276598" datatype="html">
         <source>Nuevo nombre(max 50 caracteres):</source>
-        <target>New name(max 50 characters)</target>
+        <target>New name(max 50 characters):</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
           <context context-type="linenumber">100,101</context>
@@ -1632,7 +1632,7 @@
       </trans-unit>
       <trans-unit id="3864907705426766660" datatype="html">
         <source>Repite la contraseña:</source>
-        <target>Repeat the password</target>
+        <target>Repeat the password:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.html</context>
           <context context-type="linenumber">120,121</context>
@@ -1723,11 +1723,11 @@
         <target><x id="PH" equiv-text="this.persona.nombre"/>'s account</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">52</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">140</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3480751028906843068" datatype="html">
@@ -1775,7 +1775,7 @@
         <target>New category</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6408226692529986508" datatype="html">
@@ -1819,7 +1819,7 @@
         <target>Connect products with categories</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5319516157636153201" datatype="html">
@@ -1867,7 +1867,7 @@
         <target>New product</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1118766178937475729" datatype="html">

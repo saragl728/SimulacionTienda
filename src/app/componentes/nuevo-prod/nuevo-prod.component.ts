@@ -4,6 +4,7 @@ import { Producto } from '../../models/Producto';
 import { Usuario } from '../../models/Usuario';
 import { ProductoService } from '../../servicios/producto.service';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { Sonido } from '../../models/Sonido';
 
 @Component({
   selector: 'app-nuevo-prod',
@@ -11,8 +12,9 @@ import { UsuarioService } from '../../servicios/usuario.service';
   templateUrl: './nuevo-prod.component.html',
   styleUrl: './nuevo-prod.component.css',
 })
-export class NuevoProdComponent {
+export class NuevoProdComponent extends Sonido {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService) {
+    super();
     this.obtenerNombres();
     document.title = $localize`Nuevo producto`;
   }
@@ -22,13 +24,14 @@ export class NuevoProdComponent {
   sesionIniciada: boolean = false;
   nombres: Array<any> = []; //array con los nombres de los productos, se usará para que el usuario tenga claro qué nombres no se pueden meter
   
-  cierraSesion(){
+  cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.prod = { Id: 0, nombre: '', precio: 0 };
+    this.suenaCierre();
   }
 
-  inicioSesion(): void {
+  inicioSesion() {
     let usu = document.getElementById('usuario') as HTMLInputElement;
     let contr = document.getElementById('contrasenya') as HTMLInputElement;
     this.usuarioServicio.iniSesion(this.persona).subscribe((result: any) => {
@@ -36,20 +39,24 @@ export class NuevoProdComponent {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          this.suenaInicio();
         } else {
-          alert($localize`No tienes los permisos necesarios`);
+          this.alertaFallo($localize`No tienes los permisos necesarios`);
           this.persona.contrasenya = '';
           usu.classList.add('is-invalid');
           contr.classList.add('is-invalid');
         }
       } else {
-        alert($localize`Usuario y/o contraseña incorrectos`);
+        this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');
         contr.classList.add('is-invalid');
       }
     });
   }  
 
+  /**
+   * Para obtener los nombres de productos que hay para que el usuario no intente usarlos de nuevo
+   */
   obtenerNombres() {
     this.productoServicio.obtenerNombres().subscribe((result: any) => {
       for (let i = 0; i < result.length; i++){
@@ -91,7 +98,7 @@ export class NuevoProdComponent {
       this.productoServicio.alta(this.prod).subscribe((datos: any) => {
         if (datos.resultado == 'OK') {
           console.log('Producto añadido');
-
+          this.suenaGlobo();
           nom.classList.add('is-valid');
           prc.classList.add('is-valid');
           this.obtenerNombres();
@@ -100,5 +107,6 @@ export class NuevoProdComponent {
         }
       });
     }
+    else this.suenaError();
   }
 }
