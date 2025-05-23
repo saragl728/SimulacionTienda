@@ -65,15 +65,11 @@ export class NuevoUsuarioComponent extends Sonido {
     if (this.valido) {
       this.usuarioServicio.anyade(this.usuario).subscribe((datos: any) => {
         if (datos.resultado == 'OK') {
-          console.log('Usuario añadido');
-
           nom.classList.add('is-valid');
           cor.classList.add('is-valid');
           fec.classList.add('is-valid');
           cont1.classList.add('is-valid');
           this.suenaGlobo();
-        } else {
-          console.log('No se ha podido añadir el usuario');
         }
       });
     } else this.suenaError();

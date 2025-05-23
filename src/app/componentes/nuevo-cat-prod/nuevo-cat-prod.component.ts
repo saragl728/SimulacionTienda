@@ -96,7 +96,6 @@ export class NuevoCatProdComponent extends Sonido {
     if (this.valido) {
       this.catProdService.alta(this.proCat).subscribe((datos: any) => {
         if (datos != null) {
-          console.log('Conexión añadida');
           pro.classList.add('is-valid');
           categ.classList.add('is-valid');
           this.suenaGlobo();

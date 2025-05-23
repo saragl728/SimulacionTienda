@@ -77,7 +77,10 @@ export class HacerCompraComponent extends Sonido {
     this.productoServicio.buscaPorNombre(this.busca).subscribe((result: any) => (this.comprables = result));
   }
 
-  //para sacar en un string los datos básicos del carrito del usuario
+  /**
+   * 
+   * @returns Muestra en forma de string los objetos que se van a comprar
+   */
   carritoString(): string {
     let salida = "";
     for (let i = 0; i < this.carritoAux.length; i++){
@@ -110,8 +113,6 @@ export class HacerCompraComponent extends Sonido {
     for (let i = 0; i < this.carro.length; i++) {
       this.compraServicio.anyadeCarrito(this.carro[i]).subscribe((datos: any) => {
           if (datos.resultado == 'OK') {
-            console.log('Producto añadido al carrito');
-            //actualizar correctamante cuando se añaden objetos
             this.inventarioServicio.cantidadInventario(this.persona.Id, this.carro[i].IdProducto).subscribe((res: any) => {
                 if (res != null) {
                   let can1 = Number(res[0].cantidad) + this.carro[i].cantidad;
@@ -141,7 +142,6 @@ export class HacerCompraComponent extends Sonido {
   comprar() {
     this.compraServicio.creaCompra(this.compra).subscribe((datos: any) => {
       if (datos.resultado == 'OK') {
-        console.log('Compra realizada');
         this.compraServicio.ultimoId().subscribe((d: any) => {
           for (let ca of this.carro) {
             ca.IdCompra = d[0].Id; //asigno el último Id a los elementos de carro
@@ -152,7 +152,6 @@ export class HacerCompraComponent extends Sonido {
           this.persona.saldo -= this.costeAcumulado;
           this.usuarioServicio.actualizaSaldo(this.persona).subscribe((v: any) => {
               if (v.resultado == 'OK') {
-                console.log('Saldo actualizado');
                 this.reiniciaCarrito(); //se reinicia el carrito para comprar sin problemas
                 this.suenaGlobo();
               }

@@ -16,6 +16,7 @@ export class NuevaCatComponent extends Sonido {
   constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
+    this.numAdmins();
     document.title = $localize`Nueva categoría`;
   }
 
@@ -24,6 +25,16 @@ export class NuevaCatComponent extends Sonido {
   valido: boolean = true;
   categorias: Array<any> = [];
   sesionIniciada: boolean = false;
+  nAdmins: number = 0;
+
+    /**
+   * Se usa para ver si hay administradores que puedan hacer algo
+   */
+  numAdmins() {
+    this.usuarioServicio.numeroAdmins().subscribe((result: any) => {
+      if (result != null) this.nAdmins = result[0].cantidad;
+    })
+  }
 
   cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
@@ -84,12 +95,9 @@ export class NuevaCatComponent extends Sonido {
     if (this.valido) {
       this.categoriaServicio.alta(this.cat).subscribe((datos: any) => {
         if (datos.resultado == 'OK') {
-          console.log('Categoría añadida');
           nom.classList.add('is-valid');
           this.obtenerNombres();
           this.suenaGlobo();
-        } else {
-          console.log('No se ha podido añadir la categoría');
         }
       });
     }

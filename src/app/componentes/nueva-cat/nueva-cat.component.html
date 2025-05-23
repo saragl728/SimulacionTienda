@@ -1,35 +1,45 @@
-<div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
-    @if (!sesionIniciada){
-        <div>
-            <h2 i18n>Inicia sesión como administrador para añadir categorías</h2>
-            <div class="mb-3">
-                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
-                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="persona.nombre">
-            </div>
-            <div class="mb-3">
-                <label class="form-label fw-bold" i18n>Contraseña:</label>
-                <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
-            </div>
-            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
-        </div>
+<div class="container mt-4">
+    @if (nAdmins == 0){
+    <div class="text-danger-emphasis bg-danger-subtle">
+        <h2><span class="material-symbols-outlined">error</span><span i18n>No hay administradores que puedan añadir categorías</span></h2>
+    </div>
+    <img src="BlissInv.bmp" class="img-fluid">
     }
     @else {
-        <div class="container bg-success-subtle">
-            <div class="row justify-content-between">
-                <div class="col-9 mt-2">
-                    <h3 class="text-success-emphasis p-1" i18n>Hola, {{ persona.nombre }}</h3>
+    <div class="container px-2 bg-primary-subtle border border-primary rounded border-2">
+        @if (!sesionIniciada){
+            <div>
+                <h2 i18n>Inicia sesión como administrador para añadir categorías</h2>
+                <div class="mb-3">
+                    <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                    <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="persona.nombre">
                 </div>
-                <div class="col-2 mt-2">
-                    <button class="btn btn-warning" i18n (click)="cierraSesion()">Cerrar sesión</button>
+                <div class="mb-3">
+                    <label class="form-label fw-bold" i18n>Contraseña:</label>
+                    <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
+            </div>
+        }
+        @else {
+            <div class="container bg-success-subtle">
+                <div class="row justify-content-between">
+                    <div class="col-9 mt-2">
+                        <h3 class="text-success-emphasis p-1" i18n>Hola, {{ persona.nombre }}</h3>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <button class="btn btn-warning" i18n (click)="cierraSesion()">Cerrar sesión</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <h2 i18n>Añadir nueva categoría</h2>
-        <form>
-            <div class="mb-3">
-                <input type="text" name="descripcion" id="description" class="form-control" i18n-placeholder placeholder="Escribe la categoría" [(ngModel)]="cat.nombre">
-            </div>
-            <button type="submit" class="btn btn-primary mb-3" i18n (click)="alta()">Guardar</button>
-        </form>
+            <h2 i18n>Añadir nueva categoría</h2>
+            <form>
+                <div class="mb-3">
+                    <input type="text" name="descripcion" id="description" class="form-control" i18n-placeholder placeholder="Escribe la categoría" [(ngModel)]="cat.nombre">
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" i18n (click)="alta()">Guardar</button>
+            </form>
+        }
+    </div>
     }
 </div>

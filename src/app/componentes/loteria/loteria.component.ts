@@ -17,6 +17,7 @@ import { Sonido } from '../../models/Sonido';
 export class LoteriaComponent extends Sonido {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private productoServicio: ProductoService) {
     super();
+    this.numUsuarios();
     document.title = $localize`Lotería`;
   }
 
@@ -27,6 +28,7 @@ export class LoteriaComponent extends Sonido {
   persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '',adminis: 'N'};;
   sesionIniciada = false;
   listaObjetos: Array<Producto> = [];
+  nUsuarios: number = 0; 
 
   cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
@@ -35,7 +37,16 @@ export class LoteriaComponent extends Sonido {
     this.haBuscado = false;
     this.listaObjetos = [];
     this.suenaCierre();
-}
+  }
+
+    /**
+   * Esta función se carga al inicio para saber si hay usuarios y hacer que muestre un contenido en función del resultado
+   */
+  numUsuarios() {
+    this.usuarioServicio.numeroUsuarios().subscribe((result: any) => {
+      if (result != null) this.nUsuarios = result[0].cantidad;
+    })
+  }
 
   puedeBuscar(): boolean {
     return this.cantidad < this.persona.saldo * this.PORCENTAJE_MAX;

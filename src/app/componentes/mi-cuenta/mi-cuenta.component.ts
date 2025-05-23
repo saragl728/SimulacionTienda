@@ -16,6 +16,7 @@ import { Sonido } from '../../models/Sonido';
 export class MiCuentaComponent extends Sonido {
   constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private resenyaServicio: ResenyaService) {
     super();
+    this.numUsuarios();
     document.title = $localize`Mi cuenta`;
   }
   sesionIniciada = false;
@@ -27,12 +28,22 @@ export class MiCuentaComponent extends Sonido {
   inventario: Array<ProdCant> = [];
   misReses: Array<any> = [];
   misCompras: Array<any> = [];
+  nUsuarios: number = 0;  //si es 0, no te dará la opción de ir a tu cuenta porque directamente no hay ninguna
 
   cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.suenaCierre();
     document.title = $localize`Mi cuenta`;
+  }
+
+  /**
+   * Esta función se carga al inicio para saber si hay usuarios y hacer que muestre un contenido en función del resultado
+   */
+  numUsuarios() {
+    this.usuarioServicio.numeroUsuarios().subscribe((result: any) => {
+      if (result != null) this.nUsuarios = result[0].cantidad;
+    })
   }
 
   inicioSesion() {

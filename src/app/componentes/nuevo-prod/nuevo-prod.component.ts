@@ -16,6 +16,7 @@ export class NuevoProdComponent extends Sonido {
   constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService) {
     super();
     this.obtenerNombres();
+    this.numAdmins();
     document.title = $localize`Nuevo producto`;
   }
   persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
@@ -23,7 +24,8 @@ export class NuevoProdComponent extends Sonido {
   valido: boolean = true;
   sesionIniciada: boolean = false;
   nombres: Array<any> = []; //array con los nombres de los productos, se usará para que el usuario tenga claro qué nombres no se pueden meter
-  
+  nAdmins: number = 0;
+
   cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
@@ -52,7 +54,16 @@ export class NuevoProdComponent extends Sonido {
         contr.classList.add('is-invalid');
       }
     });
-  }  
+  }
+
+  /**
+   * Se usa para ver si hay administradores que puedan hacer algo
+   */
+  numAdmins() {
+    this.usuarioServicio.numeroAdmins().subscribe((result: any) => {
+      if (result != null) this.nAdmins = result[0].cantidad;
+    })
+  }
 
   /**
    * Para obtener los nombres de productos que hay para que el usuario no intente usarlos de nuevo
@@ -97,13 +108,10 @@ export class NuevoProdComponent extends Sonido {
     if (this.valido) {
       this.productoServicio.alta(this.prod).subscribe((datos: any) => {
         if (datos.resultado == 'OK') {
-          console.log('Producto añadido');
           this.suenaGlobo();
           nom.classList.add('is-valid');
           prc.classList.add('is-valid');
           this.obtenerNombres();
-        } else {
-          console.log('No se ha podido añadir el producto');
         }
       });
     }

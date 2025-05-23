@@ -13,6 +13,14 @@ export class UsuarioService {
     return this.http.post(`${this.url}anyadir.php`, JSON.stringify(usuario));
   }
 
+  numeroAdmins() {
+    return this.http.get(`${this.url}numeroAdmins.php`);
+  }
+
+  numeroUsuarios() {
+    return this.http.get(`${this.url}numeroUsuarios.php`);
+  }
+
   sacarTodosExceptoActual(id: number){
     return this.http.get(`${this.url}sacarTodosMenosUsuario.php?Id=${id}`);
   }

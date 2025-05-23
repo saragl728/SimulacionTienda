@@ -1,40 +1,50 @@
-<div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
-    @if (!sesionIniciada){
-        <div>
-            <h2 i18n>Inicia sesión como administrador para añadir productos</h2>
-            <div class="mb-3">
-                <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
-                <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="persona.nombre">
-            </div>
-            <div class="mb-3">
-                <label class="form-label fw-bold" i18n>Contraseña:</label>
-                <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
-            </div>
-            <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
-        </div>
+<div class="container mt-4">
+    @if (nAdmins == 0){
+    <div class="text-danger-emphasis bg-danger-subtle">
+        <h2><span class="material-symbols-outlined">error</span><span i18n>No hay administradores que puedan añadir productos</span></h2>
+    </div>
+    <img src="BlissInv.bmp" class="img-fluid">
     }
     @else {
-        <div class="container bg-success-subtle">
-            <div class="row justify-content-between">
-                <div class="col-9 mt-2">
-                    <h3 class="text-success-emphasis p-1" i18n>Hola, {{ persona.nombre }}</h3>
+        <div class="bg-primary-subtle px-2 border border-primary rounded border-2">
+        @if (!sesionIniciada){
+            <div>
+                <h2 i18n>Inicia sesión como administrador para añadir productos</h2>
+                <div class="mb-3">
+                    <label for="usuario" class="form-label fw-bold" i18n>Usuario</label>
+                    <input type="text" name="usuario" id="usuario" class="form-control" i18n-placeholder placeholder="Usuario" [(ngModel)]="persona.nombre">
                 </div>
-                <div class="col-2 mt-2">
-                    <button class="btn btn-warning" i18n (click)="cierraSesion()">Cerrar sesión</button>
+                <div class="mb-3">
+                    <label class="form-label fw-bold" i18n>Contraseña:</label>
+                    <input type="password" name="contrasenya" id="contrasenya" class="form-control" i18n-placeholder placeholder="Contraseña" [(ngModel)]="persona.contrasenya"/>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" i18n (click)="inicioSesion()">Iniciar sesión</button>
+            </div>
+        }
+        @else {
+            <div class="container bg-success-subtle">
+                <div class="row justify-content-between">
+                    <div class="col-9 mt-2">
+                        <h3 class="text-success-emphasis p-1" i18n>Hola, {{ persona.nombre }}</h3>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <button class="btn btn-warning" i18n (click)="cierraSesion()">Cerrar sesión</button>
+                    </div>
                 </div>
             </div>
+            <h2 i18n>Añadir nuevo producto</h2>
+            <form>   
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-bold" i18n>Nombre del producto</label>
+                    <input type="text" name="nombre" id="description" class="form-control" i18n-placeholder placeholder="Escribe el nombre del producto" [(ngModel)]="prod.nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label fw-bold" i18n>Precio</label>
+                    <input type="number" name="precio" id="price" class="form-control" i18n-placeholder placeholder="Escribe el precio" [(ngModel)]="prod.precio">
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" i18n (click)="alta()">Guardar</button>
+            </form>
+        }
         </div>
-        <h2 i18n>Añadir nuevo producto</h2>
-        <form>   
-            <div class="mb-3">
-                <label for="description" class="form-label fw-bold" i18n>Nombre del producto</label>
-                <input type="text" name="nombre" id="description" class="form-control" i18n-placeholder placeholder="Escribe el nombre del producto" [(ngModel)]="prod.nombre">
-            </div>
-            <div class="mb-3">
-                <label for="price" class="form-label fw-bold" i18n>Precio</label>
-                <input type="number" name="precio" id="price" class="form-control" i18n-placeholder placeholder="Escribe el precio" [(ngModel)]="prod.precio">
-            </div>
-            <button type="submit" class="btn btn-primary mb-3" i18n (click)="alta()">Guardar</button>
-        </form>
     }
 </div>

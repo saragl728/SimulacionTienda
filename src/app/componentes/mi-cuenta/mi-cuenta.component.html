@@ -1,4 +1,12 @@
-<div class="container mt-4 bg-primary-subtle border border-primary rounded border-2">
+<div class="container mt-4">
+    @if (nUsuarios == 0) {
+        <div class="text-danger-emphasis bg-danger-subtle">
+            <h2><span class="material-symbols-outlined">error</span><span i18n>No hay usuarios</span></h2>
+        </div>
+        <img src="BlissInv.bmp" class="img-fluid">
+    }
+    @else {
+<div class="bg-primary-subtle px-2 border border-primary rounded border-2">
     @if (!this.sesionIniciada){
         <div>
             <h2 i18n>Inicia sesión para ver el estado de tu cuenta</h2>
@@ -125,7 +133,6 @@
                 </div>
             </div>
         </div>
-        <!--sólo se mostrará si un administrador ha iniciado sesión-->
         @if (this.persona.adminis == 'S'){
             <div class="shadow card p-3 my-2 border border-dark border-2">
                 <div class="row justify-content-between">
@@ -169,6 +176,8 @@
                 </table>
             </div>
         }
+    }
+</div>
     }
 </div>
 <div class="modal fade" id="modalCambiaPermiso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

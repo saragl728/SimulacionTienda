@@ -96,13 +96,10 @@ export class ResenyaComponent extends Sonido {
     this.rese.IdCliente = this.persona.Id;
         this.resenyaServicio.anyadir(this.rese).subscribe((datos: any) => {
       if (datos.resultado == 'OK') {
-        console.log('Reseña añadida');
         this.sacarTodas();  //si funciona, hace que cargue las reseñas
         opi.classList.add('is-valid');
         pro.classList.add('is-valid');
         this.suenaGlobo();
-      } else {
-        console.log('No se ha podido añadir la reseña');
       }
     });
     }
