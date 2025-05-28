@@ -19,8 +19,11 @@ export class MenuComponent {
   arraiRutUsu = ['/mi-cuenta', '/nuevo-usuario'];
   arraiRutUsuPr = ['/resenya', '/comprar', '/loteria'];
 
-  //función que devuelve cambia cosas sobre la página
-  infoPag() {
+  /**
+   * Función que da un mensaje de información de la página en función de la ruta actual
+   * @returns Mensaje de ayuda de la página
+   */
+  infoPag(): string {  
     let info: string = '';
     switch (this.location.path()) {
       case '/nuevo-prod':
@@ -58,9 +61,6 @@ export class MenuComponent {
         break;
       case '/error':
         info = $localize`Has escrito mal la ruta en el navegador, ¿no?`;
-        break;
-      default:
-        info = "Esto está por defecto";
         break;
     }
 

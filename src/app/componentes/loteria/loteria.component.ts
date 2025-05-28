@@ -7,6 +7,7 @@ import { Producto } from '../../models/Producto';
 import { FormsModule } from '@angular/forms';
 import { Inventario } from '../../models/Inventario';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-loteria',
@@ -15,9 +16,10 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './loteria.component.css',
 })
 export class LoteriaComponent extends Sonido {
-  constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private productoServicio: ProductoService) {
+  constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private productoServicio: ProductoService, private cookieService: CookieService) {
     super();
     this.numUsuarios();
+    this.cukiUsuario();
     document.title = $localize`Lotería`;
   }
 
@@ -36,7 +38,26 @@ export class LoteriaComponent extends Sonido {
     this.cantidad = 0;
     this.haBuscado = false;
     this.listaObjetos = [];
+    this.cookieService.delete('correo');
     this.suenaCierre();
+  }
+
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario(){
+  let galleta = this.cookieService.get('correo');
+  if (galleta.length > 0) {
+    this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+      if (result != null) {
+      this.persona = result[0];
+      this.persona.contrasenya = ''; //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
+      if (this.esAdulto()){
+        this.sesionIniciada = true;
+      }      
+      }
+    })
+  }
   }
 
     /**
@@ -86,6 +107,7 @@ export class LoteriaComponent extends Sonido {
       if (result != null) {
         this.persona = result;
         if (this.esAdulto()){
+          this.cookieService.set('correo', this.persona.correo);
           this.sesionIniciada = true;
           this.suenaInicio();
         }

@@ -11,6 +11,7 @@ import { AuxCarro } from '../../models/AuxCarro';
 import { Producto } from '../../models/Producto';
 import { Inventario } from '../../models/Inventario';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-hacer-compra',
@@ -19,9 +20,10 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './hacer-compra.component.css',
 })
 export class HacerCompraComponent extends Sonido {
-  constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService, private compraServicio: CompraService, private inventarioServicio: InventarioService) {
+  constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService, private compraServicio: CompraService, private inventarioServicio: InventarioService, private cookieService: CookieService) {
     super();
     this.sacarComprables();
+    this.cukiUsuario();
     document.title = $localize`Comprar`;
   }
   
@@ -50,7 +52,25 @@ export class HacerCompraComponent extends Sonido {
     this.costeAcumulado = 0;
     this.busca = '';
     this.temp = { Id: 0, nombre: '', precio: 0 };
+    this.cookieService.delete('correo');
     this.suenaCierre();
+  }
+
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario(){
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = '';
+        this.compra.IdCliente = this.persona.Id; //le asignamos a la compra el id del usuario actual
+        this.sesionIniciada = true;   
+        }
+      })
+    }
   }
 
   iniciarSesion() {
@@ -63,6 +83,7 @@ export class HacerCompraComponent extends Sonido {
         this.persona.contrasenya = '';
         this.sesionIniciada = true;
         this.compra.IdCliente = this.persona.Id; //le asignamos a la compra el id del usuario actual
+        this.cookieService.set('correo', this.persona.correo);  //pone una cookie
         this.suenaInicio();
       }
       else {

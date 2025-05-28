@@ -6,6 +6,7 @@ import { InventarioService } from '../../servicios/inventario.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ResenyaService } from '../../servicios/resenya.service';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-mi-cuenta',
@@ -14,9 +15,10 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './mi-cuenta.component.css'
 })
 export class MiCuentaComponent extends Sonido {
-  constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private resenyaServicio: ResenyaService) {
+  constructor(private usuarioServicio: UsuarioService, private inventarioServicio: InventarioService, private resenyaServicio: ResenyaService, private cookieService: CookieService) {
     super();
     this.numUsuarios();
+    this.cukiUsuario();
     document.title = $localize`Mi cuenta`;
   }
   sesionIniciada = false;
@@ -33,8 +35,30 @@ export class MiCuentaComponent extends Sonido {
   cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
+    this.cookieService.delete('correo');
     this.suenaCierre();
     document.title = $localize`Mi cuenta`;
+  }
+
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario() {
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = ''; //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
+        this.sesionIniciada = true;
+        this.inventarioServicio.productosDeUsuario(this.persona.Id).subscribe((resultado: any) => { this.inventario = resultado; });
+        this.resenyaServicio.resenyaPorPersona(this.persona).subscribe((resu: any) => { this.misReses = resu; });
+        this.usuarioServicio.datosComprasUsuarios(this.persona.Id).subscribe((res: any) => { this.misCompras = res; });
+        if (this.persona.adminis == 'S') this.sacarTodos();        
+        document.title = $localize`Cuenta de ${this.persona.nombre}`;
+        }
+      })
+    }
   }
 
   /**
@@ -61,6 +85,7 @@ export class MiCuentaComponent extends Sonido {
         this.suenaInicio();
         if (this.persona.adminis == 'S') this.sacarTodos();        
         document.title = $localize`Cuenta de ${this.persona.nombre}`;
+        this.cookieService.set('correo', this.persona.correo);  //pone una cookie
       } else {
         this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);
         usu.classList.add('is-invalid');

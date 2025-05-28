@@ -5,6 +5,7 @@ import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ProductoService } from '../../servicios/producto.service';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-conf-prod',
@@ -14,8 +15,9 @@ import { Sonido } from '../../models/Sonido';
 })
 
 export class ConfProdComponent extends Sonido {
-  constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService) {
+  constructor(private productoService: ProductoService, private usuarioServicio: UsuarioService, private cookieService: CookieService) {
   super();
+  this.cukiUsuario();
   this.recuperarTodos();
   document.title = $localize`Ver productos`;
   }
@@ -33,8 +35,28 @@ export class ConfProdComponent extends Sonido {
     this.temp = { Id: 0, nombre: '', precio: 0 };
     this.prod = { Id: 0, nombre: '', precio: 0 };
     this.valido = true;
+    this.cookieService.delete('correo');
     document.title = $localize`Ver productos`;
     this.suenaCierre();
+  }
+
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario(){
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = '';
+        if (this.persona.adminis == 'S') {
+          this.sesionIniciada = true;
+          document.title = $localize`Administrar productos`;
+        }      
+        }
+      })
+    }
   }
 
   buscaPorNombre() {
@@ -49,6 +71,7 @@ export class ConfProdComponent extends Sonido {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          this.cookieService.set('correo', this.persona.correo);
           this.suenaInicio();
           document.title = $localize`Administrar productos`;
         } else {

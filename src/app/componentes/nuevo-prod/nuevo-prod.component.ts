@@ -5,6 +5,7 @@ import { Usuario } from '../../models/Usuario';
 import { ProductoService } from '../../servicios/producto.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nuevo-prod',
@@ -13,10 +14,11 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './nuevo-prod.component.css',
 })
 export class NuevoProdComponent extends Sonido {
-  constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService) {
+  constructor(private productoServicio: ProductoService, private usuarioServicio: UsuarioService, private cookieService: CookieService) {
     super();
     this.obtenerNombres();
     this.numAdmins();
+    this.cukiUsuario();
     document.title = $localize`Nuevo producto`;
   }
   persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};;
@@ -30,7 +32,26 @@ export class NuevoProdComponent extends Sonido {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.prod = { Id: 0, nombre: '', precio: 0 };
+    this.cookieService.delete('correo');
     this.suenaCierre();
+  }
+
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario() {
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = '';
+        if (this.persona.adminis == 'S') {
+          this.sesionIniciada = true;
+        }      
+        }
+      })
+    }
   }
 
   inicioSesion() {
@@ -41,6 +62,7 @@ export class NuevoProdComponent extends Sonido {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          this.cookieService.set('correo', this.persona.correo);
           this.suenaInicio();
         } else {
           this.alertaFallo($localize`No tienes los permisos necesarios`);

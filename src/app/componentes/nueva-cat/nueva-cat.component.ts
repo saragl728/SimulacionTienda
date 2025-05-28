@@ -5,6 +5,7 @@ import { Usuario } from '../../models/Usuario';
 import { CategoriaService } from '../../servicios/categoria.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nueva-cat',
@@ -13,10 +14,11 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './nueva-cat.component.css',
 })
 export class NuevaCatComponent extends Sonido {
-  constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService) {
+  constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService, private cookieService: CookieService) {
     super();
     this.obtenerNombres();
     this.numAdmins();
+    this.cukiUsuario();
     document.title = $localize`Nueva categoría`;
   }
 
@@ -27,7 +29,7 @@ export class NuevaCatComponent extends Sonido {
   sesionIniciada: boolean = false;
   nAdmins: number = 0;
 
-    /**
+  /**
    * Se usa para ver si hay administradores que puedan hacer algo
    */
   numAdmins() {
@@ -36,10 +38,29 @@ export class NuevaCatComponent extends Sonido {
     })
   }
 
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario() {
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = '';
+        if (this.persona.adminis == 'S') {
+          this.sesionIniciada = true;
+        }      
+        }
+      })
+    }
+  }
+
   cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.cat = { Id: 0, nombre: '' };
+    this.cookieService.delete('correo');
     this.suenaCierre();
   }
   
@@ -51,6 +72,7 @@ export class NuevaCatComponent extends Sonido {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          this.cookieService.set('correo', this.persona.correo);
           this.suenaInicio();
         } else {
           this.alertaFallo($localize`No tienes los permisos necesarios`);

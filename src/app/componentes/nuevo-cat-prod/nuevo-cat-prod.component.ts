@@ -7,6 +7,7 @@ import { ProductoService } from '../../servicios/producto.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { FormsModule } from '@angular/forms';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nuevo-cat-prod',
@@ -15,10 +16,11 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './nuevo-cat-prod.component.css',
 })
 export class NuevoCatProdComponent extends Sonido {
-  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService, private usuarioServicio: UsuarioService) {
+  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private catProdService: CatProdService, private usuarioServicio: UsuarioService, private cookieService: CookieService) {
   super();
   this.recuperaProds();
   this.recuperaCats();
+  this.cukiUsuario();
   document.title = $localize`Conectar productos con categorías`;
   }
   //variables que se usarán para ver si se cargan datos para insertar
@@ -33,7 +35,26 @@ export class NuevoCatProdComponent extends Sonido {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.sesionIniciada = false;
     this.proCat = { IdProd: 0, IdCat: 0 };
+    this.cookieService.delete('correo');
     this.suenaCierre();
+  }
+
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario(){
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = '';
+        if (this.persona.adminis == 'S') {
+          this.sesionIniciada = true;
+        }      
+        }
+      })
+    }
   }
 
   inicioSesion() {
@@ -44,6 +65,7 @@ export class NuevoCatProdComponent extends Sonido {
         this.persona = result;
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
+          this.cookieService.set('correo', this.persona.correo);
           this.suenaInicio();
         } else {
           this.alertaFallo($localize`No tienes los permisos necesarios`);

@@ -6,6 +6,7 @@ import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../models/Usuario';
 import { Resenya } from '../../models/Resenya';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-resenya',
@@ -14,10 +15,11 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './resenya.component.css'
 })
 export class ResenyaComponent extends Sonido {
-  constructor(private resenyaServicio: ResenyaService, private usuarioServicio: UsuarioService, private productoService: ProductoService){
+  constructor(private resenyaServicio: ResenyaService, private usuarioServicio: UsuarioService, private productoService: ProductoService, private cookieService: CookieService){
     super();
     this.sacarTodas();
     this.recuperaProds();
+    this.cukiUsuario();
     document.title = $localize`Reseñas`;
   }
   resenyas: any;
@@ -28,10 +30,27 @@ export class ResenyaComponent extends Sonido {
   valido: boolean = true;
   filtro: string = "";
 
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario(){
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = ''; //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
+        this.sesionIniciada = true;  
+        }
+      })
+    }
+  }
+
   cierraSesion() {
     this.persona = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
     this.rese = { Id: 0, IdProducto: 0, IdCliente: 0, contenido: '', fecha: ''};
     this.sesionIniciada = false;
+    this.cookieService.delete('correo');
     this.suenaCierre();
   }
 
@@ -56,6 +75,7 @@ export class ResenyaComponent extends Sonido {
         this.persona = result;
         this.persona.contrasenya = '';
         this.sesionIniciada = true;
+        this.cookieService.set('correo', this.persona.correo);
         this.suenaInicio();
       } else {
         this.alertaFallo($localize`Usuario y/o contraseña incorrectos`);

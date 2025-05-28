@@ -53,4 +53,8 @@ export class UsuarioService {
     return this.http.get(`${this.url}datosComprasUsuario.php?Id=${id}`);
   }
 
+  sacaCookie(correo: string){
+    return this.http.get(`${this.url}cukiUsuario.php?correo=${correo}`);
+  }
+
 }

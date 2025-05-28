@@ -5,6 +5,7 @@ import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { CategoriaService } from '../../servicios/categoria.service';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-conf-cat',
@@ -13,9 +14,10 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './conf-cat.component.css',
 })
 export class ConfCatComponent extends Sonido {
-  constructor(private categoriaService: CategoriaService, private usuarioServicio: UsuarioService) {
+  constructor(private categoriaService: CategoriaService, private usuarioServicio: UsuarioService, private cookieService: CookieService) {
   super();
   this.recuperarTodos();
+  this.cukiUsuario();
   document.title = $localize`Ver categorías`;
 }
   categorias: any;
@@ -31,8 +33,28 @@ export class ConfCatComponent extends Sonido {
     this.temp = { Id: 0, nombre: '' };
     this.cat = { Id: 0, nombre: '' };
     this.valido = true;
+    this.cookieService.delete('correo');
     document.title = $localize`Ver categorías`;
     this.suenaCierre();
+  }
+
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario(){
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = '';
+        if (this.persona.adminis == 'S') {
+          this.sesionIniciada = true;
+          document.title = $localize`Administrar categorías`;
+        }      
+        }
+      })
+    }
   }
 
   inicioSesion() {
@@ -45,6 +67,7 @@ export class ConfCatComponent extends Sonido {
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
           document.title = $localize`Administrar categorías`;
+          this.cookieService.set('correo', this.persona.correo);
           this.suenaInicio();
         } else {
           this.alertaFallo($localize`No tienes los permisos necesarios`);

@@ -6,6 +6,7 @@ import { CatProdService } from '../../servicios/cat-prod.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { FormsModule } from '@angular/forms';
 import { Sonido } from '../../models/Sonido';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -15,9 +16,10 @@ import { Sonido } from '../../models/Sonido';
   styleUrl: './conf-cat-prod.component.css',
 })
 export class ConfCatProdComponent extends Sonido {
-  constructor(private proCatService: CatProdService, private usuarioServicio: UsuarioService) {
+  constructor(private proCatService: CatProdService, private usuarioServicio: UsuarioService, private cookieService: CookieService) {
   super();
   this.muestraTodo();
+  this.cukiUsuario();
   document.title = $localize`Ver productos con categorías`;
   }
   prodCats: any; //ids conectados
@@ -36,8 +38,28 @@ export class ConfCatProdComponent extends Sonido {
     this.filtrio = ""
     this.temp = { IdProd: 0, IdCat: 0 };
     this.auxNombres = { producto: '', categoria: '' };
+    this.cookieService.delete('correo');
     document.title = $localize`Ver productos con categorías`;
     this.suenaCierre();
+  }
+
+  /**
+   * Método que inicia sesión si hay una cookie de correo de usuario
+   */
+  cukiUsuario(){
+    let galleta = this.cookieService.get('correo');
+    if (galleta.length > 0) {
+      this.usuarioServicio.sacaCookie(galleta).subscribe((result: any) => {
+        if (result != null) {
+        this.persona = result[0];
+        this.persona.contrasenya = '';
+        if (this.persona.adminis == 'S') {
+          this.sesionIniciada = true;
+          document.title = $localize`Administrar conexiones de productos con categorías`;
+        }      
+        }
+      })
+    }
   }
 
   inicioSesion() {
@@ -50,6 +72,7 @@ export class ConfCatProdComponent extends Sonido {
         if (this.persona.adminis == 'S') {
           this.sesionIniciada = true;
           this.suenaInicio();
+          this.cookieService.set('correo', this.persona.correo);
           document.title = $localize`Administrar conexiones de productos con categorías`;
         } else {
           this.alertaFallo($localize`No tienes los permisos necesarios`);
