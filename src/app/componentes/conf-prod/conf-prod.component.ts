@@ -126,10 +126,10 @@ export class ConfProdComponent extends Sonido {
 
   baja(producto: Producto) {
     this.productoService.baja(producto).subscribe((datos: any) => {
-      if (datos.resultado == 'OK'){
+      if (datos.resultado != null){
         this.suenaBorra();
         this.recuperarTodos();
-      }
+      } else this.suenaError();
     });
   }
 

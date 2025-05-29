@@ -195,10 +195,10 @@ export class MiCuentaComponent extends Sonido {
 
   borraCuenta(usuario: Usuario){
    this.usuarioServicio.baja(usuario).subscribe((datos: any) => {
-    if (datos.resultado == 'OK') {
+    if (datos.resultado != null) {
       this.sacarTodos();
       this.suenaBorra();
-    }  
+    } else this.suenaError();
   })
   }
 

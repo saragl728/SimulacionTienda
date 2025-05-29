@@ -107,10 +107,10 @@ export class ConfCatComponent extends Sonido {
 
   baja(categoria: Categoria) {
     this.categoriaService.baja(categoria).subscribe((datos: any) => {
-      if (datos.resultado == 'OK'){
+      if (datos.resultado != null){
       this.recuperarTodos();
       this.suenaBorra();
-      } 
+      } else this.suenaError();
     });
   }
   
