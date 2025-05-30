@@ -872,7 +872,7 @@
       </trans-unit>
       <trans-unit id="3875002907670942314" datatype="html">
         <source>No se han encontrado productos</source>
-        <target>Are you sure you want to delete the product <x id="INTERPOLATION" equiv-text="{{ temp.nombre }}"/>?</target>
+        <target>No products were found</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
           <context context-type="linenumber">96</context>

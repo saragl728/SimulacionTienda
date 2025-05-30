@@ -88,7 +88,7 @@ export class NuevaCatComponent extends Sonido {
     const longMax: number = 20; //longitud máxima de la categoría
     let nom = document.getElementById('description') as HTMLInputElement;
 
-    if (!this.cat.nombre || this.cat.nombre.length > longMax /*|| this.categorias.includes(this.cat.nombre)*/) {
+    if (!this.cat.nombre || this.cat.nombre.length > longMax) {
       nom.classList.add('is-invalid');
       this.valido = false;
     }

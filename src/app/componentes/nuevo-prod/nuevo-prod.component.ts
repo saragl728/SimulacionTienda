@@ -105,7 +105,7 @@ export class NuevoProdComponent extends Sonido {
     let prc = document.getElementById('price') as HTMLInputElement;
 
     //comprobación del nombre
-    if (!this.prod.nombre || this.prod.nombre.length > longMax /*|| this.nombres.includes(this.prod.nombre)*/) {
+    if (!this.prod.nombre || this.prod.nombre.length > longMax) {
       nom.classList.add('is-invalid');
       this.valido = false;
     } else nom.classList.remove('is-invalid');
