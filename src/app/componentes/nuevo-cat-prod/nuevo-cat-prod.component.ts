@@ -49,9 +49,7 @@ export class NuevoCatProdComponent extends Sonido {
         if (result != null) {
         this.persona = result[0];
         this.persona.contrasenya = '';
-        if (this.persona.adminis == 'S') {
-          this.sesionIniciada = true;
-        }      
+        if (this.persona.adminis == 'S') this.sesionIniciada = true;
         }
       })
     }

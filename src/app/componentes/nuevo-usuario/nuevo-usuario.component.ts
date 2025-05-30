@@ -64,12 +64,17 @@ export class NuevoUsuarioComponent extends Sonido {
 
     if (this.valido) {
       this.usuarioServicio.anyade(this.usuario).subscribe((datos: any) => {
-        if (datos.resultado == 'OK') {
+        if (datos != null) {
           nom.classList.add('is-valid');
           cor.classList.add('is-valid');
           fec.classList.add('is-valid');
           cont1.classList.add('is-valid');
           this.suenaGlobo();
+        }
+        else {
+          nom.classList.add('is-invalid');
+          cor.classList.add('is-invalid');
+          this.suenaError();
         }
       });
     } else this.suenaError();
@@ -105,7 +110,6 @@ export class NuevoUsuarioComponent extends Sonido {
       this.valido = false;
     } else cor.classList.remove('is-invalid');
 
-    //hacer que entienda la fecha
     if (!this.validaEdad()) {
       fec.classList.add('is-invalid');
       this.valido = false;

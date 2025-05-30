@@ -571,15 +571,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">74</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">69</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6706866735072770624" datatype="html">
@@ -607,7 +607,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/loteria/loteria.component.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/mi-cuenta/mi-cuenta.component.ts</context>
@@ -615,15 +615,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-cat-prod/nuevo-cat-prod.component.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">75</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-prod/nuevo-prod.component.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/resenya/resenya.component.ts</context>
@@ -872,7 +872,7 @@
       </trans-unit>
       <trans-unit id="3875002907670942314" datatype="html">
         <source>No se han encontrado productos</source>
-        <target>No products were found</target>
+        <target>Are you sure you want to delete the product <x id="INTERPOLATION" equiv-text="{{ temp.nombre }}"/>?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/conf-prod/conf-prod.component.html</context>
           <context context-type="linenumber">96</context>
@@ -956,7 +956,7 @@
       </trans-unit>
       <trans-unit id="2999711515500211480" datatype="html">
         <source>A lo mejor te interesa ver alguna de estas páginas:</source>
-        <target>Maybe you could be interested in seeing one of these pages:</target>
+        <target>Maybe you could be interested on seeing one of these pages:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/error/error.component.html</context>
           <context context-type="linenumber">7,8</context>
@@ -1140,7 +1140,7 @@
       </trans-unit>
       <trans-unit id="2761514239633714002" datatype="html">
         <source>Confirmar</source>
-        <target>Confirm</target<
+        <target>Confirm</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/hacer-compra/hacer-compra.component.html</context>
           <context context-type="linenumber">116,117</context>
@@ -1263,7 +1263,7 @@
         <target>You're too young for this. You must be at least 18 years old</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/loteria/loteria.component.ts</context>
-          <context context-type="linenumber">115</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5359751386135164450" datatype="html">
@@ -1283,7 +1283,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">37,38</context>
+          <context context-type="linenumber">36,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.ts</context>
@@ -1391,7 +1391,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">54,55</context>
+          <context context-type="linenumber">53,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6633696276697624803" datatype="html">
@@ -1631,7 +1631,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="375081556928549829" datatype="html">
@@ -1643,7 +1643,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6413242245034721995" datatype="html">
@@ -1663,7 +1663,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">30,31</context>
+          <context context-type="linenumber">29,30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3850146415952125515" datatype="html">
@@ -1811,7 +1811,7 @@
         <target>New category</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nueva-cat/nueva-cat.component.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6408226692529986508" datatype="html">
@@ -1951,7 +1951,7 @@
         <target>Password(use one you can remember easily):</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6500020415684708518" datatype="html">
@@ -1959,7 +1959,7 @@
         <target>I agree to the terms and conditions of use and I accept responsability for my actions</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">35,36</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="378994111667349795" datatype="html">
@@ -1967,7 +1967,7 @@
         <target>Warning</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1867963735005456547" datatype="html">
@@ -1975,7 +1975,7 @@
         <target>If we discover that you lied about your age when you created your account, we'll delete it.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">50,51</context>
+          <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1137760207885254458" datatype="html">
@@ -1983,7 +1983,7 @@
         <target>When you say that you're 18 years old or older, you're accepting to be treated like an adult, even if you aren't.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/componentes/nuevo-usuario/nuevo-usuario.component.html</context>
-          <context context-type="linenumber">51,52</context>
+          <context context-type="linenumber">50,51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4678235583542699769" datatype="html">

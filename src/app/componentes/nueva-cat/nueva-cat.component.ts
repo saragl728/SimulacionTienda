@@ -16,7 +16,6 @@ import { CookieService } from 'ngx-cookie-service';
 export class NuevaCatComponent extends Sonido {
   constructor(private categoriaServicio: CategoriaService, private usuarioServicio: UsuarioService, private cookieService: CookieService) {
     super();
-    this.obtenerNombres();
     this.numAdmins();
     this.cukiUsuario();
     document.title = $localize`Nueva categoría`;
@@ -25,7 +24,6 @@ export class NuevaCatComponent extends Sonido {
   persona: Usuario = { Id: 0, nombre: '', correo: '', fechaNac: '', saldo: 150, contrasenya: '', adminis: 'N'};
   cat: Categoria = { Id: 0, nombre: '' };
   valido: boolean = true;
-  categorias: Array<any> = [];
   sesionIniciada: boolean = false;
   nAdmins: number = 0;
 
@@ -48,9 +46,7 @@ export class NuevaCatComponent extends Sonido {
         if (result != null) {
         this.persona = result[0];
         this.persona.contrasenya = '';
-        if (this.persona.adminis == 'S') {
-          this.sesionIniciada = true;
-        }      
+        if (this.persona.adminis == 'S')  this.sesionIniciada = true;
         }
       })
     }
@@ -88,22 +84,11 @@ export class NuevaCatComponent extends Sonido {
     });
   }  
 
-  /**
-   * Para obtener los nombres de categorías que hay para que el usuario no intente usarlos de nuevo
-   */
-  obtenerNombres() {
-    this.categoriaServicio.obtenerNombres().subscribe((result: any) => {
-      for (let i = 0; i < result.length; i++){
-        this.categorias.push(result[i].nombre)
-      }
-    });
-  }
-
   validar() {
     const longMax: number = 20; //longitud máxima de la categoría
     let nom = document.getElementById('description') as HTMLInputElement;
 
-    if (!this.cat.nombre || this.cat.nombre.length > longMax || this.categorias.includes(this.cat.nombre)) {
+    if (!this.cat.nombre || this.cat.nombre.length > longMax /*|| this.categorias.includes(this.cat.nombre)*/) {
       nom.classList.add('is-invalid');
       this.valido = false;
     }
@@ -116,10 +101,13 @@ export class NuevaCatComponent extends Sonido {
     this.validar();
     if (this.valido) {
       this.categoriaServicio.alta(this.cat).subscribe((datos: any) => {
-        if (datos.resultado == 'OK') {
+        if (datos != null) {
           nom.classList.add('is-valid');
-          this.obtenerNombres();
           this.suenaGlobo();
+        }
+        else {
+          nom.classList.add('is-invalid');
+          this.suenaError();
         }
       });
     }

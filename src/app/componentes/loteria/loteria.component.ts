@@ -52,9 +52,7 @@ export class LoteriaComponent extends Sonido {
       if (result != null) {
       this.persona = result[0];
       this.persona.contrasenya = ''; //la pongo a cadena vacía para que en la sección de modificación no salga la ristra
-      if (this.esAdulto()){
-        this.sesionIniciada = true;
-      }      
+      if (this.esAdulto()) this.sesionIniciada = true;
       }
     })
   }
@@ -157,7 +155,6 @@ export class LoteriaComponent extends Sonido {
     let max = this.redondeaDecimales(this.cantidad * 1.1);
 
     if (!this.haBuscado) this.haBuscado = true;
-
     if (this.puedeBuscar()) {
       this.productoServicio.sacarEntrePrecios(min, max).subscribe((result: any) => {
           this.listaObjetos = [];

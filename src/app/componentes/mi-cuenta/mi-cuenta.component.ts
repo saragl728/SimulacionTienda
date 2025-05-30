@@ -170,10 +170,14 @@ export class MiCuentaComponent extends Sonido {
     if (valido) {
       //si el nombre está bien, hace la actualización
       this.usuarioServicio.cambiaNombre(this.persona).subscribe((datos: any) => {
-        if (datos.resultado == 'OK') {
+        if (datos != null) {
           nom.classList.add('is-valid');
           this.suenaGlobo();
           document.title = $localize`Cuenta de ${this.persona.nombre}`; //hago que vuelva a cambiar el título
+        }
+        else {
+          nom.classList.add('is-invalid');
+          this.suenaError();
         }
       });
     }
@@ -194,7 +198,7 @@ export class MiCuentaComponent extends Sonido {
   }
 
   borraCuenta(usuario: Usuario){
-   this.usuarioServicio.baja(usuario).subscribe((datos: any) => {
+  this.usuarioServicio.baja(usuario).subscribe((datos: any) => {
     if (datos.resultado != null) {
       this.sacarTodos();
       this.suenaBorra();

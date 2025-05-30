@@ -14,7 +14,6 @@
         <div class="mb-3">
             <label class="form-label fw-bold" i18n>Fecha de nacimiento (AÑO-MES-DÍA) (debes tener al menos 13 años):</label>
             <input type="text" id="fechaNac" name="fechaNac" class="form-control" [(ngModel)]="auxFecha" />
-            <p>  {{ usuario.fechaNac }} </p>
         </div>
         @if (usuario.contrasenya != cont2){
             <h3 class="text-danger-emphasis bg-warning-subtle p-2 border border-dark border-2 rounded"><span class="material-symbols-outlined"> error </span><span i18n>Las contraseñas no coinciden</span></h3>

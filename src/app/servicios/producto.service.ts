@@ -14,10 +14,6 @@ export class ProductoService {
     return this.http.get(`${this.url}recuperartodos.php`);
   }
 
-  obtenerNombres(){
-    return this.http.get(`${this.url}listaNombres.php`);
-  }
-
   alta(producto: Producto) {
     return this.http.post(`${this.url}alta.php`, JSON.stringify(producto));
   }

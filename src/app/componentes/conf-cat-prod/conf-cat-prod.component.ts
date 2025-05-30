@@ -96,7 +96,7 @@ export class ConfCatProdComponent extends Sonido {
   }
 
   recuperarIdsPorCategoria(cat: string) {
-  	this.proCatService.recuperaIdsPorCategoria(cat).subscribe((respuesta: any) => { this.prodCats = respuesta; });
+  this.proCatService.recuperaIdsPorCategoria(cat).subscribe((respuesta: any) => { this.prodCats = respuesta; });
 }
 
   recuperaNombresPorCategoria(cat: string) {
@@ -105,7 +105,7 @@ export class ConfCatProdComponent extends Sonido {
 
 
   recuperarIdsPorProducto(pro: string) {
-  	this.proCatService.recuperarIdsPorProducto(pro).subscribe((respuesta: any) => { this.prodCats = respuesta; });
+  this.proCatService.recuperarIdsPorProducto(pro).subscribe((respuesta: any) => { this.prodCats = respuesta; });
 }
 
   recuperaNombresPorProducto(pro: string) {

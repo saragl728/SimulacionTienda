@@ -14,10 +14,6 @@ export class CategoriaService {
     return this.http.get(`${this.url}recuperartodos.php`);
   }
 
-  obtenerNombres(){
-    return this.http.get(`${this.url}listaNombres.php`);
-  }
-
   alta(categoria: Categoria) {
     return this.http.post(`${this.url}alta.php`, JSON.stringify(categoria));
   }
